@@ -1,3 +1,8 @@
 .auth {
-   
+   background-color: #CCC8AA;
+   display: flex;
+   height: 100vh;
+   width: 100%;
+   align-items: center;
+   padding-left: 20%;
 }
