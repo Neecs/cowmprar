@@ -2,6 +2,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/login.css";
+import {BrowserRouter, Routes} from 'react-router-dom'
 
 export const Login = () => {
   return (
@@ -23,11 +24,10 @@ export const Login = () => {
           <Form.Label>Contraseña</Form.Label>
           <Form.Control type="password" placeholder="Ingresa tu contraseña" />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicCheckbox"></Form.Group>
         <br />
         <Button variant="dark" type="submit">
-          Submit
+          Ingresar
         </Button>
       </Form>
     </div>
