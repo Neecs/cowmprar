@@ -1,6 +1,20 @@
-.login-space {
-   background-color: #7D7C7C;
-   padding: 5%;
-   height: 60%
-  }
-  
+.container {
+   display: flex;
+   justify-content: center; 
+   align-items: center; 
+   height: 100vh; 
+   
+   background-color: #CCC8AA;
+ }
+ 
+ .login-space
+  {
+   /* margin: 20px; */
+   padding-top: 5%;
+   padding-left: 5%;
+   padding-right: 5%;
+   padding-bottom: 5%;
+   background-color: #7D7C7C; 
+   
+ }
+ 

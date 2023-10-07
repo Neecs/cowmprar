@@ -1,0 +1,8 @@
+.form-space {
+   display: flex;
+   justify-content: center; 
+   align-items: center; 
+   height: 100vh; 
+   background-color: #CCC8AA;
+  }
+  
