@@ -17,17 +17,17 @@ function FormExample() {
       event.stopPropagation();
     }
 
-    if (form.password.value !== form.passwordConfirmation.value){
+    if (form.password.value !== form.passwordConfirmation.value) {
       alert("Las contraseñas no coinciden");
       return;
     }
 
-    if(!(/^\d+$/.test(form.phoneNumber.value))){
+    if (!/^\d+$/.test(form.phoneNumber.value)) {
       alert("Introduce un número válido");
       return;
     }
 
-    if(!(/^\d+$/.test(form.idNumber.value))){
+    if (!/^\d+$/.test(form.idNumber.value)) {
       alert("Introduce un número de id válido");
       return;
     }
@@ -39,7 +39,8 @@ function FormExample() {
     const last_name = form.lastName.value;
     const role_id = form.userType.value === "Cliente" ? 1 : 2;
     const phone = form.phoneNumber.value;
-    const doc_type = form.idType.value
+    const doc_type = form.idType.value;
+
     const data = {
       email,
       password,
@@ -59,10 +60,6 @@ function FormExample() {
       .catch(function (error) {
         console.error("Error", error);
       });
-
-    
-
-    
 
     setValidated(true);
   };
