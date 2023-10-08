@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Row from 'react-bootstrap/Row';
+import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Row from "react-bootstrap/Row";
 import "../styles/formNewUser.css";
+import axios from "axios";
 
 function FormExample() {
   const [validated, setValidated] = useState(false);
@@ -16,107 +17,167 @@ function FormExample() {
       event.stopPropagation();
     }
 
+    if (form.password.value !== form.passwordConfirmation.value){
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+
+    if(!(/^\d+$/.test(form.phoneNumber.value))){
+      alert("Introduce un número válido");
+      return;
+    }
+
+    if(!(/^\d+$/.test(form.idNumber.value))){
+      alert("Introduce un número de id válido");
+      return;
+    }
+
+    const email = form.email.value;
+    const password = form.password.value;
+    const doc_id = form.idNumber.value;
+    const first_name = form.name.value;
+    const last_name = form.lastName.value;
+    const role_id = form.userType.value === "Cliente" ? 1 : 2;
+    const phone = form.phoneNumber.value;
+    const doc_type = form.idType.value
+    const data = {
+      email,
+      password,
+      doc_id,
+      first_name,
+      last_name,
+      role_id,
+      phone,
+      doc_type,
+    };
+
+    axios
+      .post("http://localhost:3000/api/register", data)
+      .then(function (response) {
+        console.log("Correct", response.data);
+      })
+      .catch(function (error) {
+        console.error("Error", error);
+      });
+
+    
+
+    
+
     setValidated(true);
   };
 
   return (
     <div className="form-space">
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
-      <Row className="mb-3">
-        <Form.Group as={Col} md="4" controlId="validationCustom01">
-          <Form.Label>Nombres </Form.Label>
-          <Form.Control 
-            required
-            type="text"
-            placeholder="Nombres"
-            
-          />
-          <Form.Control.Feedback>Correcto</Form.Control.Feedback>
-        </Form.Group>
-        
-        <Form.Group as={Col} md="4" controlId="validationCustom02">
-          <Form.Label>Apellidos</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            placeholder="Apellidos"
-            
-          />
-          <Form.Control.Feedback>Correcto</Form.Control.Feedback>
-        </Form.Group>
+      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Row className="mb-3">
+          <Form.Group as={Col} md="4" controlId="name">
+            <Form.Label>Nombre</Form.Label>
+            <Form.Control required type="text" placeholder="Nombre" />
+            <Form.Control.Feedback>Correcto</Form.Control.Feedback>
+          </Form.Group>
 
-        
+          <Form.Group as={Col} md="4" controlId="lastName">
+            <Form.Label>Apellido</Form.Label>
+            <Form.Control required type="text" placeholder="Apellido" />
+            <Form.Control.Feedback>Correcto</Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group as={Col} md="4" controlId="idType">
+            <Form.Label>Tipo de id</Form.Label>
+            <Form.Select aria-label="Default select example" required>
+              <option value="">Selecciona tipo de id</option>
+              <option value="C.C.">C.C.</option>
+              <option value="C.E.">C.E.</option>
+              <option value="T.I.">T.I</option>
+            </Form.Select>
+            <Form.Control.Feedback type="invalid">
+              Seleccione tipo de id
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group as={Col} md="4" controlId="idNumber">
+            <Form.Label>Número de identificación</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              placeholder="# de identificación"
+            />
+            <Form.Control.Feedback>Correcto</Form.Control.Feedback>
+          </Form.Group>
         </Row>
 
-        <Row className='mb-3'>
-        <Form.Group as={Col} md="4" controlId="validationCustom02">
-          <Form.Label>Correo electronico</Form.Label>
-          <Form.Control
-            required
-            type="email"
-            placeholder="example@mail.com"
-          />
-          <Form.Control.Feedback>Correcto</Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-          <Form.Label>Contraseña</Form.Label>
-          <InputGroup hasValidation>
-            
+        <Row className="mb-3">
+          <Form.Group as={Col} md="4" controlId="email">
+            <Form.Label>Correo electronico</Form.Label>
             <Form.Control
-              type="password"
-              placeholder="Contraseña"
-              aria-describedby="inputGroupPrepend"
               required
+              type="email"
+              placeholder="example@mail.com"
             />
-            <Form.Control.Feedback type="invalid">
-              Elija una contraseña.
-            </Form.Control.Feedback>
-          </InputGroup>
-        </Form.Group>
 
-        <Form.Group as={Col} md="4" controlId="validationCustomUsername">
-          <Form.Label>Confirmar contraseña</Form.Label>
-          <InputGroup hasValidation>
-            
-            <Form.Control
-              type="password"
-              placeholder="Contraseña"
-              aria-describedby="inputGroupPrepend"
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              Elija una contraseña.
-            </Form.Control.Feedback>
-          </InputGroup>
-        </Form.Group>
-      </Row>
+            <Form.Control.Feedback>Correcto</Form.Control.Feedback>
+          </Form.Group>
 
-      <Row className="mb-3">
-        <Form.Group as={Col} md="6" controlId="validationCustom03">
-          <Form.Label>Ciudad</Form.Label>
-          <Form.Control type="text" placeholder="Ciudad" required />
-          <Form.Control.Feedback type="invalid">
-          Introduzca una ciudad valida.
-          </Form.Control.Feedback>
-        </Form.Group>
-        
-        <Form.Group as={Col} md="3" controlId="validationCustom04">
-          <Form.Label>Departamento</Form.Label>
-          <Form.Control type="text" placeholder="Departamento" required />
-          <Form.Control.Feedback type="invalid">
-            Introduzca una departamento valido.
-          </Form.Control.Feedback>
-        </Form.Group>
-      
-      </Row>
-      <Form.Group className="mb-3">
-        
-      </Form.Group>
-      <Button type="submit" className="btn btn-dark">Registrarse</Button>
-    </Form>
+          <Form.Group as={Col} md="4" controlId="password">
+            <Form.Label>Contraseña</Form.Label>
+            <InputGroup hasValidation>
+              <Form.Control
+                type="password"
+                placeholder="Contraseña"
+                aria-describedby="inputGroupPrepend"
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Elija una contraseña.
+              </Form.Control.Feedback>
+            </InputGroup>
+          </Form.Group>
+
+          <Form.Group as={Col} md="4" controlId="passwordConfirmation">
+            <Form.Label>Confirmar contraseña</Form.Label>
+            <InputGroup hasValidation>
+              <Form.Control
+                type="password"
+                placeholder="Contraseña"
+                aria-describedby="inputGroupPrepend"
+                required
+              />
+
+              <Form.Control.Feedback type="invalid">
+                Elija una contraseña.
+              </Form.Control.Feedback>
+            </InputGroup>
+          </Form.Group>
+        </Row>
+
+        <Row className="mb-3">
+          <Form.Group as={Col} md="4" controlId="userType">
+            <Form.Label>Tipo de usuario</Form.Label>
+            <Form.Select aria-label="Default select example" required>
+              <option value="">Selecciona tipo de usuario</option>
+              <option value="Client">Cliente</option>
+              <option value="Rancher">Ganadero</option>
+            </Form.Select>
+            <Form.Control.Feedback type="invalid">
+              Seleccione tipo de id
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group as={Col} md="4" controlId="phoneNumber">
+            <Form.Label>Número de telefono</Form.Label>
+            <Form.Control required type="tel" placeholder="# de telefono" />
+            <Form.Control.Feedback type="invalid">
+              Digita un número de telefono
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Row>
+        <Form.Group className="mb-3"></Form.Group>
+        <Button type="submit" className="btn btn-dark">
+          Registrarse
+        </Button>
+      </Form>
     </div>
-    
   );
 }
 
