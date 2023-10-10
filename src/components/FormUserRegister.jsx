@@ -6,6 +6,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import "../styles/formNewUser.css";
 import axios from "axios";
+import bcrypt from "bcryptjs-react";
 
 function FormUserRegister() {
   const [validated, setValidated] = useState(false);
@@ -31,7 +32,7 @@ function FormUserRegister() {
     }
 
     const email = form.email.value;
-    const password = form.password.value;
+    const password = bcrypt.hashSync(form.password.value,bcrypt.genSaltSync());
     const doc_id = form.idNumber.value;
     const first_name = form.name.value;
     const last_name = form.lastName.value;
