@@ -1,7 +1,8 @@
 export const MainPage = () => {
   return (
     <>
-    <img src="/src/assets/underconst.png" alt="" />
+    <h1>Login correcto</h1>
+    <img src="/src/assets/cow-correct.jpg" alt="" />
     </>
   )
 }
