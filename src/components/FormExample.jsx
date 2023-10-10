@@ -37,7 +37,7 @@ function FormExample() {
     const doc_id = form.idNumber.value;
     const first_name = form.name.value;
     const last_name = form.lastName.value;
-    const role_id = form.userType.value === "Cliente" ? 1 : 2;
+    const role_id = form.userType.value;
     const phone = form.phoneNumber.value;
     const doc_type = form.idType.value;
 
@@ -83,15 +83,15 @@ function FormExample() {
 
           <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="idType">
-            <Form.Label>Tipo de id</Form.Label>
+            <Form.Label>Tipo de identificación</Form.Label>
             <Form.Select aria-label="Default select example" required>
-              <option value="">Selecciona tipo de id</option>
+              <option value="">Selecciona tipo de identificación</option>
               <option value="C.C.">C.C.</option>
               <option value="C.E.">C.E.</option>
               <option value="T.I.">T.I</option>
             </Form.Select>
             <Form.Control.Feedback type="invalid">
-              Seleccione tipo de id
+              Selecciona tipo de identificación
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -112,8 +112,8 @@ function FormExample() {
             <Form.Label>Tipo de usuario</Form.Label>
             <Form.Select aria-label="Default select example" required>
               <option value="">Selecciona tipo de usuario</option>
-              <option value="Client">Cliente (solo desea comprar)</option>
-              <option value="Rancher">Ganadero (Desea admistrar y vender su ganado)</option>
+              <option value={1}>Cliente (solo desea comprar)</option>
+              <option value={2}>Ganadero (Desea admistrar y vender su ganado)</option>
             </Form.Select>
             <Form.Control.Feedback type="invalid">
               Seleccione tipo de id

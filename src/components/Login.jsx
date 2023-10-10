@@ -32,9 +32,11 @@ export const Login = () => {
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox"></Form.Group>
           <br />
+          <Link to="/main-page">
           <Button variant="dark" type="submit">
             Ingresar
           </Button>
+          </Link>
         </Form>
       </div>
       <div className="signup-space">
