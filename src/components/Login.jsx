@@ -5,35 +5,30 @@ import "../styles/login.css";
 import "../styles/signup.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
-
-  const redirectToMainPage = () => {
-    history.push("/main-page"); 
-  };
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
     const email = form.email.value;
-    const password = form.password.value;
-
-    console.log(email, password)
+    const passwordHash = form.password.value;
 
     const data = {
       email,
-      password,
+      passwordHash,
     };
-
-    console.log(form);
 
     axios
       .post("http://localhost:3000/api/login", data)
       .then(function (response) {
-        console.log("Correct", response.data);
-        /* if(response.data){
-          useHistory().push('/main-page');
-        } */
+        if (response.data.user) {
+          navigate("/main-page");
+        } else {
+          alert("Usuario o contraseña incorrectos");
+        }
       })
       .catch(function (error) {
         console.error("Error", error);

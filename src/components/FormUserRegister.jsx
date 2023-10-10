@@ -6,6 +6,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import "../styles/formNewUser.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function FormUserRegister() {
   const [validated, setValidated] = useState(false);
@@ -13,7 +14,7 @@ function FormUserRegister() {
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
-    console.log(form)
+    console.log(form);
 
     if (form.password.value !== form.passwordConfirmation.value) {
       alert("Las contraseñas no coinciden");
@@ -21,7 +22,7 @@ function FormUserRegister() {
     }
 
     if (!/^\d+$/.test(form.phoneNumber.value)) {
-      alert("Introduce un número válido");
+      alert("Introduce un número de identificación válido");
       return;
     }
 
@@ -119,7 +120,7 @@ function FormUserRegister() {
               </option>
             </Form.Select>
             <Form.Control.Feedback type="invalid">
-              Seleccione tipo de id
+              Seleccione tipo de identificación válido
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -127,7 +128,7 @@ function FormUserRegister() {
             <Form.Label>Número de telefono</Form.Label>
             <Form.Control required type="tel" placeholder="# de telefono" />
             <Form.Control.Feedback type="invalid">
-              Digita un número de telefono
+              Digita un número de telefono válido
             </Form.Control.Feedback>
           </Form.Group>
         </Row>
@@ -178,6 +179,12 @@ function FormUserRegister() {
         <Button type="submit" className="btn btn-dark">
           Registrarse
         </Button>
+        <span style={{ marginRight: "10px" }}></span>
+        <Link to="/">
+          <Button type="button" className="btn btn-dark">
+            Regresar
+          </Button>
+        </Link>
       </Form>
     </div>
   );
