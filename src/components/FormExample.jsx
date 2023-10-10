@@ -79,7 +79,9 @@ function FormExample() {
             <Form.Control required type="text" placeholder="Apellido" />
             <Form.Control.Feedback>Correcto</Form.Control.Feedback>
           </Form.Group>
+          </Row>
 
+          <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="idType">
             <Form.Label>Tipo de id</Form.Label>
             <Form.Select aria-label="Default select example" required>
@@ -105,14 +107,39 @@ function FormExample() {
         </Row>
 
         <Row className="mb-3">
-          <Form.Group as={Col} md="4" controlId="email">
+
+        <Form.Group as={Col} md="4" controlId="userType">
+            <Form.Label>Tipo de usuario</Form.Label>
+            <Form.Select aria-label="Default select example" required>
+              <option value="">Selecciona tipo de usuario</option>
+              <option value="Client">Cliente (solo desea comprar)</option>
+              <option value="Rancher">Ganadero (Desea admistrar y vender su ganado)</option>
+            </Form.Select>
+            <Form.Control.Feedback type="invalid">
+              Seleccione tipo de id
+            </Form.Control.Feedback>
+          </Form.Group>
+          
+        <Form.Group as={Col} md="4" controlId="phoneNumber">
+            <Form.Label>Número de telefono</Form.Label>
+            <Form.Control required type="tel" placeholder="# de telefono" />
+            <Form.Control.Feedback type="invalid">
+              Digita un número de telefono
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          
+        </Row>
+
+        <Row className="mb-3">
+          
+        <Form.Group as={Col} md="4" controlId="email">
             <Form.Label>Correo electronico</Form.Label>
             <Form.Control
               required
               type="email"
               placeholder="example@mail.com"
             />
-
             <Form.Control.Feedback>Correcto</Form.Control.Feedback>
           </Form.Group>
 
@@ -146,28 +173,7 @@ function FormExample() {
               </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
-        </Row>
-
-        <Row className="mb-3">
-          <Form.Group as={Col} md="4" controlId="userType">
-            <Form.Label>Tipo de usuario</Form.Label>
-            <Form.Select aria-label="Default select example" required>
-              <option value="">Selecciona tipo de usuario</option>
-              <option value="Client">Cliente</option>
-              <option value="Rancher">Ganadero</option>
-            </Form.Select>
-            <Form.Control.Feedback type="invalid">
-              Seleccione tipo de id
-            </Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group as={Col} md="4" controlId="phoneNumber">
-            <Form.Label>Número de telefono</Form.Label>
-            <Form.Control required type="tel" placeholder="# de telefono" />
-            <Form.Control.Feedback type="invalid">
-              Digita un número de telefono
-            </Form.Control.Feedback>
-          </Form.Group>
+          
         </Row>
         <Form.Group className="mb-3"></Form.Group>
         <Button type="submit" className="btn btn-dark">
