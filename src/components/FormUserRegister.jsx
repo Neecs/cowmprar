@@ -7,15 +7,13 @@ import Row from "react-bootstrap/Row";
 import "../styles/formNewUser.css";
 import axios from "axios";
 
-function FormExample() {
+function FormUserRegister() {
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    event.preventDefault();
+    console.log(form)
 
     if (form.password.value !== form.passwordConfirmation.value) {
       alert("Las contraseñas no coinciden");
@@ -61,6 +59,10 @@ function FormExample() {
         console.error("Error", error);
       });
 
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     setValidated(true);
   };
 
@@ -79,9 +81,9 @@ function FormExample() {
             <Form.Control required type="text" placeholder="Apellido" />
             <Form.Control.Feedback>Correcto</Form.Control.Feedback>
           </Form.Group>
-          </Row>
+        </Row>
 
-          <Row className="mb-3">
+        <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="idType">
             <Form.Label>Tipo de identificación</Form.Label>
             <Form.Select aria-label="Default select example" required>
@@ -107,33 +109,31 @@ function FormExample() {
         </Row>
 
         <Row className="mb-3">
-
-        <Form.Group as={Col} md="4" controlId="userType">
+          <Form.Group as={Col} md="4" controlId="userType">
             <Form.Label>Tipo de usuario</Form.Label>
             <Form.Select aria-label="Default select example" required>
               <option value="">Selecciona tipo de usuario</option>
               <option value={1}>Cliente (solo desea comprar)</option>
-              <option value={2}>Ganadero (Desea admistrar y vender su ganado)</option>
+              <option value={2}>
+                Ganadero (Desea admistrar y vender su ganado)
+              </option>
             </Form.Select>
             <Form.Control.Feedback type="invalid">
               Seleccione tipo de id
             </Form.Control.Feedback>
           </Form.Group>
-          
-        <Form.Group as={Col} md="4" controlId="phoneNumber">
+
+          <Form.Group as={Col} md="4" controlId="phoneNumber">
             <Form.Label>Número de telefono</Form.Label>
             <Form.Control required type="tel" placeholder="# de telefono" />
             <Form.Control.Feedback type="invalid">
               Digita un número de telefono
             </Form.Control.Feedback>
           </Form.Group>
-
-          
         </Row>
 
         <Row className="mb-3">
-          
-        <Form.Group as={Col} md="4" controlId="email">
+          <Form.Group as={Col} md="4" controlId="email">
             <Form.Label>Correo electronico</Form.Label>
             <Form.Control
               required
@@ -173,7 +173,6 @@ function FormExample() {
               </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
-          
         </Row>
         <Form.Group className="mb-3"></Form.Group>
         <Button type="submit" className="btn btn-dark">
@@ -184,4 +183,4 @@ function FormExample() {
   );
 }
 
-export default FormExample;
+export default FormUserRegister;
