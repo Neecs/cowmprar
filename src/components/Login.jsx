@@ -14,11 +14,11 @@ export const Login = () => {
     const form = event.currentTarget;
     event.preventDefault();
     const email = form.email.value;
-    const passwordHash = form.password.value;
+    const password = form.password.value;
 
     const data = {
       email,
-      passwordHash,
+      password,
     };
 
     axios
