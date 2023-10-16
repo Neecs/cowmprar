@@ -192,6 +192,7 @@ export const FormUserRegister = () => {
             Regresar
           </Button>
         </Link>
+        <br />
         {errorSignUp && (
           <p className="text-danger">Ya existe un usuario con este correo.</p>
         )}
