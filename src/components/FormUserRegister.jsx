@@ -12,12 +12,13 @@ import { useNavigate } from "react-router-dom";
 export const FormUserRegister = () => {
   const [validated, setValidated] = useState(false);
   const [errorSignUp, setErrorSignUp] = useState(false);
+  const [errorPassword, setErrorPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
-    console.log(form);
     event.preventDefault();
+    console.log(form);
     const email = form.email.value;
     const password = form.password.value;
     const doc_id = form.idNumber.value;
@@ -38,24 +39,32 @@ export const FormUserRegister = () => {
       doc_type,
     };
 
-    if (form.checkValidity() === false) {
+    if(password !== form.passwordConfirmation.value ){
       event.preventDefault();
       event.stopPropagation();
-    } else {
-      axios
-        .post("http://localhost:3000/api/register", data)
-        .then(function (response) {
-          console.log("Correct", response.data);
-          if ("success" in response.data) {
-            navigate("/main-page");
-          } else if ("error" in response.data) {
-            setErrorSignUp(true);
-          }
-        })
-        .catch(function (error) {
-          console.error("Error", error);
-        });
+      setErrorPassword(true);
+    }else {
+      if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+      } else {
+        axios
+          .post("http://localhost:3000/api/register", data)
+          .then(function (response) {
+            console.log("Correct", response.data);
+            if ("success" in response.data) {
+              navigate("/main-page");
+            } else if ("error" in response.data) {
+              setErrorSignUp(true);
+            }
+          })
+          .catch(function (error) {
+            console.error("Error", error);
+          });
+      }
     }
+
+   
 
     console.log(form.checkValidity());
     setValidated(true);
@@ -196,6 +205,9 @@ export const FormUserRegister = () => {
         <br />
         {errorSignUp && (
           <p className="text-danger">Ya existe un usuario con este correo.</p>
+        )}
+        {errorPassword && (
+          <p className="text-danger">Las contraseñas no coinciden.</p>
         )}
       </Form>
     </div>
