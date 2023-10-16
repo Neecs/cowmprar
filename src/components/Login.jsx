@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Alert from "react-bootstrap/Alert";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -47,7 +48,9 @@ export const Login = () => {
         <br />
         <br />
         {errorLogin && (
-          <p className="text-danger">Usuario o contraseña incorrecto.</p>
+          <Alert key="danger" variant="danger">
+            Usuario o contraseña incorrectos
+          </Alert>
         )}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="email">

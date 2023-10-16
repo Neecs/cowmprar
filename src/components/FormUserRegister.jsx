@@ -8,6 +8,7 @@ import "../styles/formNewUser.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Alert from "react-bootstrap/Alert";
 
 export const FormUserRegister = () => {
   const [validated, setValidated] = useState(false);
@@ -39,11 +40,11 @@ export const FormUserRegister = () => {
       doc_type,
     };
 
-    if(password !== form.passwordConfirmation.value ){
+    if (password !== form.passwordConfirmation.value) {
       event.preventDefault();
       event.stopPropagation();
       setErrorPassword(true);
-    }else {
+    } else {
       if (form.checkValidity() === false) {
         event.preventDefault();
         event.stopPropagation();
@@ -63,8 +64,6 @@ export const FormUserRegister = () => {
           });
       }
     }
-
-   
 
     console.log(form.checkValidity());
     setValidated(true);
@@ -204,10 +203,14 @@ export const FormUserRegister = () => {
         <br />
         <br />
         {errorSignUp && (
-          <p className="text-danger">Ya existe un usuario con este correo.</p>
+          <Alert key="danger" variant="danger">
+            Ya existe un usuario con este correo
+          </Alert>
         )}
         {errorPassword && (
-          <p className="text-danger">Las contraseñas no coinciden.</p>
+          <Alert key="danger" variant="danger">
+            Las contraseñas no coinciden
+          </Alert>
         )}
       </Form>
     </div>
