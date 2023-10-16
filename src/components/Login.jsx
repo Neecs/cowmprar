@@ -6,13 +6,15 @@ import "../styles/signup.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {useState} from 'react'
 
 export const Login = () => {
   const navigate = useNavigate();
+  const [errorLogin, setErrorLogin] = useState(false);
 
   const handleSubmit = (event) => {
-    const form = event.currentTarget;
     event.preventDefault();
+    const form = event.currentTarget;
     const email = form.email.value;
     const password = form.password.value;
 
@@ -22,17 +24,19 @@ export const Login = () => {
     };
 
     axios
-      .post("http://localhost:3000/api/login", data)
-      .then(function (response) {
-        if (response.data.user) {
-          navigate("/main-page");
-        } else {
-          alert("Usuario o contraseña incorrectos");
-        }
-      })
-      .catch(function (error) {
-        console.error("Error", error);
-      });
+    .post("http://localhost:3000/api/login", data)
+    .then((response) => {
+      if (response.data.user) {
+        navigate("/main-page");
+      } else {
+        setErrorLogin(true);
+      }
+    })
+    .catch((error) => {
+      console.error("Error", error);
+      setErrorLogin(true);
+    });
+  
   };
 
   return (
@@ -42,6 +46,7 @@ export const Login = () => {
         <h1>Inicia Sesión</h1>
         <br />
         <br />
+        {errorLogin && <p className="text-danger">Usuario o contraseña incorrecto.</p>} 
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="email">
             <Form.Label>Correo electrónico</Form.Label>
@@ -55,10 +60,7 @@ export const Login = () => {
             <Form.Label>Contraseña</Form.Label>
             <Form.Control type="password" placeholder="Ingresa tu contraseña" />
           </Form.Group>
-          <Form.Group
-            className="mb-3"
-            controlId="formBasicCheckbox"
-          ></Form.Group>
+          
           <br />
           <Button variant="dark" type="submit">
             Ingresar
@@ -66,6 +68,10 @@ export const Login = () => {
         </Form>
       </div>
       <div className="signup-space">
+        <img src="/src/assets/cow.png" width='250' height='250' alt="" />
+        <br />
+        <br /> 
+        <br /> 
         <h2>¿Aún no tienes una cuenta?</h2>
         <br />
         <br />

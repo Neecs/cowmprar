@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Login } from './components/Login';
-import FormUserRegister from './components/FormUserRegister';
+import {FormUserRegister} from './components/FormUserRegister';
 import { MainPage } from './components/MainPage';
 
 function App() {

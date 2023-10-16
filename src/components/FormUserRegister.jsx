@@ -8,28 +8,12 @@ import "../styles/formNewUser.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-function FormUserRegister() {
+export const FormUserRegister = () => {
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
-    event.preventDefault();
     console.log(form);
-
-    if (form.password.value !== form.passwordConfirmation.value) {
-      alert("Las contraseñas no coinciden");
-      return;
-    }
-
-    if (!/^\d+$/.test(form.phoneNumber.value)) {
-      alert("Introduce un número de identificación válido");
-      return;
-    }
-
-    if (!/^\d+$/.test(form.idNumber.value)) {
-      alert("Introduce un número de id válido");
-      return;
-    }
 
     const email = form.email.value;
     const password = form.password.value;
@@ -58,12 +42,14 @@ function FormUserRegister() {
       })
       .catch(function (error) {
         console.error("Error", error);
+        setValidated(false);
       });
 
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
+
     setValidated(true);
   };
 
@@ -74,13 +60,17 @@ function FormUserRegister() {
           <Form.Group as={Col} md="4" controlId="name">
             <Form.Label>Nombre</Form.Label>
             <Form.Control required type="text" placeholder="Nombre" />
-            <Form.Control.Feedback>Correcto</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">
+              Introduce tu nombre.
+            </Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group as={Col} md="4" controlId="lastName">
             <Form.Label>Apellido</Form.Label>
             <Form.Control required type="text" placeholder="Apellido" />
-            <Form.Control.Feedback>Correcto</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">
+              Introduce tu apellido
+            </Form.Control.Feedback>
           </Form.Group>
         </Row>
 
@@ -104,8 +94,11 @@ function FormUserRegister() {
               required
               type="text"
               placeholder="# de identificación"
+              pattern="[0-9]*"
             />
-            <Form.Control.Feedback>Correcto</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">
+              Introduce un número de identificación correcto.
+            </Form.Control.Feedback>
           </Form.Group>
         </Row>
 
@@ -126,7 +119,12 @@ function FormUserRegister() {
 
           <Form.Group as={Col} md="4" controlId="phoneNumber">
             <Form.Label>Número de telefono</Form.Label>
-            <Form.Control required type="tel" placeholder="# de telefono" />
+            <Form.Control
+              required
+              type="tel"
+              placeholder="# de telefono"
+              pattern="[0-9]*"
+            />
             <Form.Control.Feedback type="invalid">
               Digita un número de telefono válido
             </Form.Control.Feedback>
@@ -141,7 +139,9 @@ function FormUserRegister() {
               type="email"
               placeholder="example@mail.com"
             />
-            <Form.Control.Feedback>Correcto</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">
+              Introduce un correo válido
+            </Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group as={Col} md="4" controlId="password">
@@ -154,7 +154,7 @@ function FormUserRegister() {
                 required
               />
               <Form.Control.Feedback type="invalid">
-                Elija una contraseña.
+                Introduce una contraseña.
               </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
@@ -166,12 +166,18 @@ function FormUserRegister() {
                 type="password"
                 placeholder="Contraseña"
                 aria-describedby="inputGroupPrepend"
+                onInput={(e) => {
+                  const passwordField = document.getElementById("password");
+                  const passwordConfirmationField = e.target;
+                  if (passwordField.value !== passwordConfirmationField.value) {
+                    passwordConfirmationField.setCustomValidity("Las contraseñas no coinciden");
+                  } else {
+                    passwordConfirmationField.setCustomValidity("No coincide con la contraseña"); 
+                  }
+                }}
                 required
               />
-
-              <Form.Control.Feedback type="invalid">
-                Elija una contraseña.
-              </Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">asdasdasd</Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
         </Row>
@@ -188,6 +194,4 @@ function FormUserRegister() {
       </Form>
     </div>
   );
-}
-
-export default FormUserRegister;
+};
