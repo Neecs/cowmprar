@@ -171,13 +171,11 @@ export const FormUserRegister = () => {
                   const passwordConfirmationField = e.target;
                   if (passwordField.value !== passwordConfirmationField.value) {
                     passwordConfirmationField.setCustomValidity("Las contraseñas no coinciden");
-                  } else {
-                    passwordConfirmationField.setCustomValidity("No coincide con la contraseña"); 
-                  }
+                  } 
                 }}
                 required
               />
-              <Form.Control.Feedback type="invalid">asdasdasd</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">Las contraseñas no coinciden</Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
         </Row>
