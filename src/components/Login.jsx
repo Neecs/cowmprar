@@ -6,7 +6,7 @@ import "../styles/signup.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {useState} from 'react'
+import { useState } from "react";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -24,19 +24,19 @@ export const Login = () => {
     };
 
     axios
-    .post("http://localhost:3000/api/login", data)
-    .then((response) => {
-      if (response.data.user) {
-        navigate("/main-page");
-      } else {
+      .post("http://localhost:3000/api/login", data)
+      .then((response) => {
+        if (response.data.user) {
+          console.log(response.data.user);
+          navigate("/main-page");
+        } else {
+          setErrorLogin(true);
+        }
+      })
+      .catch((error) => {
+        console.error("Error", error);
         setErrorLogin(true);
-      }
-    })
-    .catch((error) => {
-      console.error("Error", error);
-      setErrorLogin(true);
-    });
-  
+      });
   };
 
   return (
@@ -46,7 +46,9 @@ export const Login = () => {
         <h1>Inicia Sesión</h1>
         <br />
         <br />
-        {errorLogin && <p className="text-danger">Usuario o contraseña incorrecto.</p>} 
+        {errorLogin && (
+          <p className="text-danger">Usuario o contraseña incorrecto.</p>
+        )}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="email">
             <Form.Label>Correo electrónico</Form.Label>
@@ -60,7 +62,7 @@ export const Login = () => {
             <Form.Label>Contraseña</Form.Label>
             <Form.Control type="password" placeholder="Ingresa tu contraseña" />
           </Form.Group>
-          
+
           <br />
           <Button variant="dark" type="submit">
             Ingresar
@@ -68,10 +70,10 @@ export const Login = () => {
         </Form>
       </div>
       <div className="signup-space">
-        <img src="/src/assets/cow.png" width='250' height='250' alt="" />
+        <img src="/src/assets/cow.png" width="250" height="250" alt="" />
         <br />
-        <br /> 
-        <br /> 
+        <br />
+        <br />
         <h2>¿Aún no tienes una cuenta?</h2>
         <br />
         <br />

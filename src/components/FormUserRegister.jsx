@@ -7,14 +7,17 @@ import Row from "react-bootstrap/Row";
 import "../styles/formNewUser.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const FormUserRegister = () => {
   const [validated, setValidated] = useState(false);
+  const [errorSignUp, setErrorSignUp] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     console.log(form);
-
+    event.preventDefault();
     const email = form.email.value;
     const password = form.password.value;
     const doc_id = form.idNumber.value;
@@ -35,21 +38,26 @@ export const FormUserRegister = () => {
       doc_type,
     };
 
-    axios
-      .post("http://localhost:3000/api/register", data)
-      .then(function (response) {
-        console.log("Correct", response.data);
-      })
-      .catch(function (error) {
-        console.error("Error", error);
-        setValidated(false);
-      });
-
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    } else {
+      axios
+        .post("http://localhost:3000/api/register", data)
+        .then(function (response) {
+          console.log("Correct", response.data);
+          if ("success" in response.data) {
+            navigate("/main-page");
+          } else if ("error" in response.data) {
+            setErrorSignUp(true);
+          }
+        })
+        .catch(function (error) {
+          console.error("Error", error);
+        });
     }
 
+    console.log(form.checkValidity());
     setValidated(true);
   };
 
@@ -166,16 +174,11 @@ export const FormUserRegister = () => {
                 type="password"
                 placeholder="Contraseña"
                 aria-describedby="inputGroupPrepend"
-                onInput={(e) => {
-                  const passwordField = document.getElementById("password");
-                  const passwordConfirmationField = e.target;
-                  if (passwordField.value !== passwordConfirmationField.value) {
-                    passwordConfirmationField.setCustomValidity("Las contraseñas no coinciden");
-                  } 
-                }}
                 required
               />
-              <Form.Control.Feedback type="invalid">Las contraseñas no coinciden</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                Las contraseñas no coinciden
+              </Form.Control.Feedback>
             </InputGroup>
           </Form.Group>
         </Row>
@@ -189,6 +192,9 @@ export const FormUserRegister = () => {
             Regresar
           </Button>
         </Link>
+        {errorSignUp && (
+          <p className="text-danger">Ya existe un usuario con este correo.</p>
+        )}
       </Form>
     </div>
   );
