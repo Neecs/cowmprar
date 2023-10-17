@@ -70,31 +70,49 @@ export const FormUserRegister = () => {
   };
 
   return (
+    
     <div className="form-space">
+      <div className="header-title">
+        <h4 className="title">Formulario de registro</h4>
+        <p className="category">Ingrese sus Datos</p>
+      </div>
+      <div className="data">
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Row className="mb-3">
+ 
           <Form.Group as={Col} md="4" controlId="name">
-            <Form.Label>Nombre</Form.Label>
-            <Form.Control required type="text" placeholder="Nombre" />
-            <Form.Control.Feedback type="invalid">
-              Introduce tu nombre.
-            </Form.Control.Feedback>
+            <Form.Floating className="mb-3">
+              <Form.Control
+                type="text"
+                placeholder=" "
+                required
+              />
+              <Form.Label >Nombre</Form.Label>
+              <Form.Control.Feedback type="invalid">
+                      Ingrese un Nombre.
+                    </Form.Control.Feedback>
+            </Form.Floating>
           </Form.Group>
 
           <Form.Group as={Col} md="4" controlId="lastName">
-            <Form.Label>Apellido</Form.Label>
-            <Form.Control required type="text" placeholder="Apellido" />
-            <Form.Control.Feedback type="invalid">
-              Introduce tu apellido
-            </Form.Control.Feedback>
+            <Form.Floating className="mb-3">
+              <Form.Control
+                type="text"
+                placeholder=" "
+                required
+              />
+              <Form.Label >Apellidos</Form.Label>
+              <Form.Control.Feedback type="invalid">
+                      Introduce tu apellido.
+                    </Form.Control.Feedback>
+            </Form.Floating>
           </Form.Group>
         </Row>
 
         <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="idType">
-            <Form.Label>Tipo de identificación</Form.Label>
             <Form.Select aria-label="Default select example" required>
-              <option value="">Selecciona tipo de identificación</option>
+              <option value="">Tipo de identificación</option>
               <option value="C.C.">C.C.</option>
               <option value="C.E.">C.E.</option>
               <option value="T.I.">T.I</option>
@@ -105,24 +123,25 @@ export const FormUserRegister = () => {
           </Form.Group>
 
           <Form.Group as={Col} md="4" controlId="idNumber">
-            <Form.Label>Número de identificación</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              placeholder="# de identificación"
-              pattern="[0-9]*"
-            />
-            <Form.Control.Feedback type="invalid">
+            <Form.Floating className="mb-3">
+              <Form.Control
+                type="text"
+                placeholder=" "
+                pattern="[0-9]*"
+                required
+              />
+              <Form.Label >Número de identificación</Form.Label>
+              <Form.Control.Feedback type="invalid">
               Introduce un número de identificación correcto.
-            </Form.Control.Feedback>
+                    </Form.Control.Feedback>
+            </Form.Floating>
           </Form.Group>
         </Row>
 
         <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="userType">
-            <Form.Label>Tipo de usuario</Form.Label>
             <Form.Select aria-label="Default select example" required>
-              <option value="">Selecciona tipo de usuario</option>
+              <option value="">Tipo de usuario</option>
               <option value={1}>Cliente (solo desea comprar)</option>
               <option value={2}>
                 Ganadero (Desea admistrar y vender su ganado)
@@ -134,72 +153,78 @@ export const FormUserRegister = () => {
           </Form.Group>
 
           <Form.Group as={Col} md="4" controlId="phoneNumber">
-            <Form.Label>Número de telefono</Form.Label>
-            <Form.Control
-              required
-              type="tel"
-              placeholder="# de telefono"
-              pattern="[0-9]*"
-            />
-            <Form.Control.Feedback type="invalid">
-              Digita un número de telefono válido
-            </Form.Control.Feedback>
+            <Form.Floating className="mb-3">
+              <Form.Control
+                type="text"
+                placeholder=" "
+                pattern="[0-9]*"
+                required
+              />
+              <Form.Label >Número de telefono</Form.Label>
+              <Form.Control.Feedback type="invalid">
+                      Ingrese un numero de telefono valido
+                    </Form.Control.Feedback>
+            </Form.Floating>
           </Form.Group>
         </Row>
 
         <Row className="mb-3">
-          <Form.Group as={Col} md="4" controlId="email">
-            <Form.Label>Correo electronico</Form.Label>
-            <Form.Control
-              required
-              type="email"
-              placeholder="example@mail.com"
-            />
-            <Form.Control.Feedback type="invalid">
-              Introduce un correo válido
-            </Form.Control.Feedback>
+        <Form.Group as={Col} md="4" controlId="email">
+            <Form.Floating className="mb-3">
+              <Form.Control
+                type="email"
+                placeholder="example@mail.com"
+                required
+              />
+              <Form.Label >Correo electronico</Form.Label>
+              <Form.Control.Feedback type="invalid">
+                      Ingrese un correo válido
+                    </Form.Control.Feedback>
+            </Form.Floating>
           </Form.Group>
 
           <Form.Group as={Col} md="4" controlId="password">
-            <Form.Label>Contraseña</Form.Label>
-            <InputGroup hasValidation>
+            <Form.Floating className="mb-3">
               <Form.Control
                 type="password"
-                placeholder="Contraseña"
-                aria-describedby="inputGroupPrepend"
+                placeholder=" "
                 required
               />
+              <Form.Label >Contraseña</Form.Label>
               <Form.Control.Feedback type="invalid">
-                Introduce una contraseña.
-              </Form.Control.Feedback>
-            </InputGroup>
+                      Ingrese una contraseña.
+                    </Form.Control.Feedback>
+            </Form.Floating>
           </Form.Group>
 
           <Form.Group as={Col} md="4" controlId="passwordConfirmation">
-            <Form.Label>Confirmar contraseña</Form.Label>
-            <InputGroup hasValidation>
+            <Form.Floating className="mb-3">
               <Form.Control
                 type="password"
-                placeholder="Contraseña"
-                aria-describedby="inputGroupPrepend"
+                placeholder=" "
                 required
               />
+              <Form.Label >Confirmar contraseña</Form.Label>
               <Form.Control.Feedback type="invalid">
-                Las contraseñas no coinciden
-              </Form.Control.Feedback>
-            </InputGroup>
+              Las contraseñas no coinciden.
+                    </Form.Control.Feedback>
+            </Form.Floating>
           </Form.Group>
         </Row>
+
+        <div className="buttons">
         <Form.Group className="mb-3"></Form.Group>
-        <Button type="submit" className="btn btn-dark">
+        <Button type="submit" className="btn btn-dark btn-lg">
           Registrarse
         </Button>
         <span style={{ marginRight: "10px" }}></span>
         <Link to="/">
-          <Button type="button" className="btn btn-dark">
+          <Button type="button" className="btn btn-dark btn-lg">
             Regresar
           </Button>
         </Link>
+        </div>
+        
         <br />
         <br />
         {errorSignUp && (
@@ -213,6 +238,8 @@ export const FormUserRegister = () => {
           </Alert>
         )}
       </Form>
+      </div>
+      
     </div>
   );
 };
