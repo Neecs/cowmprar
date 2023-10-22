@@ -6,10 +6,12 @@
 }
 
 .inc-form{
-    margin: 4%;
-    border: 58px solid #7D7C7C; /* Ancho del borde y color (puedes ajustarlos según tus preferencias) */
+    margin-right: 20%;
+    margin-left: 20%;
+    border: 30px solid #7D7C7C; 
     padding: 20px; 
     background-color: #F1EFEF;
+    border-radius: 52px;
 }
 
 .inc-name{

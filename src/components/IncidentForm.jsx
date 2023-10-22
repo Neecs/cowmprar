@@ -11,7 +11,7 @@ export const IncidentForm = () => {
       <br />
       <br />
       <div className="inc-form">
-        <Form>
+        <Form >
           <div className="inc-name">
             <Form.Group as={Col} md="4" controlId="name">
               <Form.Label>Nombre</Form.Label>
