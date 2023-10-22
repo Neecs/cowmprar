@@ -1,3 +1,11 @@
+.form-user{
+   display: flex;
+   height: 100vh; 
+   width: 100vw;
+   background-color: #a2c7a6;
+   margin-top: 0vh; 
+}
+
 .form-space {
    display: flex;
    flex-direction: column;
@@ -36,3 +44,4 @@
 .data{
    padding-top: 50px;
 }
+

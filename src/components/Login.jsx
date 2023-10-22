@@ -41,7 +41,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="container">
+    <div className="login-page">
       <div className="login-space">
         <h1>Bienvenido a cowmprar</h1>
         <h1>Inicia Sesión</h1>
