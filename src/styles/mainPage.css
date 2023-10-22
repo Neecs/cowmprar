@@ -1,3 +1,11 @@
-.container {
-    background-color: aqua !important;
-  }
+.main-page {
+  background-color: #a2c7a6;
+  height: 100vh;
+  width: 100vw;
+}
+
+.navbar-main {
+  background-color: #CCC8AA;
+  align-items: end;
+}
+
