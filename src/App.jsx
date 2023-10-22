@@ -8,9 +8,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={< IncidentForm/>} />
+        <Route path="/" element={< MainPage/>} />
         <Route path="/form-example" element={<FormUserRegister />} />
         <Route path="/main-page" element={<MainPage />} />
+        <Route path="/inc-reg" element={<IncidentForm />} />
       </Routes>
     </BrowserRouter>
   );

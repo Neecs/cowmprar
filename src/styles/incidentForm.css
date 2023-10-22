@@ -1,0 +1,34 @@
+.inc-form-page{
+   background-color: #a2c7a6;
+   height: 100vh;
+   width: 100vw;
+   align-items: center;
+}
+
+.inc-form{
+    margin: 4%;
+    border: 58px solid #7D7C7C; /* Ancho del borde y color (puedes ajustarlos según tus preferencias) */
+    padding: 20px; 
+    background-color: #F1EFEF;
+}
+
+.inc-name{
+    padding-left: 1%;
+}
+
+.text-area-des{
+    width: 50vw;
+    padding-left: 1%;
+}
+
+.date-in{
+    width: 30vw;
+    padding-left: 1%;
+}
+
+h1{
+    text-align: center;
+    padding-top: 4%;
+  }
+
+

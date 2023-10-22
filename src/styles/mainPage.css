@@ -5,7 +5,12 @@
 }
 
 .navbar-main {
-  background-color: #CCC8AA;
+  background-color: #7D7C7C;
   align-items: end;
+  padding-left: 2%;
+}
+
+.main-page-body{
+  padding-left: 2%;
 }
 
