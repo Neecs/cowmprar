@@ -5,17 +5,18 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 
 export const IncidentForm = () => {
+
   return (
     <div className="inc-form-page">
       <h1>Registrar Incidente</h1>
       <br />
       <br />
       <div className="inc-form">
-        <Form >
+        <Form>
           <div className="inc-name">
             <Form.Group as={Col} md="4" controlId="name">
               <Form.Label>Nombre</Form.Label>
-                <Form.Control type="text" placeholder=" " required />
+              <Form.Control type="text" placeholder=" " required />
             </Form.Group>
           </div>
           <div className="date-in">

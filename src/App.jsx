@@ -1,19 +1,21 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { Login } from "./components/Login";
 import { FormUserRegister } from "./components/FormUserRegister";
 import { MainPage } from "./components/MainPage";
-import {IncidentForm} from './components/IncidentForm'
+import { IncidentForm } from "./components/IncidentForm";
+import {FormNewUser} from './components/FormNewUser'
+import { RestorePassword } from "./components/RestorePassword";
 
 function App() {
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainPage/>} />
-        <Route path="/form-example" element={<FormUserRegister />} />
-        <Route path="/main-page" element={<MainPage />} />
-        <Route path="/inc-reg" element={<IncidentForm />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<FormNewUser />} />
+      <Route path="/" element={<MainPage />} />
+      <Route path="/inc-reg" element={<IncidentForm />} />
+      <Route path="/restore" element={<RestorePassword/>}/>
+    </Routes>
   );
 }
 
