@@ -9,21 +9,26 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import {getAllUserCows} from "../supabase/usecases/cows/get_cow.js";
+import { getAllUserCows } from "../supabase/usecases/cows/get_cow.js";
 
 export const MainPage = () => {
   const navigate = useNavigate();
   const [cowsData, setCowsData] = useState({});
 
   useEffect(() => {
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (!session) {
+        navigate("/login");
+      }
+    });
 
-    async function fetchData(){
-      console.log("Running")
-      const data = await getAllUserCows()
-      setCowsData(data)
+    async function fetchData() {
+      console.log("Running");
+      const data = await getAllUserCows();
+      setCowsData(data);
     }
-    fetchData()
-  },[]);
+    fetchData();
+  }, []);
 
   return (
     <div className="main-page">
@@ -36,10 +41,10 @@ export const MainPage = () => {
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
           <Button
-              variant="dark"
-              onClick={async () => {
-                supabase.auth.signOut();
-              }}
+            variant="dark"
+            onClick={async () => {
+              supabase.auth.signOut();
+            }}
           >
             Cerrar sesión
           </Button>
@@ -54,7 +59,6 @@ export const MainPage = () => {
         </Link>
         <br />
         <br />
-
       </div>
     </div>
   );
