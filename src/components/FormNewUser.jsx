@@ -6,8 +6,7 @@ import Row from "react-bootstrap/Row";
 import "../styles/formNewUser.css";
 import { Link } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
-import {} from "../supabase/client";
-import { supabase } from "../supabase/client";
+import {registerUser} from "../supabase/usecases/user/create_user.js";
 
 export const FormNewUser = () => {
   const [validated, setValidated] = useState(false);
@@ -31,12 +30,9 @@ export const FormNewUser = () => {
         event.preventDefault();
         event.stopPropagation();
       } else {
-        const { data, error } = await supabase.auth.signUp({
-          email,
-          password,
-        });
+        let data = registerUser(email,password)
         console.log(data);
-        if (data.user === null) {
+        if (data === false) {
           setErrorSignUp(true);
           setSuccesfullRegister(false);
         } else {

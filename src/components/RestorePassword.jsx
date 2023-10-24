@@ -2,12 +2,10 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
 import "../styles/formNewUser.css";
 import { Link } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
-import {} from "../supabase/client";
-import { supabase } from "../supabase/client";
+import { recoverPasswordByEmail} from "../supabase/usecases/auth.js";
 
 export const RestorePassword = () => {
   const [validated, setValidated] = useState(false);
@@ -15,30 +13,28 @@ export const RestorePassword = () => {
   const [errorPassword, setErrorPassword] = useState(false);
   const [succesfullRegister, setSuccesfullRegister] = useState(false);
 
-  
+
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
     event.preventDefault();
-    console.log(form);
-    const email = form.email.value;
-    
-    const { data, error } = await supabase.auth
-    .resetPasswordForEmail(email)
-    
 
-    supabase.auth.onAuthStateChange(async (event, session) => {
-        if (event == "PASSWORD_RECOVERY") {
-          const newPassword = prompt("What would you like your new password to be?");
-          const { data, error } = await supabase.auth
-            .updateUser({ password: newPassword })
-   
-          if (data) alert("Password updated successfully!")
-          if (error) alert("There was an error updating your password.")
-        }
-      })
-    setValidated(true);
+    if (form.checkValidity()) {
+      const email = form.email.value;
+      const newPassword = prompt("What would you like your new password to be?");
+
+      try {
+        setValidated(await recoverPasswordByEmail(email,newPassword))
+        setSuccesfullRegister(true);
+      } catch (error) {
+        setErrorSignUp(true);
+        console.error("Error recovering password:", error);
+      }
+    } else {
+      setValidated(true);
+    }
   };
+
   return (
     <div className="form-user">
       <div className="form-space">

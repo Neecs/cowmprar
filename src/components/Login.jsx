@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Alert from "react-bootstrap/Alert";
-import { supabase } from "../supabase/client";
+import {supabase} from "../supabase/data/constants/api_credentials.js";
 
 export const Login = () => {
   const navigate = useNavigate();
