@@ -43,10 +43,6 @@ export const FormCow = () => {
     // Access the selected values and their corresponding keys
     const razeId = selectedRaze;
     const genderId = selectedGender;
-
-    // Handle form submission here
-    console.log("Selected Raza ID:", razeId);
-    console.log("Selected Gender ID:", genderId);
   };
 
   return (
