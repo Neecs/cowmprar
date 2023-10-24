@@ -4,40 +4,35 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/login.css";
 import "../styles/signup.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Alert from "react-bootstrap/Alert";
+import { supabase } from "../supabase/client";
 
 export const Login = () => {
   const navigate = useNavigate();
   const [errorLogin, setErrorLogin] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
+
     const email = form.email.value;
     const password = form.password.value;
-
-    const data = {
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
-    };
+    });
+    console.log(data);
+    console.log(error);
 
-    axios
-      .post("http://localhost:3000/api/login", data)
-      .then((response) => {
-        if (response.data.user) {
-          console.log(response.data.user);
-          navigate("/main-page");
-        } else {
-          setErrorLogin(true);
-        }
-      })
-      .catch((error) => {
-        console.error("Error", error);
-        setErrorLogin(true);
-      });
+    if (!data.session) {
+      setErrorLogin(true);
+    } else {
+      navigate("/");
+    }
+
+    console.log(toString(errorLogin));
   };
 
   return (
@@ -65,7 +60,8 @@ export const Login = () => {
             <Form.Label>Contraseña</Form.Label>
             <Form.Control type="password" placeholder="Ingresa tu contraseña" />
           </Form.Group>
-
+          <a href="/restore">¿Olvidaste tu contraseña?</a>
+          <br />
           <br />
           <Button variant="dark" type="submit">
             Ingresar
@@ -80,7 +76,7 @@ export const Login = () => {
         <h2>¿Aún no tienes una cuenta?</h2>
         <br />
         <br />
-        <Link to="/form-example">
+        <Link to="/register">
           <button type="button" className="btn btn-dark">
             Regístrate
           </button>
