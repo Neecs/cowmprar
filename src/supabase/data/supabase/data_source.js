@@ -29,7 +29,7 @@ export const signIn = async (email, password) => {
   if (error) throw error;
   return user;
 };
- export const createNewUser = async (email, password) => {
+ export const createNewUser = async (email, password, doc_id, first_name, last_name, role_id, phone, doc_type) => {
   try {
       const {user, error:authError} = await supabase.auth.signUp({
         email: email,
@@ -41,10 +41,11 @@ export const signIn = async (email, password) => {
         return false
       }
       console.log(user)
-/*
+
       const {data, error: insertError} = await supabase.from('Person')
           .insert({
             id:user.id,
+            email:email,
             doc_id:doc_id,
             first_name:first_name,
             last_name:last_name,
@@ -52,21 +53,7 @@ export const signIn = async (email, password) => {
             phone:phone,
             doc_type:doc_type
           });
-*/
-      return true
-      /*
-
-      await supabase.from('public."Person"').upsert([
-        {
-          email: email,
-          doc_type:doc_type,
-          doc_id:doc_id,
-          first_name:first_name,
-          last_name:last_name,
-          role_id:role_id,
-          phone:phone
-        }
-      ])*/
+      return true;
   } catch (error) {
     return error;
   }
