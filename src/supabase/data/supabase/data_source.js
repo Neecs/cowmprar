@@ -1,4 +1,5 @@
 import { supabase } from "../constants/api_credentials.js";
+import data from "bootstrap/js/src/dom/data.js";
 
 export const fetchDataFromSupabase = async () => {
   const { data, error } = await supabase.from("Person").select("*");
@@ -115,17 +116,20 @@ export const recoverUserPassword = async (email, new_password) => {
   }
 };
 
-export const createNewCow = async(raze, gender, hv_cow, birth_date) => {
+export const createNewCow = async(raze, birth_date, gender, name) => {
   try {
-    await supabase
-        .from("Cow")
-        .insert({
-          raze,
-          gender,
-          hv_cow,
-          birth_date
-        });
-    return true;
+      const { data, error } = await supabase
+          .from('Vacas')
+          .insert([
+              { raza_vaca: raze,
+                fecha_nacimiento: birth_date,
+                id_genero:gender,
+                nombre_vaca:name
+              },
+          ])
+          .select()
+        console.log(data,error)
+      return true;
   }catch (error){
     return false;
   }
@@ -243,5 +247,16 @@ export const recoverPasswordViaEmail = async(email) => {
         return true
     }catch (error) {
         console.error(error)
+    }
+}
+
+export const getAllCows = async () => {
+    try {
+        const {data:cowData, error} = await supabase
+            .from('Vacas')
+            .select('*')
+        return cowData
+    }catch (error){
+        console.log(error)
     }
 }

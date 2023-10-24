@@ -9,29 +9,22 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import {getAllUserCows} from "../supabase/usecases/cows/get_cow.js";
 
 export const MainPage = () => {
   const navigate = useNavigate();
   const [cowsData, setCowsData] = useState({});
-  useEffect(() => {
-    supabase.auth.onAuthStateChange(
-      (event, session) => {
-        if (!session) {
-          navigate("/login");
-        }
-      },
-      [navigate]
-    );
 
-    async function bringCows() {
-      let { data: Hojas, error } = await supabase
-        .from("Hojas de vida")
-        .select("*");
-      console.log(Hojas.length);
-      setCowsData(Hojas);
+  useEffect(() => {
+    async function fetchData(){
+      console.log("Running")
+      const data = await getAllUserCows()
+      setCowsData(data)
     }
-    bringCows();
-  }, []);
+    fetchData()
+  },[]);
+
+  console.log(cowsData)
 
   return (
     <div className="main-page">

@@ -18,6 +18,8 @@ import {
   getRazes,
 } from "../supabase/usecases/cows/get_cow.js";
 import { getCowGenders } from "../supabase/data/supabase/data_source.js";
+import {registerUser} from "../supabase/usecases/user/create_user.js";
+import {createCow} from "../supabase/usecases/cows/create_cow.js";
 
 export const FormCow = () => {
   const [validated, setValidated] = useState(false);
@@ -63,6 +65,7 @@ export const FormCow = () => {
       location,
     };
 
+    createCow(razeId,genderId,bornDate,name)
     console.log(data);
   };
 

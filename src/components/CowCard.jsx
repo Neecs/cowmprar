@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 
-export const CowCard = () => {
+export const CowCard = ({cowList}) => {
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Body>
