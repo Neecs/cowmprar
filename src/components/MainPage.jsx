@@ -25,8 +25,6 @@ export const MainPage = () => {
     fetchData()
   },[]);
 
-  console.log(cowsData)
-
   return (
     <div className="main-page">
       <div className="navbar-main">
@@ -37,6 +35,14 @@ export const MainPage = () => {
             <Nav.Link href="#features">Features</Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
           </Nav>
+          <Button
+              variant="dark"
+              onClick={async () => {
+                supabase.auth.signOut();
+              }}
+          >
+            Cerrar sesión
+          </Button>
         </Navbar>
       </div>
       <br />
@@ -48,14 +54,7 @@ export const MainPage = () => {
         </Link>
         <br />
         <br />
-        <Button
-          variant="dark"
-          onClick={async () => {
-            supabase.auth.signOut();
-          }}
-        >
-          Cerrar sesión
-        </Button>
+
       </div>
     </div>
   );

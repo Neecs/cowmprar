@@ -1,0 +1,5 @@
+/* CowCard.css */
+.horizontal-cow-card {
+    display: inline-block; /* Display horizontally */
+    margin: 10px; /* Add some margin for spacing */
+}
