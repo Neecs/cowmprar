@@ -163,7 +163,6 @@ export const getCowRazes = async () => {
     const {data:cowRazes, error} = await supabase
         .from('Razas Vaca')
         .select('*')
-      console.log(cowRazes)
     const dictionaryRaze = {};
     cowRazes.forEach(item => {
         dictionaryRaze[item.id_raza] = item.raza_vaca

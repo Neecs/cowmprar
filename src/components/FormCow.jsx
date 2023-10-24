@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -12,165 +12,164 @@ import Alert from "react-bootstrap/Alert";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import {getRazes} from "../supabase/usecases/cows/get_cow.js";
+import {getCow, getGenders, getRazes} from "../supabase/usecases/cows/get_cow.js";
+import {getCowGenders} from "../supabase/data/supabase/data_source.js";
 
 export const FormCow = () => {
   const [validated, setValidated] = useState(false);
   const [errorSignUp, setErrorSignUp] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
-  const razesDictionary = getRazes();
+  const [razesDictionary, setRazesDictionary] = useState({});
+  const [genderDictionary, setGenderDictionary] = useState({});
 
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+    // Fetch the raze dictionary when the component mounts
+    async function fetchData() {
+      const razes = await getRazes();
+      console.log(await getRazes())
+      setRazesDictionary(razes);
 
+      const gender = await getGenders();
+      console.log(await getGenders())
+      setGenderDictionary(gender)
+    }
+    fetchData();
+  }, []); // Empty dependency array means this effect runs once when the component mounts
+
+  const handleSubmit = (event) => {
+    // Handle form submission here
   };
 
-
   return (
-    <div className="form-cow">
-    <div className="form-space-cow">
-      <div className="header-title-cow">
-        <h4 className="title">Formulario de registro de un nuevo Bovino</h4>
-        <p className="category">Ingrese los datos del Bovino</p>
-      </div>
-      <div className="data-cow">
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
-          <Col md="3">
-                <h9>Información principal</h9>
-            </Col>
-          <Row className="mb-3">
-          <Form.Group as={Col} md="4" controlId="breed">
-            <Form.Select aria-label="Default select example" required>
-              <option value="">Raza</option>
-              {Object.keys(razesDictionary)
-                  .map((key) => (
-                  <option key={key} value={key}>{razesDictionary[key]}</option>
-              ))}
-            </Form.Select>
-              <Form.Control.Feedback type="invalid">
-                Seleccione tipo de identificación válido
-              </Form.Control.Feedback>
-            </Form.Group>
-
-            <Form.Group as={Col} md="5" controlId="bornDate">
-              <Form.Floating className="mb-3">
-              <Form.Control type="date"  required />
-                <Form.Label>Fecha de nacimiento del bovino</Form.Label>
-                <Form.Control.Feedback type="invalid">
-                  Introduce la fecha de nacimiento.
-                </Form.Control.Feedback>
-              </Form.Floating>
-            </Form.Group>
-          </Row>
-
-          <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="sex">
-              <Form.Select aria-label="Default select example" required>
-                <option value="">Sexo </option>
-                <option value="Macho">Macho</option>
-                <option value="Hembra">Hembra</option>
-              </Form.Select>
-              <Form.Control.Feedback type="invalid">
-                Selecciona el sexo del Bovino.
-              </Form.Control.Feedback>
-            </Form.Group>
-          </Row>
-            <Col md="3">
-                <h9>Información adicional</h9>
-            </Col>
-          <Row className="mb-3">
-
-            <Form.Group as={Col} md="4" controlId="name">
-              <Form.Floating className="mb-3">
-                <Form.Control
-                  type="text"
-                  placeholder=" "
-                  required
-                />
-                <Form.Label>Nombre del bovino</Form.Label>
-                <Form.Control.Feedback type="invalid">
-                  Introduce un nombre.
-                </Form.Control.Feedback>
-              </Form.Floating>
-            </Form.Group>
-            <Form.Group as={Col} md="4" controlId="color">
-              <Form.Floating className="mb-3">
-                <Form.Control
-                  type="text"
-                  placeholder=" "
-
-                  required
-                />
-                <Form.Label>Color del bovino</Form.Label>
-                <Form.Control.Feedback type="invalid">
-                  Ingrese un color.
-                </Form.Control.Feedback>
-              </Form.Floating>
-            </Form.Group>
-          </Row>
-            <Col md="3">
-                <h9>Información del hato</h9>
-            </Col>
-          <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="name-hato">
-              <Form.Floating className="mb-3">
-                <Form.Control
-                  type="text"
-                  placeholder=" "
-                  required
-                />
-                <Form.Label>Nombre del Hato</Form.Label>
-                <Form.Control.Feedback type="invalid">
-                  Introduce un nombre.
-                </Form.Control.Feedback>
-              </Form.Floating>
-            </Form.Group>
-            <Form.Group as={Col} md="4" controlId="location">
-              <Form.Floating className="mb-3">
-                <Form.Control
-                  type="text"
-                  placeholder=" "
-
-                  required
-                />
-                <Form.Label>Ubicacion del Hato</Form.Label>
-                <Form.Control.Feedback type="invalid">
-                  Ingrese un color.
-                </Form.Control.Feedback>
-              </Form.Floating>
-            </Form.Group>
-          </Row>
-
-
-          <div className="buttons-cow">
-            <Form.Group className="mb-3"></Form.Group>
-            <Button type="submit" className="btn btn-dark btn-lg">
-              Registrarse
-            </Button>
-            <span style={{ marginRight: "10px" }}></span>
-            <Link to="/">
-              <Button type="button" className="btn btn-dark btn-lg">
-                Regresar
-              </Button>
-            </Link>
+      <div className="form-cow">
+        <div className="form-space-cow">
+          <div className="header-title-cow">
+            <h4 className="title">Formulario de registro de un nuevo Bovino</h4>
+            <p className="category">Ingrese los datos del Bovino</p>
           </div>
+          <div className="data-cow">
+            <Form noValidate validated={validated} onSubmit={handleSubmit}>
+              <Col md="3">
+                <h9>Información principal</h9>
+              </Col>
+              <Row className="mb-3">
+                <Form.Group as={Col} md="4" controlId="breed">
+                  <Form.Select aria-label="Default select example" required>
+                    <option value="">Raza</option>
+                    {Object.keys(razesDictionary).map((key) => (
+                        <option key={key} value={key}>
+                          {razesDictionary[key]}
+                        </option>
+                    ))}
+                  </Form.Select>
+                  <Form.Control.Feedback type="invalid">
+                    Seleccione tipo de identificación válido
+                  </Form.Control.Feedback>
+                </Form.Group>
 
-          <br />
-          <br />
-          {errorSignUp && (
-            <Alert key="danger" variant="danger">
-              Ya existe un usuario con este correo
-            </Alert>
-          )}
-          {errorPassword && (
-            <Alert key="danger" variant="danger">
-              Las contraseñas no coinciden
-            </Alert>
-          )}
-        </Form>
+                <Form.Group as={Col} md="5" controlId="bornDate">
+                  <Form.Floating className="mb-3">
+                    <Form.Control type="date" required />
+                    <Form.Label>Fecha de nacimiento del bovino</Form.Label>
+                    <Form.Control.Feedback type="invalid">
+                      Introduce la fecha de nacimiento.
+                    </Form.Control.Feedback>
+                  </Form.Floating>
+                </Form.Group>
+              </Row>
+
+              <Row className="mb-3">
+                <Form.Group as={Col} md="4" controlId="sex">
+                  <Form.Select aria-label="Default select example" required>
+                    <option value="">Genero</option>
+                    {Object.keys(genderDictionary).map((key) => (
+                        <option key={key} value={key}>
+                          {genderDictionary[key]}
+                        </option>
+                    ))}
+                  </Form.Select>
+                  <Form.Control.Feedback type="invalid">
+                    Selecciona el sexo del Bovino.
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Row>
+              <Col md="3">
+                <h9>Información adicional</h9>
+              </Col>
+              <Row className="mb-3">
+                <Form.Group as={Col} md="4" controlId="name">
+                  <Form.Floating className="mb-3">
+                    <Form.Control type="text" placeholder=" " required />
+                    <Form.Label>Nombre del bovino</Form.Label>
+                    <Form.Control.Feedback type="invalid">
+                      Introduce un nombre.
+                    </Form.Control.Feedback>
+                  </Form.Floating>
+                </Form.Group>
+                <Form.Group as={Col} md="4" controlId="color">
+                  <Form.Floating className="mb-3">
+                    <Form.Control type="text" placeholder=" " required />
+                    <Form.Label>Color del bovino</Form.Label>
+                    <Form.Control.Feedback type="invalid">
+                      Ingrese un color.
+                    </Form.Control.Feedback>
+                  </Form.Floating>
+                </Form.Group>
+              </Row>
+              <Col md="3">
+                <h9>Información del hato</h9>
+              </Col>
+              <Row className="mb-3">
+                <Form.Group as={Col} md="4" controlId="name-hato">
+                  <Form.Floating className="mb-3">
+                    <Form.Control type="text" placeholder=" " required />
+                    <Form.Label>Nombre del Hato</Form.Label>
+                    <Form.Control.Feedback type="invalid">
+                      Introduce un nombre.
+                    </Form.Control.Feedback>
+                  </Form.Floating>
+                </Form.Group>
+                <Form.Group as={Col} md="4" controlId="location">
+                  <Form.Floating className="mb-3">
+                    <Form.Control type="text" placeholder=" " required />
+                    <Form.Label>Ubicacion del Hato</Form.Label>
+                    <Form.Control.Feedback type="invalid">
+                      Ingrese un color.
+                    </Form.Control.Feedback>
+                  </Form.Floating>
+                </Form.Group>
+              </Row>
+
+              <div className="buttons-cow">
+                <Form.Group className="mb-3"></Form.Group>
+                <Button type="submit" className="btn btn-dark btn-lg">
+                  Registrarse
+                </Button>
+                <span style={{ marginRight: "10px" }}></span>
+                <Link to="/">
+                  <Button type="button" className="btn btn-dark btn-lg">
+                    Regresar
+                  </Button>
+                </Link>
+              </div>
+
+              <br />
+              <br />
+              {errorSignUp && (
+                  <Alert key="danger" variant="danger">
+                    Ya existe un usuario con este correo
+                  </Alert>
+              )}
+              {errorPassword && (
+                  <Alert key="danger" variant="danger">
+                    Las contraseñas no coinciden
+                  </Alert>
+              )}
+            </Form>
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
   );
 };
