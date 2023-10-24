@@ -1,5 +1,5 @@
-import {updateCowHistory} from '../../data/supabase/data_source'
+import {updateHV} from '../../data/supabase/data_source'
 
-export const updateHistory = async (cow_id, feed, color, name, photo, id_hato, id_history) => {
-    return await updateCowHistory(cow_id, name, color, photo, id_hato, id_history)
+export const updateHistory = async (cow_id, feed, color, name, photo, id_hato, person_id) => {
+    return await updateHV(color,name, photo, id_hato, person_id)
 }
