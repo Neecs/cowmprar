@@ -12,65 +12,20 @@ import Alert from "react-bootstrap/Alert";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
+import {getRazes} from "../supabase/usecases/cows/get_cow.js";
 
 export const FormCow = () => {
   const [validated, setValidated] = useState(false);
   const [errorSignUp, setErrorSignUp] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
+  const razesDictionary = getRazes();
+
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    event.preventDefault();
-    console.log(form);
-    const email = form.email.value;
-    const password = form.password.value;
-    const doc_id = form.idNumber.value;
-    const first_name = form.name.value;
-    const last_name = form.lastName.value;
-    const role_id = form.userType.value;
-    const phone = form.phoneNumber.value;
-    const doc_type = form.idType.value;
 
-    const data = {
-      email,
-      password,
-      doc_id,
-      first_name,
-      last_name,
-      role_id,
-      phone,
-      doc_type,
-    };
-
-    if (password !== form.passwordConfirmation.value) {
-      event.preventDefault();
-      event.stopPropagation();
-      setErrorPassword(true);
-    } else {
-      if (form.checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-      } else {
-        axios
-          .post("http://localhost:3000/api/register", data)
-          .then(function (response) {
-            console.log("Correct", response.data);
-            if ("success" in response.data) {
-              navigate("/main-page");
-            } else if ("error" in response.data) {
-              setErrorSignUp(true);
-            }
-          })
-          .catch(function (error) {
-            console.error("Error", error);
-          });
-      }
-    }
-
-    console.log(form.checkValidity());
-    setValidated(true);
   };
+
 
   return (
     <div className="form-cow">
@@ -86,11 +41,13 @@ export const FormCow = () => {
             </Col>
           <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="breed">
-              <Form.Select aria-label="Default select example" required>
-                <option value="">Raza</option>
-                <option value={1}>raza 1</option>
-                <option value={2}>Raza 2</option>
-              </Form.Select>
+            <Form.Select aria-label="Default select example" required>
+              <option value="">Raza</option>
+              {Object.keys(razesDictionary)
+                  .map((key) => (
+                  <option key={key} value={key}>{razesDictionary[key]}</option>
+              ))}
+            </Form.Select>
               <Form.Control.Feedback type="invalid">
                 Seleccione tipo de identificación válido
               </Form.Control.Feedback>
@@ -123,7 +80,7 @@ export const FormCow = () => {
                 <h9>Información adicional</h9>
             </Col>
           <Row className="mb-3">
-            
+
             <Form.Group as={Col} md="4" controlId="name">
               <Form.Floating className="mb-3">
                 <Form.Control
@@ -142,7 +99,7 @@ export const FormCow = () => {
                 <Form.Control
                   type="text"
                   placeholder=" "
-                  
+
                   required
                 />
                 <Form.Label>Color del bovino</Form.Label>
@@ -174,7 +131,7 @@ export const FormCow = () => {
                 <Form.Control
                   type="text"
                   placeholder=" "
-                  
+
                   required
                 />
                 <Form.Label>Ubicacion del Hato</Form.Label>
@@ -184,7 +141,7 @@ export const FormCow = () => {
               </Form.Floating>
             </Form.Group>
           </Row>
-         
+
 
           <div className="buttons-cow">
             <Form.Group className="mb-3"></Form.Group>
