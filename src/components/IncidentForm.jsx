@@ -2,9 +2,11 @@ import Form from "react-bootstrap/Form";
 import "../styles/incidentForm.css";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import {addCowIncident} from "../supabase/usecases/cows/update_cow.js";
 
 export const IncidentForm = () => {
+  const {cowId} = useParams();
   const handleSumbit = (e) => {
     const form = e.currentTarget;
     e.preventDefault();
@@ -18,8 +20,10 @@ export const IncidentForm = () => {
       dateIn,
       description,
     };
+    console.log(cowId)
 
     console.log(data);
+    addCowIncident(name,dateIn,description)
   };
 
 

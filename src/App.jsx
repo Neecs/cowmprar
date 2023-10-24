@@ -13,7 +13,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<FormUserRegister />} />
       <Route path="/" element={<MainPage />} />
-      <Route path="/inc-reg" element={<IncidentForm />} />
+      <Route path="/inc-reg/:cowId" element={<IncidentForm />} />
       <Route path="/restore" element={<RestorePassword/>}/>
       <Route path="form-cow" element={<FormCow/>}/>
     </Routes>
