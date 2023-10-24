@@ -11,6 +11,7 @@ import {getGenders, getRazes} from "../supabase/usecases/cows/get_cow.js";
 import {getDocumentTypes} from "../supabase/data/supabase/data_source.js";
 import {getPossibleDocuments, getRoles} from "../supabase/usecases/user/fetch_user.js";
 import {registerUser} from "../supabase/usecases/user/create_user.js";
+import {supabase} from "../supabase/data/constants/api_credentials.js";
 
 export const FormUserRegister = () => {
   const [validated, setValidated] = useState(false);
@@ -59,6 +60,7 @@ export const FormUserRegister = () => {
       phone,
       doc_type,
     };
+    console.log(data)
 
     if (password !== form.passwordConfirmation.value) {
       event.preventDefault();
@@ -69,9 +71,29 @@ export const FormUserRegister = () => {
         event.preventDefault();
         event.stopPropagation();
       } else {
-        registerUser(data).then(
+        if (registerUser(email,password,doc_id,first_name,last_name,role_id,phone,doc_type)){
+          navigate("/")
+        }else{
+          setErrorSignUp(true)
+        }
+        /*(data).then(
             () => navigate("/"),
             () => setErrorSignUp(true))
+        */
+        /*supabase.from("Person").insert([
+          {email_persona:"email@gmail.com"},
+          {documento_persona:"12312312312"},
+          {nombre_persona:"first_name"},
+          { apellido_persona:"last_name"},
+          {id_rol:1},
+          {telefono_persona:"13432432432"},
+          {id_tipo_documento:1},
+        ]);
+        supabase.auth.signUp({
+          email: email,
+          password: password
+        });*/
+
       }
     }
 

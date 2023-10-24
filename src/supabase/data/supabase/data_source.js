@@ -29,41 +29,46 @@ export const signIn = async (email, password) => {
   if (error) throw error;
   return user;
 };
- export const createNewUser = async (email, password, doc_id, first_name, last_name, role_id, phone, doc_type) => {
-  try {
-      const {user, error:authError} = await supabase.auth.signUp({
-        email: email,
-        password: password
-      });
+export const createNewUser = async (
+    email_persona,
+    password,
+    documento_persona,
+    nombre_persona,
+    apellido_persona,
+    id_rol,
+    telefono_persona,
+    id_tipo_documento,
+) => {
+    try {
+            const {data: createUser, error} =
+                await supabase.from("Person").insert({
+                    email_persona,
+                    documento_persona,
+                    nombre_persona,
+                    apellido_persona,
+                    id_rol,
+                    telefono_persona,
+                    id_tipo_documento
+                });
+            console.log(createUser, error)
 
-      if( authError ) {
-        console.error("Error en el registro", authError)
-        return false
-      }
-      console.log(user)
-
-      const {data, error: insertError} = await supabase.from('Person')
-          .insert({
-            id:user.id,
-            email:email,
-            doc_id:doc_id,
-            first_name:first_name,
-            last_name:last_name,
-            role_id:role_id,
-            phone:phone,
-            doc_type:doc_type
-          });
-      return true;
-  } catch (error) {
-    return error;
-  }
+            const{authData:createAuthUser, errorAuth} =
+                await supabase.auth.signUp({
+                    email: email_persona,
+                    password: password
+                });
+            console.log(createAuthUser,errorAuth)
+            return true
+    } catch (error) {
+        return error;
+    }
 };
 
 export const fetchPersonDataByEmail = async (email) => {
   const { data, error } = await supabase
     .from("Person")
     .select("*")
-    .eq("email", email);
+    .eq("email_persona", email);
   if (error) throw error;
   return data.length > 0;
 };
