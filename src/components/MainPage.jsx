@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import { supabase } from "../supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export const MainPage = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ export const MainPage = () => {
       },
       [navigate]
     );
-  },[]);
+  }, []);
 
   return (
     <div className="main-page">
@@ -37,15 +38,18 @@ export const MainPage = () => {
       <div className="main-page-body">
         <CowList />
         <br />
+        <Link to="form-cow">
+          <Button variant="dark">Agregar vaca</Button>
+        </Link>
+        <br />
+        <br />
         <Button
           variant="dark"
           onClick={() => {
             supabase.auth.signOut();
-            console.log(supabase.auth.getUser());
-            navigate("/login");
           }}
         >
-          Agregar vaca
+          Cerrar sesión
         </Button>
       </div>
     </div>
