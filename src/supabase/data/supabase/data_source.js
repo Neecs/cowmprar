@@ -260,3 +260,36 @@ export const getAllCows = async () => {
         console.log(error)
     }
 }
+
+export const getHV = async () => {
+  try {
+      const{ data: hvData, error } = await supabase
+        .from('Hojas de vida')
+        .select('id_hoja_vida')
+      
+      return hvData
+  }catch (error){
+      console.log(error)
+  }
+}
+
+
+export const updateHV = async (color,nombre,foto,id_hato,id_persona) => {
+  try {
+    await supabase
+        .from('Hojas de vida')
+        .update({
+          color,
+          nombre,
+          foto,
+          id_hato,
+          id_persona
+        })
+            .eq('id_hoja_vida');
+    return true
+  }catch (error){
+    return false
+  }
+}
+
+
