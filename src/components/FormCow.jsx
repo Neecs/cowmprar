@@ -18,8 +18,8 @@ import {
   getRazes,
 } from "../supabase/usecases/cows/get_cow.js";
 import { getCowGenders } from "../supabase/data/supabase/data_source.js";
-import {registerUser} from "../supabase/usecases/user/create_user.js";
-import {createCow} from "../supabase/usecases/cows/create_cow.js";
+import { registerUser } from "../supabase/usecases/user/create_user.js";
+import { createCow } from "../supabase/usecases/cows/create_cow.js";
 
 export const FormCow = () => {
   const [validated, setValidated] = useState(false);
@@ -65,8 +65,8 @@ export const FormCow = () => {
       location,
     };
 
-    createCow(razeId,genderId,bornDate,name)
-    navigate('/')
+    createCow(razeId, genderId, bornDate, name);
+    navigate("/");
   };
 
   return (
@@ -182,7 +182,7 @@ export const FormCow = () => {
             <div className="buttons-cow">
               <Form.Group className="mb-3"></Form.Group>
               <Button type="submit" className="btn btn-dark btn-lg">
-                Registrarse
+                Registrar vaca
               </Button>
               <span style={{ marginRight: "10px" }}></span>
               <Link to="/">
