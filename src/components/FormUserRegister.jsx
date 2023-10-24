@@ -4,7 +4,6 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import "../styles/formNewUser.css";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
@@ -48,19 +47,7 @@ export const FormUserRegister = () => {
         event.preventDefault();
         event.stopPropagation();
       } else {
-        axios
-          .post("http://localhost:3000/api/register", data)
-          .then(function (response) {
-            console.log("Correct", response.data);
-            if ("success" in response.data) {
-              navigate("/main-page");
-            } else if ("error" in response.data) {
-              setErrorSignUp(true);
-            }
-          })
-          .catch(function (error) {
-            console.error("Error", error);
-          });
+       
       }
     }
 

@@ -4,13 +4,15 @@ import { CowList } from "./CowList";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/mainPage.css";
 import Button from "react-bootstrap/Button";
-import {supabase} from "../supabase/data/constants/api_credentials.js";
+import { supabase } from "../supabase/data/constants/api_credentials.js";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export const MainPage = () => {
   const navigate = useNavigate();
+  const [cowsData, setCowsData] = useState({});
   useEffect(() => {
     supabase.auth.onAuthStateChange(
       (event, session) => {
@@ -20,6 +22,15 @@ export const MainPage = () => {
       },
       [navigate]
     );
+
+    async function bringCows() {
+      let { data: Hojas, error } = await supabase
+        .from("Hojas de vida")
+        .select("*");
+      console.log(Hojas.length);
+      setCowsData(Hojas);
+    }
+    bringCows();
   }, []);
 
   return (
@@ -45,7 +56,7 @@ export const MainPage = () => {
         <br />
         <Button
           variant="dark"
-          onClick={() => {
+          onClick={async () => {
             supabase.auth.signOut();
           }}
         >

@@ -11,7 +11,7 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<FormNewUser />} />
+      <Route path="/register" element={<FormUserRegister />} />
       <Route path="/" element={<MainPage />} />
       <Route path="/inc-reg" element={<IncidentForm />} />
       <Route path="/restore" element={<RestorePassword/>}/>
