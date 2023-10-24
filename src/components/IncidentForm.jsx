@@ -22,6 +22,8 @@ export const IncidentForm = () => {
     console.log(data);
   };
 
+
+
   return (
     <div className="inc-form-page">
       <h1>Registrar Incidente</h1>
