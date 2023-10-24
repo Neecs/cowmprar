@@ -21,7 +21,7 @@ export const CowCard = ({ cow }) => {
                 <tr>
                   <td>1</td>
                   <td>{cow.raza_vaca}</td>
-                  <td>{cow.id_genero === 1 ? "hembra" : "macho"}</td>
+                  <td>{cow.id_genero === 1 ? "macho" : "hembra"}</td>
                   <td>{cow.fecha_nacimiento}</td>
                 </tr>
               </tbody>
