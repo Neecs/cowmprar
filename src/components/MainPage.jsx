@@ -16,6 +16,7 @@ export const MainPage = () => {
   const [cowsData, setCowsData] = useState({});
 
   useEffect(() => {
+
     async function fetchData(){
       console.log("Running")
       const data = await getAllUserCows()
