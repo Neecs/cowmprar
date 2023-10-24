@@ -8,12 +8,10 @@ export const CowList = () => {
 
   useEffect(() => {
     async function fetchData() {
-      console.log("Running");
       const data = await getAllUserCows();
       setCowsData(data);
     }
     fetchData();
-    console.log(cowsData);
   }, []);
 
   return (

@@ -23,7 +23,6 @@ export const MainPage = () => {
     });
 
     async function fetchData() {
-      console.log("Running");
       const data = await getAllUserCows();
       setCowsData(data);
     }

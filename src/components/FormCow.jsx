@@ -66,7 +66,6 @@ export const FormCow = () => {
     };
 
     createCow(razeId,genderId,bornDate,name)
-    console.log(data);
     navigate('/')
   };
 
