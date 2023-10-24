@@ -12,8 +12,8 @@ import Alert from "react-bootstrap/Alert";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import {getCow, getGenders, getRazes} from "../supabase/usecases/cows/get_cow.js";
-import {getCowGenders} from "../supabase/data/supabase/data_source.js";
+import { getCow, getGenders, getRazes } from "../supabase/usecases/cows/get_cow.js";
+import { getCowGenders } from "../supabase/data/supabase/data_source.js";
 
 export const FormCow = () => {
   const [validated, setValidated] = useState(false);
@@ -21,26 +21,32 @@ export const FormCow = () => {
   const [errorPassword, setErrorPassword] = useState(false);
   const [razesDictionary, setRazesDictionary] = useState({});
   const [genderDictionary, setGenderDictionary] = useState({});
+  const [selectedRaze, setSelectedRaze] = useState("");
+  const [selectedGender, setSelectedGender] = useState("");
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch the raze dictionary when the component mounts
     async function fetchData() {
       const razes = await getRazes();
-      console.log(await getRazes())
       setRazesDictionary(razes);
 
       const gender = await getGenders();
-      console.log(await getGenders())
-      setGenderDictionary(gender)
+      setGenderDictionary(gender);
     }
     fetchData();
-  }, []); // Empty dependency array means this effect runs once when the component mounts
+  }, []);
 
   const handleSubmit = (event) => {
-    // Handle form submission here
+    event.preventDefault();
 
+    // Access the selected values and their corresponding keys
+    const razeId = selectedRaze;
+    const genderId = selectedGender;
+
+    // Handle form submission here
+    console.log("Selected Raza ID:", razeId);
+    console.log("Selected Gender ID:", genderId);
   };
 
   return (
@@ -57,7 +63,12 @@ export const FormCow = () => {
               </Col>
               <Row className="mb-3">
                 <Form.Group as={Col} md="4" controlId="breed">
-                  <Form.Select aria-label="Default select example" required>
+                  <Form.Select
+                      aria-label="Default select example"
+                      required
+                      value={selectedRaze}
+                      onChange={(e) => setSelectedRaze(e.target.value)}
+                  >
                     <option value="">Raza</option>
                     {Object.keys(razesDictionary).map((key) => (
                         <option key={key} value={key}>
@@ -83,7 +94,12 @@ export const FormCow = () => {
 
               <Row className="mb-3">
                 <Form.Group as={Col} md="4" controlId="sex">
-                  <Form.Select aria-label="Default select example" required>
+                  <Form.Select
+                      aria-label="Default select example"
+                      required
+                      value={selectedGender}
+                      onChange={(e) => setSelectedGender(e.target.value)}
+                  >
                     <option value="">Genero</option>
                     {Object.keys(genderDictionary).map((key) => (
                         <option key={key} value={key}>
