@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Alert from "react-bootstrap/Alert";
-import {supabase} from "../supabase/data/constants/api_credentials.js";
+import { supabase } from "../supabase/data/constants/api_credentials.js";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -38,7 +38,11 @@ export const Login = () => {
   return (
     <div className="login-page">
       <div className="login-space">
-        <h1>Bienvenido a cowmprar</h1>
+        <div className="welcome">
+          <h1>Bienvenido a cowmprar</h1>
+        </div>
+        <br />
+        <br />
         <h1>Inicia Sesión</h1>
         <br />
         <br />

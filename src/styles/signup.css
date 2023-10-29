@@ -1,10 +1,13 @@
 .signup-space {
-   background-color: #D9D9D9;
+   background-color:  #ECEFF1;
    height: 90vh;
+   width: 28vw;
    padding-top: 6vh;
    padding-left: 5vh;
    padding-right: 5vh;
    padding-bottom: 5vh;
+   border-radius: 30px;
+   border: 20px solid #49463d;
 }
 
 
