@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -7,23 +7,25 @@ import "../styles/formNewUser.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
-import {getGenders, getRazes} from "../supabase/usecases/cows/get_cow.js";
-import {getDocumentTypes} from "../supabase/data/supabase/data_source.js";
-import {getPossibleDocuments, getRoles} from "../supabase/usecases/user/fetch_user.js";
-import {registerUser} from "../supabase/usecases/user/create_user.js";
-import {supabase} from "../supabase/data/constants/api_credentials.js";
+import { getGenders, getRazes } from "../supabase/usecases/cows/get_cow.js";
+import { getDocumentTypes } from "../supabase/data/supabase/data_source.js";
+import {
+  getPossibleDocuments,
+  getRoles,
+} from "../supabase/usecases/user/fetch_user.js";
+import { registerUser } from "../supabase/usecases/user/create_user.js";
+import { supabase } from "../supabase/data/constants/api_credentials.js";
 
 export const FormUserRegister = () => {
   const [validated, setValidated] = useState(false);
   const [errorSignUp, setErrorSignUp] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
+  const [succesfullRegister, setSuccesfullRegister] = useState(false);
   const [idTypes, setIDTypes] = useState({});
   const [roleType, setRoleType] = useState({});
   const [selectedIDType, setSelectedIDType] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
 
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch the raze dictionary when the component mounts
@@ -32,35 +34,17 @@ export const FormUserRegister = () => {
       setIDTypes(types);
 
       const role = await getRoles();
-      setRoleType(role)
+      setRoleType(role);
     }
     fetchData();
   }, []); // Empty dependency array means this effect runs once when the component mounts
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     const form = event.currentTarget;
     event.preventDefault();
     console.log(form);
     const email = form.email.value;
     const password = form.password.value;
-    const doc_id = form.idNumber.value;
-    const first_name = form.name.value;
-    const last_name = form.lastName.value;
-    const role_id = selectedRole;
-    const phone = form.phoneNumber.value;
-    const doc_type = selectedIDType;
-
-    const data = {
-      email,
-      password,
-      doc_id,
-      first_name,
-      last_name,
-      role_id,
-      phone,
-      doc_type,
-    };
-    console.log(data)
 
     if (password !== form.passwordConfirmation.value) {
       event.preventDefault();
@@ -71,29 +55,15 @@ export const FormUserRegister = () => {
         event.preventDefault();
         event.stopPropagation();
       } else {
-        if (registerUser(email,password,doc_id,first_name,last_name,role_id,phone,doc_type)){
-          navigate("/")
-        }else{
-          setErrorSignUp(true)
+        let data = registerUser(email, password);
+        console.log(data);
+        if (data === false) {
+          setErrorSignUp(true);
+          setSuccesfullRegister(false);
+        } else {
+          
+          setSuccesfullRegister(true);
         }
-        /*(data).then(
-            () => navigate("/"),
-            () => setErrorSignUp(true))
-        */
-        /*supabase.from("Person").insert([
-          {email_persona:"email@gmail.com"},
-          {documento_persona:"12312312312"},
-          {nombre_persona:"first_name"},
-          { apellido_persona:"last_name"},
-          {id_rol:1},
-          {telefono_persona:"13432432432"},
-          {id_tipo_documento:1},
-        ]);
-        supabase.auth.signUp({
-          email: email,
-          password: password
-        });*/
-
       }
     }
 
@@ -136,16 +106,16 @@ export const FormUserRegister = () => {
             <Row className="mb-3">
               <Form.Group as={Col} md="4" controlId="idType">
                 <Form.Select
-                    aria-label="Default select example"
-                    required
-                    value={selectedIDType}
-                    onChange={(e) => setSelectedIDType(e.target.value)}
+                  aria-label="Default select example"
+                  required
+                  value={selectedIDType}
+                  onChange={(e) => setSelectedIDType(e.target.value)}
                 >
                   <option value="">Tipo de identificacion</option>
                   {Object.keys(idTypes).map((key) => (
-                      <option key={key} value={key}>
-                        {idTypes[key]}
-                      </option>
+                    <option key={key} value={key}>
+                      {idTypes[key]}
+                    </option>
                   ))}
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
@@ -172,23 +142,22 @@ export const FormUserRegister = () => {
             <Row className="mb-3">
               <Form.Group as={Col} md="4" controlId="userType">
                 <Form.Select
-                    aria-label="Default select example"
-                    required
-                    value={selectedRole}
-                    onChange={(e) => setSelectedRole(e.target.value)}
+                  aria-label="Default select example"
+                  required
+                  value={selectedRole}
+                  onChange={(e) => setSelectedRole(e.target.value)}
                 >
                   <option value="">Rol</option>
                   {Object.keys(roleType).map((key) => (
-                      <option key={key} value={key}>
-                        {roleType[key]}
-                      </option>
+                    <option key={key} value={key}>
+                      {roleType[key]}
+                    </option>
                   ))}
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
                   Seleccione tipo de identificación válido
                 </Form.Control.Feedback>
               </Form.Group>
-
 
               <Form.Group as={Col} md="4" controlId="phoneNumber">
                 <Form.Floating className="mb-3">
@@ -265,6 +234,11 @@ export const FormUserRegister = () => {
             {errorPassword && (
               <Alert key="danger" variant="danger">
                 Las contraseñas no coinciden
+              </Alert>
+            )}
+            {succesfullRegister && (
+              <Alert key="success" variant="success">
+                Realiza la confirmación en tu correo electrónico
               </Alert>
             )}
           </Form>

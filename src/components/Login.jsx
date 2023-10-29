@@ -77,7 +77,9 @@ export const Login = () => {
         <br />
         <br />
         <br />
+        <div className="account-question">
         <h2>¿Aún no tienes una cuenta?</h2>
+        </div>
         <br />
         <br />
         <Link to="/register">
