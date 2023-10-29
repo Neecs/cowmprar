@@ -8,10 +8,21 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import { supabase } from "../supabase/data/constants/api_credentials.js";
+import { useEffect } from "react";
 
 export const Login = () => {
   const navigate = useNavigate();
   const [errorLogin, setErrorLogin] = useState(false);
+
+  useEffect(() => {
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (!session) {
+        navigate("/login");
+      } else {
+        navigate("/");
+      }
+    });
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -78,7 +89,7 @@ export const Login = () => {
         <br />
         <br />
         <div className="account-question">
-        <h2>¿Aún no tienes una cuenta?</h2>
+          <h2>¿Aún no tienes una cuenta?</h2>
         </div>
         <br />
         <br />

@@ -9,6 +9,7 @@ import "../styles/restorePass.css";
 import { supabase } from "../supabase/data/constants/api_credentials.js";
 import data from "bootstrap/js/src/dom/data.js";
 
+
 export const RestoreForm = () => {
   const [validated, setValidated] = useState(false);
   const [errorSignUp, setErrorSignUp] = useState(false);
