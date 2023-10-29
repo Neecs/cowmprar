@@ -5,6 +5,7 @@ import { MainPage } from "./components/MainPage";
 import { IncidentForm } from "./components/IncidentForm";
 import { RestorePassword } from "./components/RestorePassword";
 import { FormCow } from "./components/FormCow";
+import {RestoreForm} from './components/RestoreForm'
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Route path="/inc-reg/:cowId" element={<IncidentForm />} />
       <Route path="/restore" element={<RestorePassword />} />
       <Route path="form-cow" element={<FormCow />} />
-      <Route path="/profile/update" element={<RestorePassword />} />
+      <Route path="/profile/update" element={<RestoreForm />} />
     </Routes>
   );
 }

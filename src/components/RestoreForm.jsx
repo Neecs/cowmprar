@@ -9,7 +9,7 @@ import "../styles/restorePass.css";
 import { supabase } from "../supabase/data/constants/api_credentials.js";
 import data from "bootstrap/js/src/dom/data.js";
 
-export const RestorePassword = () => {
+export const RestoreForm = () => {
   const [validated, setValidated] = useState(false);
   const [errorSignUp, setErrorSignUp] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
@@ -18,15 +18,11 @@ export const RestorePassword = () => {
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
-    const email = form.email.value;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    const password = form.password.value;
 
     const sendEmail = async () => {
-      const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: "http://localhost:5173/profile/update",
+      const { data, error } = await supabase.auth.updateUser({
+        password: password,
       });
     };
     sendEmail();
@@ -37,31 +33,30 @@ export const RestorePassword = () => {
   return (
     <div className="form-pass-recovery">
       <div className="form-pass-recovery-space">
-        <div className="header-title">
-          <h4 className="title">Recuperación de contraseña</h4>
-          <p className="category">Ingrese su correo.</p>
-        </div>
-        <br />
-        <br />
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
-          <Form.Group as={Col} md="4" controlId="email">
+          <Form.Group as={Col} md="4" controlId="password">
             <Form.Floating className="mb-3">
-              <Form.Control
-                type="email"
-                placeholder="example@mail.com"
-                required
-              />
-              <Form.Label>Correo electronico</Form.Label>
+              <Form.Control type="password" placeholder=" " required />
+              <Form.Label>Contraseña</Form.Label>
               <Form.Control.Feedback type="invalid">
-                Ingrese un correo válido
+                Ingrese una contraseña.
               </Form.Control.Feedback>
             </Form.Floating>
           </Form.Group>
 
+          <Form.Group as={Col} md="4" controlId="passwordConfirmation">
+            <Form.Floating className="mb-3">
+              <Form.Control type="password" placeholder=" " required />
+              <Form.Label>Confirmar contraseña</Form.Label>
+              <Form.Control.Feedback type="invalid">
+                Las contraseñas no coinciden.
+              </Form.Control.Feedback>
+            </Form.Floating>
+          </Form.Group>
           <div className="buttons">
             <Form.Group className="mb-3"></Form.Group>
             <Button type="submit" className="btn btn-dark btn-lg">
-              Enviar correo
+              Registrarse
             </Button>
             <span style={{ marginRight: "10px" }}></span>
             <Link to="/">
@@ -70,24 +65,6 @@ export const RestorePassword = () => {
               </Button>
             </Link>
           </div>
-
-          <br />
-          <br />
-          {errorSignUp && (
-            <Alert key="danger" variant="danger">
-              Error al crear usuario
-            </Alert>
-          )}
-          {errorPassword && (
-            <Alert key="danger" variant="danger">
-              Las contraseñas no coinciden
-            </Alert>
-          )}
-          {succesfullRegister && (
-            <Alert key="success" variant="success">
-              Realiza la confirmación en tu correo electrónico
-            </Alert>
-          )}
         </Form>
       </div>
     </div>
