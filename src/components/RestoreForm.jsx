@@ -36,8 +36,8 @@ export const RestoreForm = () => {
       } else {
         updatePassword();
         setSuccesfullRecovery(true);
-        alert("Contraseña cambiada exitosamente");
         navigate("/");
+        alert("Contraseña cambiada exitosamente");
       }
     }
 
