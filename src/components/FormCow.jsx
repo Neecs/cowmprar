@@ -79,7 +79,7 @@ export const FormCow = () => {
         <div className="data-cow">
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Col md="3">
-              <h9>Información principal</h9>
+              <h3>Información principal</h3>
             </Col>
             <Row className="mb-3">
               <Form.Group as={Col} md="4" controlId="breed">

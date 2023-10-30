@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { getAllUserCows } from "../supabase/usecases/cows/get_cow.js";
+import {fetchCows} from "../supabase/data/supabase/data_source.js";
 
 export const MainPage = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export const MainPage = () => {
       }
     });
 
+    console.log(fetchCows())
     async function fetchData() {
       const data = await getAllUserCows();
       setCowsData(data);

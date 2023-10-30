@@ -1,16 +1,9 @@
 import {createNewUser} from "../../data/supabase/data_source.js";
 
 
-export const registerUser = async (email, password, doc_id, first_name, last_name, role_id, phone, doc_type) => {
-    console.log(email,password,doc_id,first_name,last_name,role_id,phone,doc_type)
+export const registerUser = async (email, password) => {
     return await createNewUser(
         email,
-        password,
-        doc_id,
-        first_name,
-        last_name,
-        role_id,
-        phone,
-        doc_type
+        password
     )
 };

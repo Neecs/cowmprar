@@ -32,33 +32,19 @@ export const signIn = async (email, password) => {
 };
 export const createNewUser = async (
     email_persona,
-    password,
-    documento_persona,
-    nombre_persona,
-    apellido_persona,
-    id_rol,
-    telefono_persona,
-    id_tipo_documento,
+    password
 ) => {
     try {
-            const {data: createUser, error} =
-                await supabase.from("Person").insert({
-                    email_persona,
-                    documento_persona,
-                    nombre_persona,
-                    apellido_persona,
-                    id_rol,
-                    telefono_persona,
-                    id_tipo_documento
-                });
-            console.log(createUser, error)
+        const{authData:createAuthUser, errorAuth} =
+            await supabase.auth.signUp({
+                email: email_persona,
+                password: password
+        });
 
-            const{authData:createAuthUser, errorAuth} =
-                await supabase.auth.signUp({
-                    email: email_persona,
-                    password: password
-                });
-            console.log(createAuthUser,errorAuth)
+        const { data, error } = await supabase.rpc('create_user_users')
+
+        console.log(createAuthUser,errorAuth)
+        console.log(data,error)
             return true
     } catch (error) {
         return error;
@@ -290,6 +276,17 @@ export const updateHV = async (color,nombre,foto,id_hato,id_persona) => {
   }catch (error){
     return false
   }
+}
+
+export const fetchCows = async () => {
+    try{
+        const { data, error } = await supabase
+            .from('Vacas')
+            .select('id_vaca,Hojas de vida!inner(id_hoja_vida)')
+        console.log(data, error)
+    }catch (error){
+        console.log(error)
+    }
 }
 
 

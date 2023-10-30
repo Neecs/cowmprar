@@ -60,7 +60,6 @@ export const FormUserRegister = () => {
           setErrorSignUp(true);
           setSuccesfullRegister(false);
         } else {
-          
           setSuccesfullRegister(true);
         }
       }
@@ -80,7 +79,7 @@ export const FormUserRegister = () => {
         <br />
         <div className="data">
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Row className="mb-3">
+            {/*<Row className="mb-3">
               <Form.Group as={Col} md="4" controlId="name">
                 <Form.Floating className="mb-3">
                   <Form.Control type="text" placeholder=" " required />
@@ -173,7 +172,7 @@ export const FormUserRegister = () => {
                 </Form.Floating>
               </Form.Group>
             </Row>
-
+*/}
             <Row className="mb-3">
               <Form.Group as={Col} md="4" controlId="email">
                 <Form.Floating className="mb-3">
@@ -222,7 +221,6 @@ export const FormUserRegister = () => {
                 </Button>
               </Link>
             </div>
-
             <br />
             <br />
             {errorSignUp && (

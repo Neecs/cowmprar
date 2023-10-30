@@ -34,7 +34,7 @@ export const Login = () => {
       email,
       password,
     });
-    console.log(data);
+    console.log(data.user.id);
     console.log(error);
 
     if (!data.session) {

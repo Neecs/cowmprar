@@ -5,6 +5,14 @@ import "../styles/cowCard.css";
 
 export const CowCard = ({ cow }) => {
   const navigate = useNavigate();
+  // eslint-disable-next-line react/prop-types
+  const currentDate = new Date();
+  // eslint-disable-next-line react/prop-types
+  const birthDate = new Date(cow.fecha_nacimiento);
+
+  const ageInMilliseconds = currentDate - birthDate;
+
+  const ageInYears =Math.floor(ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25));
 
   const handleAddIncident = () => {
     navigate(`/inc-reg/${cow.id_vaca}`);
@@ -20,7 +28,7 @@ export const CowCard = ({ cow }) => {
                 <th>#</th>
                 <th>Raza</th>
                 <th>Genero</th>
-                <th>Fecha</th>
+                <th>Edad</th>
               </tr>
               </thead>
               <tbody>
@@ -28,7 +36,7 @@ export const CowCard = ({ cow }) => {
                 <td>1</td>
                 <td>{cow.raza_vaca}</td>
                 <td>{cow.id_genero === 1 ? "Macho" : "Hembra"}</td>
-                <td>{cow.fecha_nacimiento}</td>
+                <td>{ageInYears} Año</td>
               </tr>
               </tbody>
             </Table>
