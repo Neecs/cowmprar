@@ -1,19 +1,35 @@
 .form-pass-recovery {
   display: flex;
+  justify-content: center;
   height: 100vh;
   width: 100vw;
-  background-image: linear-gradient(
-    to bottom,
-    #7ec1ec,
-    #43413a,
-    #eceff1,
-    #6b862d
-  );
+  background-color: #BABFA8 !important;
+  
 }
 
 .form-pass-recovery-space {
   border-radius: 30px;
-  border: 20px solid #43413a;
-  padding-top: 10%;
-  margin-left: 20vw;
+  border: 10px solid #50592F;
+  height: 60vh; 
+  width: 46vw;
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #F1EFEF;
+}
+
+.header-title {
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+   border-radius: 32px;
+   padding: 21px;
+   background-color: #50592F; 
+   height: 13vh; 
+   width: 80vh;
+   color: white;
+   margin-left: 2vw;
+}
+
+.infoSpace {
+  margin-left: 2vw;
 }
