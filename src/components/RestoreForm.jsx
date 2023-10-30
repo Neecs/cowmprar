@@ -7,27 +7,40 @@ import Alert from "react-bootstrap/Alert";
 import { recoverPasswordByEmail } from "../supabase/usecases/auth.js";
 import "../styles/restorePass.css";
 import { supabase } from "../supabase/data/constants/api_credentials.js";
-import data from "bootstrap/js/src/dom/data.js";
-
+import { useNavigate } from "react-router-dom";
 
 export const RestoreForm = () => {
   const [validated, setValidated] = useState(false);
-  const [errorSignUp, setErrorSignUp] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
-  const [succesfullRegister, setSuccesfullRegister] = useState(false);
+  const [succesfullRecovery, setSuccesfullRecovery] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
     const password = form.password.value;
-
-    const sendEmail = async () => {
-      const { data, error } = await supabase.auth.updateUser({
+    const updatePassword = async () => {
+      await supabase.auth.updateUser({
         password: password,
       });
     };
-    sendEmail();
-    console.log(data);
+
+    if (password !== form.passwordConfirmation.value) {
+      event.preventDefault();
+      event.stopPropagation();
+      setErrorPassword(true);
+    } else {
+      if (form.checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+      } else {
+        updatePassword();
+        setSuccesfullRecovery(true);
+        alert("Contraseña cambiada exitosamente");
+        navigate("/");
+      }
+    }
+
     setValidated(true);
   };
 
@@ -66,6 +79,16 @@ export const RestoreForm = () => {
               </Button>
             </Link>
           </div>
+          {errorPassword && (
+            <Alert key="danger" variant="danger">
+              Las contraseñas no coinciden
+            </Alert>
+          )}
+          {succesfullRecovery && (
+            <Alert key="success" variant="success">
+              Realiza la confirmación en tu correo electrónico
+            </Alert>
+          )}
         </Form>
       </div>
     </div>

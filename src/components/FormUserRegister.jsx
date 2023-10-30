@@ -5,7 +5,6 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import "../styles/formNewUser.css";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import { getGenders, getRazes } from "../supabase/usecases/cows/get_cow.js";
 import { getDocumentTypes } from "../supabase/data/supabase/data_source.js";

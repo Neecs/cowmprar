@@ -7,18 +7,16 @@ import Alert from "react-bootstrap/Alert";
 import { recoverPasswordByEmail } from "../supabase/usecases/auth.js";
 import "../styles/restorePass.css";
 import { supabase } from "../supabase/data/constants/api_credentials.js";
-import data from "bootstrap/js/src/dom/data.js";
 
 export const RestorePassword = () => {
   const [validated, setValidated] = useState(false);
-  const [errorSignUp, setErrorSignUp] = useState(false);
-  const [errorPassword, setErrorPassword] = useState(false);
-  const [succesfullRegister, setSuccesfullRegister] = useState(false);
+  const [message, setMessage] = useState(false);
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
     const email = form.email.value;
+
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
@@ -30,7 +28,7 @@ export const RestorePassword = () => {
       });
     };
     sendEmail();
-    console.log(data);
+    setMessage(true);
     setValidated(true);
   };
 
@@ -38,8 +36,11 @@ export const RestorePassword = () => {
     <div className="form-pass-recovery">
       <div className="form-pass-recovery-space">
         <div className="header-title">
-          <h4 className="title">Recuperación de contraseña</h4>
-          <p className="category">Ingrese su correo.</p>
+          <h4 className="title">Ingresa tu correo registrado en cowmprar</h4>
+          <p className="category">
+            Si tu correo está registrado te llegará un enlace para restaurar tu
+            contraseña.
+          </p>
         </div>
         <br />
         <br />
@@ -73,22 +74,12 @@ export const RestorePassword = () => {
 
           <br />
           <br />
-          {errorSignUp && (
-            <Alert key="danger" variant="danger">
-              Error al crear usuario
-            </Alert>
-          )}
-          {errorPassword && (
-            <Alert key="danger" variant="danger">
-              Las contraseñas no coinciden
-            </Alert>
-          )}
-          {succesfullRegister && (
-            <Alert key="success" variant="success">
-              Realiza la confirmación en tu correo electrónico
-            </Alert>
-          )}
         </Form>
+        {message && (
+          <Alert key="info" variant="info">
+            Revisa en tu correo el enlace de recuperación.
+          </Alert>
+        )}
       </div>
     </div>
   );
