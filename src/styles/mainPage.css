@@ -1,13 +1,18 @@
 .main-page {
-  background-color: #a2c7a6;
+  background-color: #BABFA8;
   height: 100vh;
   width: 100vw;
 }
 
 .navbar-main {
-  background-color: #7D7C7C;
+  background-color: #50592F;
   align-items: end;
   padding-left: 2vh;
+  
+}
+
+.navbarText{
+  color: #ECEFF1;
 }
 
 .main-page-body{

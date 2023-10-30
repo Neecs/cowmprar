@@ -7,15 +7,14 @@ export const CowCard = ({ cow }) => {
   const navigate = useNavigate();
 
   const handleAddIncident = () => {
-    // Navegar a la página de registro de incidentes y pasar el cowId
     navigate(`/inc-reg/${cow.id_vaca}`);
   };
   return (
       <div className="horizontal-cow-card">
-        <Card style={{ width: "18rem" }}>
+        <Card className="cardcow" style={{ width: "18rem" }}>
           <Card.Body>
             <Card.Title>{cow.nombre_vaca}</Card.Title>
-            <Table striped bordered hover>
+            <Table striped bordered hover className="tableCow">
               <thead>
               <tr>
                 <th>#</th>

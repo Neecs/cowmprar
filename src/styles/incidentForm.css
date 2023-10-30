@@ -1,5 +1,5 @@
 .inc-form-page{
-   background-color: #a2c7a6;
+   background-color: #BABFA8;
    height: 100vh;
    width: 100vw;
    align-items: center;
@@ -8,7 +8,7 @@
 .inc-form{
     margin-right: 20vw;
     margin-left: 20vw;
-    border: 30px solid #7D7C7C; 
+    border: 10px solid #50592F; 
     padding: 20px; 
     background-color: #F1EFEF;
     border-radius: 52px;

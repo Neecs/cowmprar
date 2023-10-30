@@ -33,11 +33,11 @@ export const MainPage = () => {
     <div className="main-page">
       <div className="navbar-main">
         <Navbar>
-          <Navbar.Brand href="#home">Cowmprar</Navbar.Brand>
+          <Navbar.Brand className="navbarText" href="#home">Cowmprar</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link className="navbarText" href="#home">Home</Nav.Link>
+            <Nav.Link className="navbarText" href="#features">Features</Nav.Link>
+            <Nav.Link className="navbarText" href="#pricing">Pricing</Nav.Link>
           </Nav>
           <Button
             variant="dark"

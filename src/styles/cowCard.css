@@ -2,4 +2,16 @@
 .horizontal-cow-card {
     display: inline-block; /* Display horizontally */
     margin: 10px; /* Add some margin for spacing */
+    background-color: #BABFA8 !important;
+    color: aliceblue;
+}
+
+.cardcow{
+    background-color: #50592F;
+    color: aliceblue;
+}
+
+.tableCow{
+    background-color: pink !important;
+    color: aliceblue;
 }
