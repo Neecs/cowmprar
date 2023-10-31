@@ -60,7 +60,6 @@ export const FormUserRegister = () => {
           setErrorSignUp(true);
           setSuccesfullRegister(false);
         } else {
-          
           setSuccesfullRegister(true);
         }
       }

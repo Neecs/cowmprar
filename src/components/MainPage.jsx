@@ -9,39 +9,36 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import {getCowsByUser} from "../supabase/usecases/cows/get_cow.js";
+import { getCowsByUser } from "../supabase/usecases/cows/get_cow.js";
 
 export const MainPage = () => {
   const navigate = useNavigate();
-  const [cowsData, setCowsData] = useState({});
-  const [userId, setUserId] = useState(null);
-  const [email, setEmail] = useState(null);
-
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
       if (!session) {
         navigate("/login");
-      }else{
-        setUserId(session.user.id)
-        setEmail(session.user.email)
       }
     });
-    async function fetchData() {
-      const data = await getCowsByUser(userId);
-      setCowsData(data);
-    }
-    fetchData();
   }, []);
+
   return (
     <div className="main-page">
       <div className="navbar-main">
         <Navbar>
-          <Navbar.Brand className="navbarText" href="#home">Cowmprar</Navbar.Brand>
+          <Navbar.Brand className="navbarText" href="#home">
+            Cowmprar
+          </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link className="navbarText" href="#home">Home</Nav.Link>
-            <Nav.Link className="navbarText" href="#features">Features</Nav.Link>
-            <Nav.Link className="navbarText" href="#pricing">Pricing</Nav.Link>
+            <Nav.Link className="navbarText" href="#home">
+              Home
+            </Nav.Link>
+            <Nav.Link className="navbarText" href="#features">
+              Features
+            </Nav.Link>
+            <Nav.Link className="navbarText" href="#pricing">
+              Pricing
+            </Nav.Link>
           </Nav>
           <Button
             variant="dark"
@@ -55,8 +52,7 @@ export const MainPage = () => {
       </div>
       <br />
       <div className="main-page-body">
-        {userId}
-        <CowList userId={userId}/>
+        <CowList />
         <br />
         <Link to="form-cow">
           <Button variant="dark">Agregar vaca</Button>
