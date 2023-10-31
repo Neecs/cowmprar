@@ -1,5 +1,7 @@
 import { supabase } from "../constants/api_credentials.js";
-import data from "bootstrap/js/src/dom/data.js";
+
+const user = supabase.auth.user();
+
 
 export const fetchDataFromSupabase = async () => {
   const { data, error } = await supabase.from("Person").select("*");
@@ -74,21 +76,18 @@ export const fetchPersonDataByEmail = async (email) => {
   return data.length > 0;
 };
 
-export const registerUser = async (
-  email,
-  passwordHash,
+// TODO no es registrar usuario sino actualizar usuario
+export const updateUser = async (  
   doc_id,
   first_name,
   last_name,
   role_id,
   phone,
   doc_type
-) => {
-  try {
-    if (!(await fetchPersonDataByEmail(email))) {
+  ) => {
+    try {
+    if (!(await fetchPersonDataByEmail(user.email))) {
       await supabase.from("Person").insert({
-        email,
-        passwordHash,
         doc_id,
         first_name,
         last_name,
@@ -118,13 +117,15 @@ export const recoverUserPassword = async (email, new_password) => {
 
 export const createNewCow = async(raze, birth_date, gender, name) => {
   try {
+    
       const { data, error } = await supabase
           .from('Vacas')
           .insert([
               { raza_vaca: raze,
                 fecha_nacimiento: birth_date,
                 id_genero:gender,
-                nombre_vaca:name
+                nombre_vaca:name,
+                userId: user.id
               },
           ])
           .select()
@@ -292,4 +293,31 @@ export const updateHV = async (color,nombre,foto,id_hato,id_persona) => {
   }
 }
 
+
+export const createUserForm = async () => {
+  try {
+      if (!(await fetchPersonDataByEmail(user.email))) {
+        await supabase.from("Person").insert({
+          email: user.email,
+          user_id: user.id
+        });
+        return true;
+      }
+  } catch (error) {
+      console.log(error);
+  }
+}
+
+
+export const getUserCows = async () => {
+  try {
+      const {data:cowData, error} = await supabase
+          .from('Vacas')
+          .select('*')
+          .eq('userId', user.id)
+      return cowData
+  }catch (error){
+      console.log(error)
+  }
+}
 
