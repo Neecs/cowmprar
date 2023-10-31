@@ -8,8 +8,6 @@ import { supabase } from "../supabase/data/constants/api_credentials.js";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { getCowsByUser } from "../supabase/usecases/cows/get_cow.js";
 
 export const MainPage = () => {
   const navigate = useNavigate();

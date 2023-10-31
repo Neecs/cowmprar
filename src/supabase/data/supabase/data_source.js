@@ -110,7 +110,7 @@ export const recoverUserPassword = async (email, new_password) => {
   }
 };
 
-export const createNewCow = async (raze, birth_date, gender, name) => {
+export const createNewCow = async (raze, birth_date, gender, name,userId) => {
   try {
     const { data, error } = await supabase
       .from("Vacas")
@@ -120,7 +120,7 @@ export const createNewCow = async (raze, birth_date, gender, name) => {
           fecha_nacimiento: birth_date,
           id_genero: gender,
           nombre_vaca: name,
-          userId: user.id,
+          userId: userId,
         },
       ])
       .select();
@@ -308,13 +308,12 @@ export const createUserForm = async (user) => {
 
 export const getUserCows = async (userId) => {
   try {
-    const { data: cowData, error } = await supabase
-      .from("Vacas")
-      .select("*")
-      .eq("userId", userId);
-    console.log(userId);
-    console.log(cowData);
-    return cowData;
+      const { data: cowData, error } = await supabase
+          .from("Vacas")
+          .select("*")
+          .eq("userId", userId);
+      console.log(cowData)
+      return cowData
   } catch (error) {
     console.log(error);
   }

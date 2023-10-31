@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import Row from "react-bootstrap/Row";
 import "../styles/formNewCow.css";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
@@ -13,13 +11,11 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import {
-  getCow,
   getGenders,
   getRazes,
 } from "../supabase/usecases/cows/get_cow.js";
-import { getCowGenders } from "../supabase/data/supabase/data_source.js";
-import { registerUser } from "../supabase/usecases/user/create_user.js";
 import { createCow } from "../supabase/usecases/cows/create_cow.js";
+import {supabase} from "../supabase/data/constants/api_credentials.js";
 
 export const FormCow = () => {
   const [validated, setValidated] = useState(false);
@@ -55,19 +51,14 @@ export const FormCow = () => {
     const nameHato = form.nameHato.value;
     const location = form.location.value;
 
-    const data = {
-      razeId,
-      bornDate,
-      genderId,
-      name,
-      color,
-      nameHato,
-      location,
-    };
+    supabase.auth.onAuthStateChange((event, session) => {
+      const createNewCow = async () => {
+        await createCow(razeId, genderId, bornDate, name,session.user.id);
+      };
+      createNewCow();
 
-    createCow(razeId, genderId, bornDate, name);
-    navigate("/");
-  };
+    });
+  }
 
   return (
     <div className="form-cow">

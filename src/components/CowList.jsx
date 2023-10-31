@@ -6,24 +6,19 @@ import { supabase } from "../supabase/data/constants/api_credentials.js";
 
 export const CowList = () => {
   const [cowsData, setCowsData] = useState([]);
+  const [userId, setUserId] = useState('')
 
-  useEffect(() => {
-    supabase.auth.onAuthStateChange((event, session) => {
-      if (!session) {
-        console.log("first");
-      } else {
-        console.log(session.user.id);
+    useEffect(() => {
         const fetchData = async () => {
-          const data = await getCowsByUser(session.user.id);
-          setCowsData(data);
+            const user = await supabase.auth.getUser();
+            console.log(user.data.user.id);
+            const data = await getCowsByUser(user.data.user.id);
+            setCowsData(data);
         };
         fetchData();
         console.log(cowsData);
-      }
-    });
+    }, []);
 
-    // This logs userId again, and you can use it inside the useEffect
-  }, []); // Make sure to include userId in the dependency array
 
   return (
     <div>
