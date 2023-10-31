@@ -4,9 +4,24 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import {Link, useParams} from "react-router-dom";
 import {addCowIncident} from "../supabase/usecases/cows/update_cow.js";
+import Row from "react-bootstrap/Row";
+import {useEffect, useState} from "react";
+import {getGenders, getIncidents, getRazes} from "../supabase/usecases/cows/get_cow.js";
 
 export const IncidentForm = () => {
+  const [incidentTypes, setIncidentTypes] = useState("")
+  const [incidentDictionary, setIncidentDictionary] = useState({})
   const {cowId} = useParams();
+
+  useEffect(() => {
+    async function fetchData() {
+      const incidents = await getIncidents();
+      setIncidentDictionary(incidents);
+    }
+    fetchData();
+  }, []);
+
+
   const handleSumbit = (e) => {
     const form = e.currentTarget;
     e.preventDefault();
@@ -23,7 +38,7 @@ export const IncidentForm = () => {
     console.log(cowId)
 
     console.log(data);
-    addCowIncident(name,dateIn,description)
+    addCowIncident(name,dateIn,description,cowId)
   };
 
 
@@ -53,6 +68,26 @@ export const IncidentForm = () => {
               <Form.Control as="textarea" rows={3} />
             </Form.Group>
           </div>
+          <Row className="mb-3">
+            <Form.Group as={Col} md="4" controlId="genre">
+              <Form.Select
+                  aria-label="Default select example"
+                  required
+                  value={incidentTypes}
+                  onChange={(e) => setIncidentTypes(e.target.value)}
+              >
+                <option value="">Tipo incidente</option>
+                {Object.keys(incidentDictionary).map((key) => (
+                    <option key={key} value={key}>
+                      {incidentDictionary[key]}
+                    </option>
+                ))}
+              </Form.Select>
+              <Form.Control.Feedback type="invalid">
+                Selecciona el sexo del Bovino.
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Row>
           <div className="buttons">
             <Button type="submit" className="btn btn-dark btn-lg">
               Guardar

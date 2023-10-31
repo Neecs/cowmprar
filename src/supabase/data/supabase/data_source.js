@@ -230,6 +230,21 @@ export const getAppRoles = async () => {
   }
 };
 
+export const getIncidentTypes = async () => {
+  try {
+    const {data:incidentes, error} = await supabase
+        .from("Tipos incidentes")
+        .select("*")
+    const dictionaryIncidents = {};
+    incidentes.forEach((item) => {
+      dictionaryIncidents[item.id_incidente] = item.nombre_incidente;
+    });
+    return dictionaryIncidents
+  } catch (error) {
+    console.log(error)
+  }
+};
+
 export const recoverPasswordViaEmail = async (email) => {
   try {
     const { data, error } = await supabase.auth.resetPasswordForEmail(email);
@@ -318,3 +333,14 @@ export const getUserCows = async (userId) => {
     console.log(error);
   }
 };
+
+export const addIncident = async (name,dateIn,description,cowId) => {
+  try{
+    const {data:cowIncident, error} = await supabase
+        .from()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+

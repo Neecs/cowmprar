@@ -1,4 +1,12 @@
-import {getCowGenders, getCowInformation, getCowRazes, getAllCows, getHV, getUserCows} from '../../data/supabase/data_source'
+import {
+    getCowGenders,
+    getCowInformation,
+    getCowRazes,
+    getAllCows,
+    getHV,
+    getUserCows,
+    getIncidentTypes
+} from '../../data/supabase/data_source'
 
 export const getCow = async (id_cow) => {
     return await getCowInformation(id_cow)
@@ -10,6 +18,10 @@ export const getRazes = async () => {
 
 export const getGenders = async () => {
     return await getCowGenders()
+}
+
+export const getIncidents = async () => {
+    return await getIncidentTypes()
 }
 
 export const getAllUserCows = async () => {
