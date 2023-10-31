@@ -28,7 +28,7 @@ export const CowCard = ({ cow }) => {
                 <th>#</th>
                 <th>Raza</th>
                 <th>Genero</th>
-                <th>Edad</th>
+                <th>Edad (Anios)</th>
               </tr>
               </thead>
               <tbody>
@@ -36,7 +36,7 @@ export const CowCard = ({ cow }) => {
                 <td>1</td>
                 <td>{cow.raza_vaca}</td>
                 <td>{cow.id_genero === 1 ? "Macho" : "Hembra"}</td>
-                <td>{ageInYears} Año</td>
+                <td>{ageInYears}</td>
               </tr>
               </tbody>
             </Table>
