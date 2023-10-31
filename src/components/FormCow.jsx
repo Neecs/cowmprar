@@ -56,6 +56,7 @@ export const FormCow = () => {
         await createCow(razeId, genderId, bornDate, name,session.user.id);
       };
       createNewCow();
+      navigate('/')
 
     });
   }

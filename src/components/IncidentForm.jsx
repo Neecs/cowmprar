@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import { Link, useParams } from "react-router-dom";
 import { addCowIncident } from "../supabase/usecases/cows/update_cow.js";
 import Row from "react-bootstrap/Row";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {
   getGenders,
@@ -13,6 +14,7 @@ import {
 } from "../supabase/usecases/cows/get_cow.js";
 
 export const IncidentForm = () => {
+  const navigate = useNavigate();
   const [incidentTypes, setIncidentTypes] = useState("");
   const [incidentDictionary, setIncidentDictionary] = useState({});
   const { cowId } = useParams();
@@ -32,10 +34,8 @@ export const IncidentForm = () => {
     const incidentName = form.incidentName.value;
     const dateIn = form.dateIn.value;
     const description = form.description.value;
-
-    console.log(cowId);
-
     addCowIncident(incidentName, dateIn, description, cowId);
+    navigate('/')
   };
 
   return (
