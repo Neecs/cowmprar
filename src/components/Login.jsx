@@ -48,11 +48,7 @@ export const Login = () => {
         <div className="welcome">
           <h1>Bienvenido a cowmprar</h1>
         </div>
-        <br />
-        <br />
-        <h1>Inicia Sesión</h1>
-        <br />
-        <br />
+
         {errorLogin && (
           <Alert key="danger" variant="danger">
             Usuario o contraseña incorrectos
@@ -61,39 +57,34 @@ export const Login = () => {
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="email">
             <Form.Label>Correo electrónico</Form.Label>
-            <Form.Control type="email" placeholder="Ingresa tu correo" />
-            <Form.Text className="text-muted">
-              Cowmprar no compartirá tu correo con nadie.
+            <Form.Control type="email" placeholder="Ingresa tu correo" className="formulary-field" />
+            <Form.Text id="text-muted">
+              <p>Cowmprar no compartirá tu correo con nadie.</p>
             </Form.Text>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="password">
             <Form.Label>Contraseña</Form.Label>
-            <Form.Control type="password" placeholder="Ingresa tu contraseña" />
+            <Form.Control type="password" placeholder="Ingresa tu contraseña" className="formulary-field"
+            />
           </Form.Group>
           <a href="/restore">¿Olvidaste tu contraseña?</a>
           <br />
           <br />
-          <Button variant="dark" type="submit">
+          <Button variant="dark" type="submit" id="login-button">
             Ingresar
           </Button>
+          <br/>
+          <a href="/signup" id="signup-text">No tienes una cuenta? Registrate</a>
+          <br/>
+          <br/>
+          <br/>
+          <Link to="/register">
+            <button type="button" className="btn btn-dark">
+              Regístrate
+            </button>
+          </Link>
         </Form>
-      </div>
-      <div className="signup-space">
-        <img src="/src/assets/cow.png" width="250" height="250" alt="" />
-        <br />
-        <br />
-        <br />
-        <div className="account-question">
-          <h2>¿Aún no tienes una cuenta?</h2>
-        </div>
-        <br />
-        <br />
-        <Link to="/register">
-          <button type="button" className="btn btn-dark">
-            Regístrate
-          </button>
-        </Link>
       </div>
     </div>
   );

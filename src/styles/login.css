@@ -4,35 +4,65 @@
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background-color: #BABFA8;
-  
+  background-image: url("https://images.pexels.com/photos/4766371/pexels-photo-4766371.jpeg");
+  background-size: cover;
+  font-size: 20px;
 }
 
 .login-space {
-  height: 90vh;
-  width: 30vw;
-  padding-top: 5vh;
-  padding-left: 5vw;
-  padding-right: 5vw;
-  padding-bottom: 5vh;
-  background-color: #50592F;
+  width: 70%;
+  padding: 5vh 5vw;
   color: #eceff1;
-  border-radius: 30px;
-  border: 10px solid #eceff1;
+  background: rgba( 255, 255, 255, 0.1 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 12.5px );
+  -webkit-backdrop-filter: blur( 12.5px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 .welcome {
-  background-color: #eceff1;
-  border: 10px solid #eceff1;
+  align-items: center;background: rgba( 255, 255, 255, 0.35 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 12.5px );
+  -webkit-backdrop-filter: blur( 12.5px );
   border-radius: 10px;
-  color: #50592F;
-  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  color: #343434;
+  margin-bottom: 5vh;
+  text-align: center;
 }
 
-.text-muted {
-  color: #eceff1 !important;
+.formulary-field{
+  padding: 2vh;
+}
+
+#text-muted {
+  color: white;
+}
+
+#login-button {
+  margin-bottom: 4vh;
+}
+#signup-text {
+  margin-bottom: 2vh;
+}
+
+.img{
+  text-align: center;
 }
 
 a {
+  margin-bottom: 3vh;
+  margin-top: 3vh;
   color: #eceff1;
+}
+
+p {
+  color: #ffffff;
+  font-size: 13px;
+}
+
+#login-text {
+  color: #1e1e1e;
 }
