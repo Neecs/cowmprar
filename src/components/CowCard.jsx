@@ -33,7 +33,7 @@ export const CowCard = ({ cow }) => {
               </tbody>
             </Table>
             <Card.Link onClick={handleAddIncident}>Agregar incidente</Card.Link>
-            <Card.Link href="#">Another Link</Card.Link>
+            <Card.Link href="#">Hoja de vida</Card.Link>
           </Card.Body>
         </Card>
       </div>
