@@ -11,10 +11,7 @@
 .login-space {
   height: 90vh;
   width: 30vw;
-  padding-top: 5vh;
-  padding-left: 5vw;
-  padding-right: 5vw;
-  padding-bottom: 5vh;
+  padding: 5vh 5vw;
   background-color: #50592F;
   color: #eceff1;
   border-radius: 30px;
