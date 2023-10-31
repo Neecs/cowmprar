@@ -110,7 +110,7 @@ export const recoverUserPassword = async (email, new_password) => {
   }
 };
 
-export const createNewCow = async (raze, birth_date, gender, name,userId) => {
+export const createNewCow = async (raze, birth_date, gender, name, userId) => {
   try {
     const { data, error } = await supabase
       .from("Vacas")
@@ -232,16 +232,16 @@ export const getAppRoles = async () => {
 
 export const getIncidentTypes = async () => {
   try {
-    const {data:incidentes, error} = await supabase
-        .from("Tipos incidentes")
-        .select("*")
+    const { data: incidentes, error } = await supabase
+      .from("Tipos incidentes")
+      .select("*");
     const dictionaryIncidents = {};
     incidentes.forEach((item) => {
       dictionaryIncidents[item.id_incidente] = item.nombre_incidente;
     });
-    return dictionaryIncidents
+    return dictionaryIncidents;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
 
@@ -323,24 +323,30 @@ export const createUserForm = async (user) => {
 
 export const getUserCows = async (userId) => {
   try {
-      const { data: cowData, error } = await supabase
-          .from("Vacas")
-          .select("*")
-          .eq("userId", userId);
-      console.log(cowData)
-      return cowData
+    const { data: cowData, error } = await supabase
+      .from("Vacas")
+      .select("*")
+      .eq("userId", userId);
+    console.log(cowData);
+    return cowData;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const addIncident = async (name,dateIn,description,cowId) => {
-  try{
-    const {data:cowIncident, error} = await supabase
-        .from()
+export const addIncident = async (id_incidente, dateIn, description, cowId) => {
+  try {
+    const { data: cowIncident, error } = await supabase
+      .from("Historiales")
+      .insert([
+        {
+          id_incidente,
+          fecha_incidente: dateIn,
+          descripcion: description,
+          id_hoja_vida: cowId,
+        },
+      ]);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
-
-
+};

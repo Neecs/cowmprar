@@ -2,16 +2,20 @@ import Form from "react-bootstrap/Form";
 import "../styles/incidentForm.css";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import {Link, useParams} from "react-router-dom";
-import {addCowIncident} from "../supabase/usecases/cows/update_cow.js";
+import { Link, useParams } from "react-router-dom";
+import { addCowIncident } from "../supabase/usecases/cows/update_cow.js";
 import Row from "react-bootstrap/Row";
-import {useEffect, useState} from "react";
-import {getGenders, getIncidents, getRazes} from "../supabase/usecases/cows/get_cow.js";
+import { useEffect, useState } from "react";
+import {
+  getGenders,
+  getIncidents,
+  getRazes,
+} from "../supabase/usecases/cows/get_cow.js";
 
 export const IncidentForm = () => {
-  const [incidentTypes, setIncidentTypes] = useState("")
-  const [incidentDictionary, setIncidentDictionary] = useState({})
-  const {cowId} = useParams();
+  const [incidentTypes, setIncidentTypes] = useState("");
+  const [incidentDictionary, setIncidentDictionary] = useState({});
+  const { cowId } = useParams();
 
   useEffect(() => {
     async function fetchData() {
@@ -21,27 +25,18 @@ export const IncidentForm = () => {
     fetchData();
   }, []);
 
-
   const handleSumbit = (e) => {
     const form = e.currentTarget;
     e.preventDefault();
 
-    const name = form.name.value;
+    const incidentName = form.incidentName.value;
     const dateIn = form.dateIn.value;
     const description = form.description.value;
 
-    const data = {
-      name,
-      dateIn,
-      description,
-    };
-    console.log(cowId)
+    console.log(cowId);
 
-    console.log(data);
-    addCowIncident(name,dateIn,description,cowId)
+    addCowIncident(incidentName, dateIn, description, cowId);
   };
-
-
 
   return (
     <div className="inc-form-page">
@@ -53,7 +48,7 @@ export const IncidentForm = () => {
           <div className="inc-name">
             <Form.Group as={Col} md="4" controlId="name">
               <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" placeholder=" " required />
+              <Form.Control type="text" placeholder=" " />
             </Form.Group>
           </div>
           <div className="date-in">
@@ -69,18 +64,18 @@ export const IncidentForm = () => {
             </Form.Group>
           </div>
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="genre">
+            <Form.Group as={Col} md="4" controlId="incidentName">
               <Form.Select
-                  aria-label="Default select example"
-                  required
-                  value={incidentTypes}
-                  onChange={(e) => setIncidentTypes(e.target.value)}
+                aria-label="Default select example"
+                required
+                value={incidentTypes}
+                onChange={(e) => setIncidentTypes(e.target.value)}
               >
                 <option value="">Tipo incidente</option>
                 {Object.keys(incidentDictionary).map((key) => (
-                    <option key={key} value={key}>
-                      {incidentDictionary[key]}
-                    </option>
+                  <option key={key} value={key}>
+                    {incidentDictionary[key]}
+                  </option>
                 ))}
               </Form.Select>
               <Form.Control.Feedback type="invalid">
