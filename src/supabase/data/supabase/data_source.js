@@ -1,8 +1,5 @@
 import { supabase } from "../constants/api_credentials.js";
 
-const user = supabase.auth.user();
-
-
 export const fetchDataFromSupabase = async () => {
   const { data, error } = await supabase.from("Person").select("*");
   if (error) throw error;
@@ -309,12 +306,13 @@ export const createUserForm = async () => {
 }
 
 
-export const getUserCows = async () => {
+export const getUserCows = async (userId) => {
   try {
       const {data:cowData, error} = await supabase
           .from('Vacas')
           .select('*')
-          .eq('userId', user.id)
+          //.eq('userId', userId)
+      console.log(cowData)
       return cowData
   }catch (error){
       console.log(error)

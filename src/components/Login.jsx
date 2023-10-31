@@ -34,16 +34,12 @@ export const Login = () => {
       email,
       password,
     });
-    console.log(data);
-    console.log(error);
 
     if (!data.session) {
       setErrorLogin(true);
     } else {
       navigate("/");
     }
-
-    console.log(toString(errorLogin));
   };
 
   return (

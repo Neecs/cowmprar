@@ -9,26 +9,30 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { getAllUserCows } from "../supabase/usecases/cows/get_cow.js";
+import {getCowsByUser} from "../supabase/usecases/cows/get_cow.js";
 
 export const MainPage = () => {
   const navigate = useNavigate();
   const [cowsData, setCowsData] = useState({});
+  const [userId, setUserId] = useState(null);
+  const [email, setEmail] = useState(null);
+
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
       if (!session) {
         navigate("/login");
+      }else{
+        setUserId(session.user.id)
+        setEmail(session.user.email)
       }
     });
-
     async function fetchData() {
-      const data = await getAllUserCows();
+      const data = await getCowsByUser(userId);
       setCowsData(data);
     }
     fetchData();
   }, []);
-
   return (
     <div className="main-page">
       <div className="navbar-main">
@@ -51,7 +55,8 @@ export const MainPage = () => {
       </div>
       <br />
       <div className="main-page-body">
-        <CowList />
+        {userId}
+        <CowList userId={userId}/>
         <br />
         <Link to="form-cow">
           <Button variant="dark">Agregar vaca</Button>
