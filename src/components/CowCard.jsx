@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/cowCard.css";
 
-export const CowCard = ({ cow }) => {
+export const CowCard = ({ cow , razes}) => {
   const navigate = useNavigate();
 
   const handleAddIncident = () => {
@@ -26,7 +26,7 @@ export const CowCard = ({ cow }) => {
               <tbody>
               <tr>
                 <td>1</td>
-                <td>{cow.raza_vaca}</td>
+                <td>{razes[cow.raza_vaca]}</td>
                 <td>{cow.id_genero === 1 ? "Macho" : "Hembra"}</td>
                 <td>{cow.fecha_nacimiento}</td>
               </tr>
