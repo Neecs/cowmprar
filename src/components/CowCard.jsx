@@ -40,7 +40,6 @@ export const CowCard = ({ cow, razes }) => {
           <Table striped bordered hover className="tableCow">
             <thead>
               <tr>
-                <th>#</th>
                 <th>Raza</th>
                 <th>Genero</th>
                 <th>Edad</th>
@@ -48,7 +47,6 @@ export const CowCard = ({ cow, razes }) => {
             </thead>
             <tbody>
               <tr>
-                <td>1</td>
                 <td>{razes[cow.raza_vaca]}</td>
                 <td>{cow.id_genero === 1 ? "Macho" : "Hembra"}</td>
                 <td>{cowAge} años</td>
