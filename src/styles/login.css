@@ -10,7 +10,7 @@
 }
 
 .login-space {
-  width: 70%;
+  width: 50%;
   padding: 5vh 5vw;
   color: #eceff1;
   background: rgba( 255, 255, 255, 0.1 );
@@ -22,15 +22,21 @@
 }
 
 .welcome {
-  align-items: center;background: rgba( 255, 255, 255, 0.35 );
-  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-  backdrop-filter: blur( 12.5px );
-  -webkit-backdrop-filter: blur( 12.5px );
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  background-color: rgba(80, 89, 47, 1);
+  height: 13vh;
+  color: white;
+  align-items: center;
+  backdrop-filter: blur( 13px );
+  -webkit-backdrop-filter: blur( 13px );
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
-  color: #343434;
-  margin-bottom: 5vh;
-  text-align: center;
+  margin-bottom: 8vh;
+}
+
+.welcome h1 {
+  border: 10px red;
+  margin-bottom: 2vh;
 }
 
 .formulary-field{
@@ -42,14 +48,16 @@
 }
 
 #login-button {
-  margin-bottom: 4vh;
-}
-#signup-text {
-  margin-bottom: 2vh;
+  position: relative;
+  left: 35%;
+  width: 60%;
+  transform: translateX(-50%);
+  font-size: 20px; /* Adjust the font size as needed */
+  padding: 12px 24px; /* Adjust the padding as needed */
 }
 
-.img{
-  text-align: center;
+.secondary-options {
+  font-size: 12px;
 }
 
 a {

@@ -3,12 +3,13 @@ import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/login.css";
 import "../styles/signup.css";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import { supabase } from "../supabase/data/constants/api_credentials.js";
 import { useEffect } from "react";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -68,22 +69,22 @@ export const Login = () => {
             <Form.Control type="password" placeholder="Ingresa tu contraseña" className="formulary-field"
             />
           </Form.Group>
-          <a href="/restore">¿Olvidaste tu contraseña?</a>
-          <br />
-          <br />
-          <Button variant="dark" type="submit" id="login-button">
-            Ingresar
-          </Button>
-          <br/>
-          <a href="/signup" id="signup-text">No tienes una cuenta? Registrate</a>
-          <br/>
-          <br/>
-          <br/>
-          <Link to="/register">
-            <button type="button" className="btn btn-dark">
-              Regístrate
-            </button>
-          </Link>
+
+          <Form.Group>
+            <Row>
+              <Col className="secondary-options col-3">
+                <a href="/restore">¿Olvidaste tu contraseña?</a>
+                <br/>
+                <br/>
+                <a href="/register" id="signup-text">No tienes una cuenta? Registrate</a>
+              </Col>
+              <Col>
+                <Button variant="dark" type="submit" id="login-button">
+                  Ingresar
+                </Button>
+              </Col>
+            </Row>
+          </Form.Group>
         </Form>
       </div>
     </div>
