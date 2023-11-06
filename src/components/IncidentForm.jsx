@@ -30,11 +30,9 @@ export const IncidentForm = () => {
   const handleSumbit = (e) => {
     const form = e.currentTarget;
     e.preventDefault();
-
-    const incidentName = form.incidentName.value;
     const dateIn = form.dateIn.value;
     const description = form.description.value;
-    addCowIncident(incidentName, dateIn, description, cowId);
+    addCowIncident(dateIn, description, cowId);
     navigate('/')
   };
 
@@ -45,12 +43,6 @@ export const IncidentForm = () => {
       <br />
       <div className="inc-form">
         <Form onSubmit={handleSumbit}>
-          <div className="inc-name">
-            <Form.Group as={Col} md="4" controlId="name">
-              <Form.Label>Nombre</Form.Label>
-              <Form.Control type="text" placeholder=" " />
-            </Form.Group>
-          </div>
           <div className="date-in">
             <Form.Group className="mb-3" controlId="dateIn">
               <Form.Label>Fecha</Form.Label>
