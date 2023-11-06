@@ -32,10 +32,10 @@ export const MainPage = () => {
               Home
             </Nav.Link>
             <Nav.Link className="navbarText" href="#features">
-              Features
+             Marketplace
             </Nav.Link>
             <Nav.Link className="navbarText" href="#pricing">
-              Pricing
+              Settings
             </Nav.Link>
           </Nav>
           <Button
@@ -43,7 +43,7 @@ export const MainPage = () => {
             onClick={async () => {
               supabase.auth.signOut();
             }}
-          >
+          className="sign-out">
             Cerrar sesión
           </Button>
         </Navbar>
