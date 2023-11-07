@@ -6,7 +6,7 @@ import {
     getHV,
     getUserCows,
     getIncidentTypes
-} from '../../data/supabase/data_source'
+} from '../../data/supabase/supabase_querys.js'
 
 export const getCow = async (id_cow) => {
     return await getCowInformation(id_cow)
@@ -24,7 +24,7 @@ export const getIncidents = async () => {
     return await getIncidentTypes()
 }
 
-export const getAllUserCows = async () => {
+export const getAllDBCows = async () => {
     return await getAllCows()
 }
 

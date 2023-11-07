@@ -7,7 +7,7 @@ import "./formNewUser.css";
 import { Link } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import { getGenders, getRazes } from "../../../supabase/usecases/cows/get_cow.js";
-import { getDocumentTypes } from "../../../supabase/data/supabase/data_source.js";
+import { getDocumentTypes } from "../../../supabase/data/supabase/supabase_querys.js";
 import {
   getPossibleDocuments,
   getRoles,
