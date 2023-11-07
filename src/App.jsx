@@ -1,12 +1,12 @@
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
-import { Login } from "./components/Login";
-import { FormUserRegister } from "./components/FormUserRegister";
-import { MainPage } from "./components/MainPage";
-import { IncidentForm } from "./components/IncidentForm";
-import { RestorePassword } from "./components/RestorePassword";
-import { FormCow } from "./components/FormCow";
-import {RestoreForm} from './components/RestoreForm'
-import { FormCvCow } from "./components/FormCvCow";
+import { Login } from "./components/Users/Login/Login.jsx";
+import { FormUserRegister } from "./components/Users/SignUp/FormUserRegister.jsx";
+import { MainPage } from "./components/GeneralComponents/MainPage.jsx";
+import { IncidentForm } from "./components/Cows/Incidents/IncidentForm.jsx";
+import { RestorePassword } from "./components/Users/Restore/RestorePassword.jsx";
+import { FormCow } from "./components/Cows/NewCow/FormCow.jsx";
+import {RestoreForm} from './components/Users/Restore/RestoreForm.jsx'
+import { FormCvCow } from "./components/Cows/HVCow/FormCvCow.jsx";
 
 
 function App() {

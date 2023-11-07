@@ -3,26 +3,38 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import "../styles/formCvCow.css";
+import "./formNewCow.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
-import { updateHistory } from "../supabase/usecases/cows/update_cow.js";
-import {supabase} from "../supabase/data/constants/api_credentials.js";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import {
+  getGenders,
+  getRazes,
+} from "../../../supabase/usecases/cows/get_cow.js";
+import { createCow } from "../../../supabase/usecases/cows/create_cow.js";
+import {supabase} from "../../../supabase/data/constants/api_credentials.js";
 
-export const FormCvCow = () => {
+export const FormCow = () => {
   const [validated, setValidated] = useState(false);
   const [errorSignUp, setErrorSignUp] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [razesDictionary, setRazesDictionary] = useState({});
   const [genderDictionary, setGenderDictionary] = useState({});
+  const [selectedRaze, setSelectedRaze] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
 
   const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
-      
+      const razes = await getRazes();
+      setRazesDictionary(razes);
+
+      const gender = await getGenders();
+      setGenderDictionary(gender);
     }
     fetchData();
   }, []);
@@ -31,15 +43,17 @@ export const FormCvCow = () => {
     const form = event.currentTarget;
     event.preventDefault();
 
-    const color = form.color.value;
+    const razeId = form.breed.value;
+    const bornDate = form.bornDate.value;
+    const genderId = form.genre.value;
     const name = form.name.value;
-    const idHato = form.hato.value;
-    const idPerson = form.person.value;
-    
+    const color = form.color.value;
+    const nameHato = form.nameHato.value;
+    const location = form.location.value;
 
     supabase.auth.onAuthStateChange((event, session) => {
       const createNewCow = async () => {
-        await updateHistory(color, name, idHato, idPerson,session.user.id);
+        await createCow(razeId, genderId, bornDate, name,session.user.id);
       };
       createNewCow();
       navigate('/')
@@ -48,27 +62,34 @@ export const FormCvCow = () => {
   }
 
   return (
-    <div className="form-cv-cow">
-      <div className="form-space-cv">
-        <div className="header-title-cv">
-          <h4 className="title">Hoja de vida</h4>
-          <p className="category">Estos son los datos</p>
+    <div className="form-cow">
+      <div className="form-space-cow">
+        <div className="header-title-cow">
+          <h4 className="title">Formulario de registro de un nuevo Bovino</h4>
+          <p className="category">Ingrese los datos del Bovino</p>
         </div>
         <div className="data-cow">
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Col md="3">
-              <h4>Información principal</h4>
+              <h2>Información principal</h2>
             </Col>
             <Row className="mb-3">
-              <Form.Group as={Col} md="4" controlId="color">
+              <Form.Group as={Col} md="4" controlId="breed">
                 <Form.Select
-                  aria-label="Cambiar el color"
+                  aria-label="Default select example"
                   required
-                  onChange={(e) => (e.target.value)}
+                  value={selectedRaze}
+                  onChange={(e) => setSelectedRaze(e.target.value)}
                 >
+                  <option value="">Raza</option>
+                  {Object.keys(razesDictionary).map((key) => (
+                    <option key={key} value={key}>
+                      {razesDictionary[key]}
+                    </option>
+                  ))}
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
-                  Seleccione un color valido
+                  Seleccione tipo de identificación válido
                 </Form.Control.Feedback>
               </Form.Group>
 
@@ -104,7 +125,7 @@ export const FormCvCow = () => {
               </Form.Group>
             </Row>
             <Col md="3">
-              <h9>Información adicional</h9>
+              <p>Información adicional</p>
             </Col>
             <Row className="mb-3">
               <Form.Group as={Col} md="4" controlId="name">
@@ -127,7 +148,7 @@ export const FormCvCow = () => {
               </Form.Group>
             </Row>
             <Col md="3">
-              <h9>Información del hato</h9>
+              <p>Información del hato</p>
             </Col>
             <Row className="mb-3">
               <Form.Group as={Col} md="4" controlId="nameHato">
@@ -149,7 +170,6 @@ export const FormCvCow = () => {
                 </Form.Floating>
               </Form.Group>
             </Row>
-
             <div className="buttons-cow">
               <Form.Group className="mb-3"></Form.Group>
               <Button type="submit" className="btn btn-dark btn-lg">
@@ -162,19 +182,6 @@ export const FormCvCow = () => {
                 </Button>
               </Link>
             </div>
-
-            <br />
-            <br />
-            {errorSignUp && (
-              <Alert key="danger" variant="danger">
-                Ya existe un usuario con este correo
-              </Alert>
-            )}
-            {errorPassword && (
-              <Alert key="danger" variant="danger">
-                Las contraseñas no coinciden
-              </Alert>
-            )}
           </Form>
         </div>
       </div>
