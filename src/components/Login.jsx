@@ -60,7 +60,7 @@ export const Login = () => {
             <Form.Label>Correo electrónico</Form.Label>
             <Form.Control type="email" placeholder="Ingresa tu correo" className="formulary-field" />
             <Form.Text id="text-muted">
-              <p>Cowmprar no compartirá tu correo con nadie.</p>
+              <p id="privacy">Cowmprar no compartirá tu correo con nadie.</p>
             </Form.Text>
           </Form.Group>
 
