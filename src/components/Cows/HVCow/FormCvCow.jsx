@@ -92,21 +92,11 @@ export const FormCvCow = () => {
                         </Row>
 
                         <Col md="3">
-                            <h2 className="subtitle">Ubicación y dueño</h2>
+                            <h2 className="subtitle">Dueño y Ubicación</h2>
                         </Col>
-                        <Row className="mb-3">
+                        <Row>
                             <Form.Group as={Col} md="3" controlId="genre">
-                                <Form.Floating className="mb-3">
-                                    <Form.Control
-                                        type="text"
-                                        placeholder=" "
-                                        required
-                                    />
-                                    <Form.Label>Hato</Form.Label>
-                                </Form.Floating>
-                            </Form.Group>
-                            <Form.Group as={Col} md="3" controlId="genre">
-                                <Form.Floating className="mb-3">
+                                <Form.Floating className="long-text-field mb-3">
                                     <Form.Control
                                         type="text"
                                         placeholder=" "
@@ -119,6 +109,19 @@ export const FormCvCow = () => {
                                 </Form.Floating>
                             </Form.Group>
                         </Row>
+                        <Row className="mb-3">
+                            <Form.Group as={Col} md="3" controlId="genre">
+                                <Form.Floating className="mb-3 long-text-field">
+                                    <Form.Control
+                                        type="text"
+                                        placeholder=" "
+                                        required
+                                    />
+                                    <Form.Label>Hato</Form.Label>
+                                </Form.Floating>
+                            </Form.Group>
+                        </Row>
+                        
                         <div className="buttons-cow">
                             <Form.Group className="mb-3"></Form.Group>
                             <Button
