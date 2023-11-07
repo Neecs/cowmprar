@@ -1,8 +1,8 @@
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import "../styles/cowCard.css";
+import { MDBCard, MDBCardBody, MDBCardTitle, MDBTable, MDBTableHead } from "mdb-react-ui-kit";
+import {useEffect, useState} from "react";
 
 export const CowCard = ({ cow, razes }) => {
   useEffect(() => {
@@ -19,9 +19,9 @@ export const CowCard = ({ cow, razes }) => {
     const age = actualDate.getFullYear() - bornDate.getFullYear();
 
     if (
-      actualDate.getMonth() < bornDate.getMonth() ||
-      (actualDate.getMonth() === bornDate.getMonth() &&
-        actualDate.getDate() < bornDate.getDate())
+        actualDate.getMonth() < bornDate.getMonth() ||
+        (actualDate.getMonth() === bornDate.getMonth() &&
+            actualDate.getDate() < bornDate.getDate())
     ) {
       setCowAge(age - 1);
     } else {
@@ -32,31 +32,32 @@ export const CowCard = ({ cow, razes }) => {
   const handleAddIncident = () => {
     navigate(`/inc-reg/${cow.id_vaca}`);
   };
+
   return (
-    <div className="horizontal-cow-card">
-      <Card className="cardcow" style={{ width: "18rem" }}>
-        <Card.Body>
-          <Card.Title>{cow.nombre_vaca}</Card.Title>
-          <Table striped bordered hover className="tableCow">
-            <thead>
-              <tr>
-                <th>Raza</th>
-                <th>Genero</th>
-                <th>Edad</th>
-              </tr>
-            </thead>
-            <tbody>
+      <div className="horizontal-cow-card">
+        <MDBCard className="cardcow rounded" style={{ width: "18rem" }}>
+          <MDBCardBody>
+            <MDBCardTitle>{cow.nombre_vaca}</MDBCardTitle>
+            <MDBTable className="tableCow striped bordered hover">
+              <MDBTableHead>
+                <tr>
+                  <th>Raza</th>
+                  <th>Genero</th>
+                  <th>Edad</th>
+                </tr>
+              </MDBTableHead>
+              <tbody>
               <tr>
                 <td>{razes[cow.raza_vaca]}</td>
                 <td>{cow.id_genero === 1 ? "Macho" : "Hembra"}</td>
                 <td>{cowAge} años</td>
               </tr>
-            </tbody>
-          </Table>
-          <Card.Link onClick={handleAddIncident}>Agregar incidente</Card.Link>
-          <Card.Link href="#">Hoja de vida</Card.Link>
-        </Card.Body>
-      </Card>
-    </div>
+              </tbody>
+            </MDBTable>
+            <a className="incident-button btn btn-primary" onClick={handleAddIncident}>Agregar incidente</a>
+            <a className="btn btn-secondary" href="#">Hoja de vida</a>
+          </MDBCardBody>
+        </MDBCard>
+      </div>
   );
 };

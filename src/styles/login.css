@@ -4,32 +4,77 @@
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background-color: #BABFA8;
-  
+  background-image: url("../assets/Login-Cows.jpg");
+  background-size: cover;
+  font-size: 20px;
 }
 
 .login-space {
-  height: 90vh;
-  width: 30vw;
+  width: 50%;
   padding: 5vh 5vw;
-  background-color: #50592F;
   color: #eceff1;
-  border-radius: 30px;
-  border: 10px solid #eceff1;
+  background: rgba( 255, 255, 255, 0.1 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 12.5px );
+  -webkit-backdrop-filter: blur( 12.5px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 .welcome {
-  background-color: #eceff1;
-  border: 10px solid #eceff1;
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  background-color: rgba(80, 89, 47, 1);
+  height: 13vh;
+  color: white;
+  align-items: center;
+  backdrop-filter: blur( 13px );
+  -webkit-backdrop-filter: blur( 13px );
   border-radius: 10px;
-  color: #50592F;
-  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  margin-bottom: 8vh;
 }
 
-.text-muted {
-  color: #eceff1 !important;
+.welcome h1 {
+  border: 10px red;
+  margin-bottom: 2vh;
+}
+
+.formulary-field{
+  padding: 2vh;
+}
+
+#text-muted {
+  color: white;
+}
+
+#login-button {
+  position: relative;
+  left: 35%;
+  width: 60%;
+  transform: translateX(-50%);
+  font-size: 20px; /* Adjust the font size as needed */
+  padding: 12px 24px; /* Adjust the padding as needed */
+}
+
+.secondary-options {
+  font-size: 12px;
 }
 
 a {
+  margin-bottom: 3vh;
+  margin-top: 3vh;
   color: #eceff1;
+}
+
+p {
+  color: #ffffff;
+  font-size: 13px;
+}
+
+#privacy {
+  color: white;
+}
+
+#login-text {
+  color: #1e1e1e;
 }

@@ -23,7 +23,7 @@ export const MainPage = () => {
   return (
     <div className="main-page">
       <div className="navbar-main">
-        <Navbar>
+        <Navbar id="navbar-menu">
           <Navbar.Brand className="navbarText" href="#home">
             Cowmprar
           </Navbar.Brand>
@@ -32,18 +32,19 @@ export const MainPage = () => {
               Home
             </Nav.Link>
             <Nav.Link className="navbarText" href="#features">
-              Features
+             Marketplace
             </Nav.Link>
             <Nav.Link className="navbarText" href="#pricing">
-              Pricing
+              Settings
             </Nav.Link>
           </Nav>
           <Button
+              id="close-session-button"
             variant="dark"
             onClick={async () => {
               supabase.auth.signOut();
             }}
-          >
+          className="sign-out">
             Cerrar sesión
           </Button>
         </Navbar>
@@ -52,8 +53,8 @@ export const MainPage = () => {
       <div className="main-page-body">
         <CowList />
         <br />
-        <Link to="form-cow">
-          <Button variant="dark">Agregar vaca</Button>
+        <Link to="form-cow" id="add-new-cow">
+          <Button variant="dark" id="add-cow-button">Agregar vaca</Button>
         </Link>
         <br />
         <br />
