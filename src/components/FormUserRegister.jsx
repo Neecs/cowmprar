@@ -36,7 +36,7 @@ export const FormUserRegister = () => {
       setRoleType(role);
     }
     fetchData();
-  }, []); // Empty dependency array means this effect runs once when the component mounts
+  }, []);
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
@@ -222,7 +222,6 @@ export const FormUserRegister = () => {
               </Link>
             </div>
 
-            <br />
             <br />
             {errorSignUp && (
               <Alert key="danger" variant="danger">
