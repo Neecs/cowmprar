@@ -3,12 +3,12 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import "../styles/formCvCow.css";
+import "./formCvCow.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
-import { updateHistory } from "../supabase/usecases/cows/update_cow.js";
-import {supabase} from "../supabase/data/constants/api_credentials.js";
+import { updateHistory } from "../../../supabase/usecases/cows/update_cow.js";
+import {supabase} from "../../../supabase/data/constants/api_credentials.js";
 
 export const FormCvCow = () => {
   const [validated, setValidated] = useState(false);

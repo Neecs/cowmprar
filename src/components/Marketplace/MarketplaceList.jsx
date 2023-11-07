@@ -1,10 +1,12 @@
-import { CowCard } from "./CowCard";
+import { CowCard} from "../Cows/Cards/CowCard.jsx";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getCowsByUser, getRazes } from "../supabase/usecases/cows/get_cow.js";
-import { supabase } from "../supabase/data/constants/api_credentials.js";
+import {getAllDBCows, getCowsByUser, getRazes} from "../../supabase/usecases/cows/get_cow.js";
+import { supabase} from "../../supabase/data/constants/api_credentials.js";
+import NavBar from "../GeneralComponents/NavBar.jsx";
+import {MarketplaceCard} from "./MarketplaceCard.jsx";
 
-export const CowList = () => {
+export const MarketplaceList = () => {
     const [cowsData, setCowsData] = useState([]);
     const [cowsRazes, setCowsRazes] = useState([]);
 
@@ -12,7 +14,7 @@ export const CowList = () => {
         const fetchDataCows = async () => {
             const user = await supabase.auth.getUser();
             console.log(user.data.user.id);
-            const data = await getCowsByUser(user.data.user.id);
+            const data = await getAllDBCows();
             setCowsData(data);
             const razes = await getRazes();
             setCowsRazes(razes);
@@ -25,7 +27,7 @@ export const CowList = () => {
     return (
         <div>
             {cowsData.map((cow) => (
-                <CowCard key={cow.id_vaca} cow={cow} razes={cowsRazes}/>
+                <MarketplaceCard key={cow.id_vaca} cow={cow} razes={cowsRazes}/>
             ))}
         </div>
     );

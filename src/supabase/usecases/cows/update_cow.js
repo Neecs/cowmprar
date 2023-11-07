@@ -1,4 +1,4 @@
-import {updateHV, addIncident} from '../../data/supabase/data_source'
+import {updateHV, addIncident} from '../../data/supabase/supabase_querys.js'
 
 export const updateHistory = async (color, name, id_hato, person_id) => {
     return await updateHV(color,name, id_hato, person_id)

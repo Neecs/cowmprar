@@ -1,12 +1,11 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/login.css";
-import "../styles/signup.css";
+import "./login.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Alert from "react-bootstrap/Alert";
-import { supabase } from "../supabase/data/constants/api_credentials.js";
+import { supabase } from "../../../supabase/data/constants/api_credentials.js";
 import { useEffect } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";

@@ -3,16 +3,25 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import "../styles/formNewCow.css";
+import "./formNewCow.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
+<<<<<<< HEAD:src/components/FormCow.jsx
 import { getGenders, getRazes } from "../supabase/usecases/cows/get_cow.js";
 import { createCow } from "../supabase/usecases/cows/create_cow.js";
 import { supabase } from "../supabase/data/constants/api_credentials.js";
+=======
+import {
+  getGenders,
+  getRazes,
+} from "../../../supabase/usecases/cows/get_cow.js";
+import { createCow } from "../../../supabase/usecases/cows/create_cow.js";
+import {supabase} from "../../../supabase/data/constants/api_credentials.js";
+>>>>>>> 4e33cfba37397ccf632aa8efbfdcfa159df91ca6:src/components/Cows/NewCow/FormCow.jsx
 
 export const FormCow = () => {
     const [validated, setValidated] = useState(false);

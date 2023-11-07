@@ -1,9 +1,9 @@
 import Form from "react-bootstrap/Form";
-import "../styles/incidentForm.css";
+import "./incidentForm.css";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { Link, useParams } from "react-router-dom";
-import { addCowIncident } from "../supabase/usecases/cows/update_cow.js";
+import { addCowIncident } from "../../../supabase/usecases/cows/update_cow.js";
 import Row from "react-bootstrap/Row";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -11,7 +11,7 @@ import {
   getGenders,
   getIncidents,
   getRazes,
-} from "../supabase/usecases/cows/get_cow.js";
+} from "../../../supabase/usecases/cows/get_cow.js";
 
 export const IncidentForm = () => {
   const navigate = useNavigate();

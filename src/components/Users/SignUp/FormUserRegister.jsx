@@ -3,17 +3,17 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import "../styles/formNewUser.css";
+import "./formNewUser.css";
 import { Link } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
-import { getGenders, getRazes } from "../supabase/usecases/cows/get_cow.js";
-import { getDocumentTypes } from "../supabase/data/supabase/data_source.js";
+import { getGenders, getRazes } from "../../../supabase/usecases/cows/get_cow.js";
+import { getDocumentTypes } from "../../../supabase/data/supabase/supabase_querys.js";
 import {
   getPossibleDocuments,
   getRoles,
-} from "../supabase/usecases/user/fetch_user.js";
-import { registerUser } from "../supabase/usecases/user/create_user.js";
-import { supabase } from "../supabase/data/constants/api_credentials.js";
+} from "../../../supabase/usecases/user/fetch_user.js";
+import { registerUser } from "../../../supabase/usecases/user/create_user.js";
+import { supabase } from "../../../supabase/data/constants/api_credentials.js";
 
 export const FormUserRegister = () => {
   const [validated, setValidated] = useState(false);
