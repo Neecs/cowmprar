@@ -6,27 +6,15 @@ import Row from "react-bootstrap/Row";
 import "./formNewCow.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Alert from "react-bootstrap/Alert";
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-<<<<<<< HEAD:src/components/FormCow.jsx
-import { getGenders, getRazes } from "../supabase/usecases/cows/get_cow.js";
-import { createCow } from "../supabase/usecases/cows/create_cow.js";
-import { supabase } from "../supabase/data/constants/api_credentials.js";
-=======
 import {
   getGenders,
   getRazes,
 } from "../../../supabase/usecases/cows/get_cow.js";
 import { createCow } from "../../../supabase/usecases/cows/create_cow.js";
 import {supabase} from "../../../supabase/data/constants/api_credentials.js";
->>>>>>> 4e33cfba37397ccf632aa8efbfdcfa159df91ca6:src/components/Cows/NewCow/FormCow.jsx
 
 export const FormCow = () => {
-    const [validated, setValidated] = useState(false);
-    const [errorSignUp, setErrorSignUp] = useState(false);
-    const [errorPassword, setErrorPassword] = useState(false);
+    const [validated] = useState(false);
     const [razesDictionary, setRazesDictionary] = useState({});
     const [genderDictionary, setGenderDictionary] = useState({});
     const [selectedRaze, setSelectedRaze] = useState("");
@@ -53,9 +41,6 @@ export const FormCow = () => {
         const bornDate = form.bornDate.value;
         const genderId = form.genre.value;
         const name = form.name.value;
-        const color = form.color.value;
-        const nameHato = form.nameHato.value;
-        const location = form.location.value;
 
         supabase.auth.onAuthStateChange((event, session) => {
             const createNewCow = async () => {
@@ -77,9 +62,9 @@ export const FormCow = () => {
             <div className="form-space-cow">
                 <div className="header-title-cow">
                     <h4 className="title">
-                        Formulario de registro de un nuevo Bovino
+                        Formulario de registro
                     </h4>
-                    <p className="category">Ingrese los datos del Bovino</p>
+                    {/* <p className="category">Ingrese los datos del Bovino</p> */}
                 </div>
                 <div className="data-cow">
                     <Form
@@ -108,9 +93,6 @@ export const FormCow = () => {
                                     ))}
                                 </Form.Select>
                             </Form.Group>
-                        </Row>
-
-                        <Row className="mb-3">
                             <Form.Group as={Col} md="3" controlId="genre">
                                 <Form.Select
                                     aria-label="Default select example"
@@ -133,9 +115,7 @@ export const FormCow = () => {
                                     Selecciona el sexo del Bovino.
                                 </Form.Control.Feedback>
                             </Form.Group>
-                        </Row>
-
-                        <Form.Group as={Col} md="5" controlId="bornDate">
+                            <Form.Group as={Col} md="5" controlId="bornDate">
                             <Form.Floating className="mb-3">
                                 <Form.Control type="date" required />
                                 <Form.Label>
@@ -146,6 +126,9 @@ export const FormCow = () => {
                                 </Form.Control.Feedback>
                             </Form.Floating>
                         </Form.Group>
+                        </Row>
+
+                        
 
                         <Col md="3">
                             <h2 className="subtitle">Información adicional</h2>
@@ -213,16 +196,13 @@ export const FormCow = () => {
                             <Form.Group className="mb-3"></Form.Group>
                             <Button
                                 type="submit"
-                                className="btn btn-dark btn-lg"
+                                className="button-common button-aceptar"
                             >
-                                Registrar vaca
+                                Registrar
                             </Button>
                             <span style={{ marginRight: "10px" }}></span>
                             <Link to="/">
-                                <Button
-                                    type="button"
-                                    className="btn btn-dark btn-lg"
-                                >
+                                <Button type="button" className="button-common button-regresar">
                                     Regresar
                                 </Button>
                             </Link>
