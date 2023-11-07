@@ -2,15 +2,16 @@
   background-color: #BABFA8;
   height: 100vh;
   width: 100vw;
-  background-image: url("https://images.pexels.com/photos/1390200/pexels-photo-1390200.jpeg");
+  background-image: url("../assets/Main-Cow.jpg");
   background-size: cover;
+  background-color: rgba(0,0,0,0.5);
+  background-repeat: no-repeat;
 }
 
-.navbar-main {
-  background-color: #50592F;
-  align-items: end;
-  padding-left: 2vh;
-  
+#navbar-menu {
+  background-color: #50592F;;
+  padding-left: 3vh;
+  padding-right: 3vh;
 }
 
 .navbarText{
@@ -18,5 +19,22 @@
 }
 
 .main-page-body{
-  padding-left: 2vh;
+  padding: 2vh;
+}
+
+#add-new-cow {
+  position: fixed;
+  right: 5vw;
+  bottom: 3vw;
+}
+
+#add-cow-button {
+  width: 9vw;
+  height: 6vh;
+  font-size: 16px;
+}
+
+#close-session-button {
+  width: 10vw;
+  height: 7vh;
 }

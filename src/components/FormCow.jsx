@@ -71,7 +71,7 @@ export const FormCow = () => {
         <div className="data-cow">
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Col md="3">
-              <h9>Información principal</h9>
+              <h2>Información principal</h2>
             </Col>
             <Row className="mb-3">
               <Form.Group as={Col} md="4" controlId="breed">
@@ -125,7 +125,7 @@ export const FormCow = () => {
               </Form.Group>
             </Row>
             <Col md="3">
-              <h9>Información adicional</h9>
+              <p>Información adicional</p>
             </Col>
             <Row className="mb-3">
               <Form.Group as={Col} md="4" controlId="name">
@@ -148,7 +148,7 @@ export const FormCow = () => {
               </Form.Group>
             </Row>
             <Col md="3">
-              <h9>Información del hato</h9>
+              <p>Información del hato</p>
             </Col>
             <Row className="mb-3">
               <Form.Group as={Col} md="4" controlId="nameHato">
@@ -170,7 +170,6 @@ export const FormCow = () => {
                 </Form.Floating>
               </Form.Group>
             </Row>
-
             <div className="buttons-cow">
               <Form.Group className="mb-3"></Form.Group>
               <Button type="submit" className="btn btn-dark btn-lg">
@@ -183,19 +182,6 @@ export const FormCow = () => {
                 </Button>
               </Link>
             </div>
-
-            <br />
-            <br />
-            {errorSignUp && (
-              <Alert key="danger" variant="danger">
-                Ya existe un usuario con este correo
-              </Alert>
-            )}
-            {errorPassword && (
-              <Alert key="danger" variant="danger">
-                Las contraseñas no coinciden
-              </Alert>
-            )}
           </Form>
         </div>
       </div>
