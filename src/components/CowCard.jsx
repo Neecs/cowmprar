@@ -55,7 +55,7 @@ export const CowCard = ({ cow, razes }) => {
               </tbody>
             </MDBTable>
             <a className="incident-button btn btn-primary" onClick={handleAddIncident}>Agregar incidente</a>
-            <a className="btn btn-secondary" href="#">Hoja de vida</a>
+            <a className="btn btn-secondary" href="hv-cow">Hoja de vida</a>
           </MDBCardBody>
         </MDBCard>
       </div>
