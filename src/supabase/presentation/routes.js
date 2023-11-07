@@ -5,6 +5,7 @@ const { createCow } = require('../usecases/cows/create_cow')
 const { registerUser} = require('../usecases/user/create_user')
 const {getPersonByEmail, getPossibleDocuments, getRoles} = require("../usecases/user/fetch_user");
 const {getRazes, getGenders, getCow} = require("../usecases/cows/get_cow");
+const { updateCowHistory} = require("../usecases/cows/update_cow_history");
 
 export const router = express.Router();
 
@@ -132,6 +133,21 @@ router.get('/app-roles', async (req,res) => {
     try {
         const appRoles = await getRoles()
         res.json(appRoles)
+    }catch (error){
+        res.status(500).json({error:error.message})
+    }
+})
+
+router.post('/hv-cow', async (req, res) => {
+    try {
+        const color = req.body.color;
+        const nombre = req.body.nombre;
+        const idHato = req.body.id_hato;
+        const idPerson = req.body.idPerson;
+        
+        await updateCowHistory(color, nombre, idHato, idPerson);
+
+        res.json({sucess:"Your Cow was updated successfully"})
     }catch (error){
         res.status(500).json({error:error.message})
     }

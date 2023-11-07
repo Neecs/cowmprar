@@ -3,38 +3,26 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import "../styles/formNewCow.css";
+import "../styles/formCvCow.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import {
-  getGenders,
-  getRazes,
-} from "../supabase/usecases/cows/get_cow.js";
-import { createCow } from "../supabase/usecases/cows/create_cow.js";
+import { updateHistory } from "../supabase/usecases/cows/update_cow.js";
 import {supabase} from "../supabase/data/constants/api_credentials.js";
 
-export const FormCow = () => {
+export const FormCvCow = () => {
   const [validated, setValidated] = useState(false);
   const [errorSignUp, setErrorSignUp] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [razesDictionary, setRazesDictionary] = useState({});
   const [genderDictionary, setGenderDictionary] = useState({});
-  const [selectedRaze, setSelectedRaze] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
 
   const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
-      const razes = await getRazes();
-      setRazesDictionary(razes);
-
-      const gender = await getGenders();
-      setGenderDictionary(gender);
+      
     }
     fetchData();
   }, []);
@@ -43,17 +31,15 @@ export const FormCow = () => {
     const form = event.currentTarget;
     event.preventDefault();
 
-    const razeId = form.breed.value;
-    const bornDate = form.bornDate.value;
-    const genderId = form.genre.value;
-    const name = form.name.value;
     const color = form.color.value;
-    const nameHato = form.nameHato.value;
-    const location = form.location.value;
+    const name = form.name.value;
+    const idHato = form.hato.value;
+    const idPerson = form.person.value;
+    
 
     supabase.auth.onAuthStateChange((event, session) => {
       const createNewCow = async () => {
-        await createCow(razeId, genderId, bornDate, name,session.user.id);
+        await updateHistory(color, name, idHato, idPerson,session.user.id);
       };
       createNewCow();
       navigate('/')
@@ -62,34 +48,27 @@ export const FormCow = () => {
   }
 
   return (
-    <div className="form-cow">
-      <div className="form-space-cow">
-        <div className="header-title-cow">
+    <div className="form-cv-cow">
+      <div className="form-space-cv">
+        <div className="header-title-cv">
           <h4 className="title">Hoja de vida</h4>
-          <p className="category">Ingrese los datos del Bovino</p>
+          <p className="category">Estos son los datos</p>
         </div>
         <div className="data-cow">
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Col md="3">
-              <h9>Información principal</h9>
+              <h4>Información principal</h4>
             </Col>
             <Row className="mb-3">
-              <Form.Group as={Col} md="4" controlId="breed">
+              <Form.Group as={Col} md="4" controlId="color">
                 <Form.Select
-                  aria-label="Default select example"
+                  aria-label="Cambiar el color"
                   required
-                  value={selectedRaze}
-                  onChange={(e) => setSelectedRaze(e.target.value)}
+                  onChange={(e) => (e.target.value)}
                 >
-                  <option value="">Raza</option>
-                  {Object.keys(razesDictionary).map((key) => (
-                    <option key={key} value={key}>
-                      {razesDictionary[key]}
-                    </option>
-                  ))}
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
-                  Seleccione tipo de identificación válido
+                  Seleccione un color valido
                 </Form.Control.Feedback>
               </Form.Group>
 

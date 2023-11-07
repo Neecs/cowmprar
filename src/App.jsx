@@ -6,6 +6,8 @@ import { IncidentForm } from "./components/IncidentForm";
 import { RestorePassword } from "./components/RestorePassword";
 import { FormCow } from "./components/FormCow";
 import {RestoreForm} from './components/RestoreForm'
+import { FormCvCow } from "./components/FormCvCow";
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
       <Route path="/restore" element={<RestorePassword />} />
       <Route path="form-cow" element={<FormCow />} />
       <Route path="/profile/update" element={<RestoreForm />} />
+      <Route path="/hv-cow" element={<FormCvCow />} />
     </Routes>
   );
 }
