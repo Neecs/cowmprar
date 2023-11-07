@@ -1,4 +1,4 @@
-import {createNewUser} from "../../data/supabase/data_source.js";
+import {createNewUser} from "../../data/supabase/supabase_querys.js";
 
 
 export const registerUser = async (email, password) => {

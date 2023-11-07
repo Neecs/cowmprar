@@ -4,8 +4,8 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
-import "../styles/restorePass.css";
-import { supabase } from "../supabase/data/constants/api_credentials.js";
+import "./restorePass.css";
+import { supabase } from "../../../supabase/data/constants/api_credentials.js";
 
 export const RestorePassword = () => {
   const [validated, setValidated] = useState(false);
@@ -43,6 +43,7 @@ export const RestorePassword = () => {
         </div>
         <br />
         <br />
+        <div className="infoSpace">
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group as={Col} md="4" controlId="email">
             <Form.Floating className="mb-3">
@@ -60,12 +61,12 @@ export const RestorePassword = () => {
 
           <div className="buttons">
             <Form.Group className="mb-3"></Form.Group>
-            <Button type="submit" className="btn btn-dark btn-lg">
+            <Button type="submit" className="btn btn-dark btn-md">
               Enviar correo
             </Button>
             <span style={{ marginRight: "10px" }}></span>
             <Link to="/">
-              <Button type="button" className="btn btn-dark btn-lg">
+              <Button type="button" className="btn btn-dark btn-md">
                 Regresar
               </Button>
             </Link>
@@ -74,6 +75,8 @@ export const RestorePassword = () => {
           <br />
           <br />
         </Form>
+        </div>
+        
         {message && (
           <Alert key="info" variant="info">
             Revisa en tu correo el enlace de recuperación.

@@ -1,0 +1,114 @@
+.form-cow-cv {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    background-color: #ffffff;
+}
+
+.form-space-cow {
+    background: rgb(255, 255, 255);
+    /* backdrop-filter: blur(15.5px); */
+    /* -webkit-backdrop-filter: blur(15.5px); */
+    border-radius: 10px;
+    box-shadow: 0 0 1.2rem rgba(77, 77, 77, 0.18);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 33rem;
+    width: 55rem;
+    max-width: 95%; /* Limitar el ancho máximo */
+    max-height: 95%; /* Limitar la altura máxima */
+    padding: 15px; /* Aumentar el relleno */
+    margin: auto; /* Centrar horizontalmente */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.header-title-cow {
+    box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42),
+        0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #95ca46;
+    width: 80vh;
+    color: rgb(36, 36, 36);
+    align-items: center;
+    text-align: center;
+}
+
+.title {
+    text-align: absolute;
+}
+
+.mb-3 {
+    margin-bottom: 1rem !important;
+}
+
+.buttons-cow {
+    padding-top: 1px;
+}
+
+.data-cow {
+    padding-top: 20px;
+    width: 35vw;
+}
+
+.category {
+    color: rgb(0, 0, 0);
+}
+
+p {
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+}
+
+.subtitle {
+    text-decoration: underline;
+    white-space: nowrap;
+    color: rgb(76, 73, 73);
+    font-size: 22px;
+}
+
+/* Estilo común para ambos botones */
+.button-common {
+    color: black; /* Letras negras por defecto */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s; /* Transición suave del color de fondo en :hover */
+}
+
+.buttons-cow {
+    text-align: center;
+}
+
+/* Estilo para el botón de Aceptar */
+.button-aceptar {
+    background-color: #b7b7b7; /* Gris claro */
+}
+
+.button-aceptar:hover {
+    background-color: #4caf50; /* Color verde de confirmación al pasar el mouse */
+}
+
+/* Estilo para el botón de Regresar */
+.button-regresar {
+    background-color: #b7b7b7; /* Gris claro */
+}
+
+.button-regresar:hover {
+    background-color: #ff5733; /* Color rojo al pasar el mouse */
+}
+
+.long-text-field {
+    width: 18rem;
+}
