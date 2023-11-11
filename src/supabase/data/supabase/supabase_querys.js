@@ -289,14 +289,13 @@ export const getHV = async () => {
   }
 };
 
-export const updateHV = async (color, nombre, foto, id_hato, id_persona) => {
+export const updateHV = async (color, nombre, id_hato, id_persona) => {
   try {
     await supabase
       .from("Hojas de vida")
       .update({
         color,
         nombre,
-        foto,
         id_hato,
         id_persona,
       })

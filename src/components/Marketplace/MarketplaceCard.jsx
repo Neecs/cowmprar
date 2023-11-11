@@ -3,8 +3,10 @@ import Table from "react-bootstrap/Table";
 import { Link, useNavigate } from "react-router-dom";
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBTable, MDBTableHead } from "mdb-react-ui-kit";
 import {useEffect, useState} from "react";
+import './marketplaceCard.css'
+import {MainPage} from "../GeneralComponents/MainPage.jsx";
 
-export const CowCard = ({ cow, razes }) => {
+export const MarketplaceCard = ({ cow, razes }) => {
   useEffect(() => {
     calculateCowAge();
   }, []);
@@ -54,8 +56,8 @@ export const CowCard = ({ cow, razes }) => {
               </tr>
               </tbody>
             </MDBTable>
-            <a className="incident-button btn btn-primary" onClick={handleAddIncident}>Agregar incidente</a>
-            <a className="btn btn-secondary" href="#">Hoja de vida</a>
+            <a className="incident-button btn btn-primary" href="/">Ver detalles</a>
+            <a className="btn btn-secondary" href="contact-owner">Contactar al vendedor</a>
           </MDBCardBody>
         </MDBCard>
       </div>

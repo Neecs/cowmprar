@@ -4,8 +4,8 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
-import "../styles/restorePass.css";
-import { supabase } from "../supabase/data/constants/api_credentials.js";
+import "./restorePass.css";
+import { supabase } from "../../../supabase/data/constants/api_credentials.js";
 
 export const RestorePassword = () => {
   const [validated, setValidated] = useState(false);

@@ -1,0 +1,30 @@
+/* MarketplaceCard.css */
+.horizontal-cow-card {
+    display: inline-block; /* Display horizontally */
+    margin: 2rem; /* Add some margin for spacing */
+    color: black;
+    height: 18rem;
+    width: 18rem;
+}
+
+.cardcow {
+    background-color: white;
+    color: black;
+}
+
+.tableCow {
+    background-color: pink !important;
+    color: aliceblue;
+}
+
+.btn {
+    padding: 4px;
+    margin: 5px;
+}
+
+.th {
+    max-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

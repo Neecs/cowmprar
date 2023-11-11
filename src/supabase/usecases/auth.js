@@ -1,4 +1,4 @@
-import {recoverUserPassword, checkUserLogin, recoverPasswordViaEmail} from "../data/supabase/data_source.js";
+import {recoverUserPassword, checkUserLogin, recoverPasswordViaEmail} from "../data/supabase/supabase_querys.js";
 
 export const loginUser = async (email, password) => {
     return await checkUserLogin(email, password)

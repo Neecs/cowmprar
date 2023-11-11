@@ -1,4 +1,4 @@
-import { fetchPersonDataByEmail, getDocumentTypes, getAppRoles} from '../../data/supabase/data_source'
+import { fetchPersonDataByEmail, getDocumentTypes, getAppRoles} from '../../data/supabase/supabase_querys.js'
 
 export const getPersonByEmail = async (email) => {
     return await fetchPersonDataByEmail(email);
