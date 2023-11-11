@@ -1,7 +1,12 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { useEffect, useState } from "react";
 
 const ModalCV = (props) => {
+  useEffect(() => {
+    console.log(props.cowhv);
+  }, []);
+
   return (
     <Modal
       {...props}
@@ -16,11 +21,7 @@ const ModalCV = (props) => {
       </Modal.Header>
       <Modal.Body>
         <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
+        <p>asd</p>
         <a href="/hv-cow" style={{ color: "blue" }}>
           Editar hoja de vida
         </a>

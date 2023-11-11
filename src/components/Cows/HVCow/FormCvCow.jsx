@@ -28,13 +28,12 @@ export const FormCvCow = () => {
     const genderId = form.genre.value;
     const name = form.name.value;
 
-    supabase.auth.onAuthStateChange((event, session) => {
-      const createNewCow = async () => {
-        await createCow(razeId, genderId, bornDate, name, session.user.id);
-      };
-      createNewCow();
-      navigate("/");
-    });
+    const createNewCow = async () => {
+      const user = await supabase.auth.getUser();
+      await createCow(razeId, genderId, bornDate, name, user.data.user.id);
+    };
+    createNewCow();
+    navigate("/");
   };
 
   return (

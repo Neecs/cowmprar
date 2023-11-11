@@ -26,7 +26,7 @@ export const FormCow = () => {
   const updateDate = () => {
     const date = new Date();
     const actualYear = date.getFullYear();
-    const actualMonth = date.getMonth();
+    const actualMonth = date.getMonth() + 1;
     const actualDay = date.getDate();
     setActualDate(`${actualYear}-${actualMonth}-${actualDay}`);
   };

@@ -281,7 +281,7 @@ export const getHV = async () => {
   try {
     const { data: hvData, error } = await supabase
       .from("Hojas de vida")
-      .select("id_hoja_vida");
+      .select("*");
 
     return hvData;
   } catch (error) {

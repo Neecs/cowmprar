@@ -25,16 +25,31 @@ export const CowCard = ({ cow, razes }) => {
     const actualDate = new Date();
     const bornDate = new Date(Date.parse(cow.fecha_nacimiento));
 
-    const age = actualDate.getFullYear() - bornDate.getFullYear();
+    const ageInYears = actualDate.getFullYear() - bornDate.getFullYear();
+    const ageInMonths = actualDate.getMonth() - bornDate.getMonth();
+    const ageInDays = actualDate.getDate() - bornDate.getDate();
 
-    if (
-      actualDate.getMonth() < bornDate.getMonth() ||
-      (actualDate.getMonth() === bornDate.getMonth() &&
-        actualDate.getDate() < bornDate.getDate())
-    ) {
-      setCowAge(age - 1);
+    if (ageInYears > 0) {
+      // Si la edad es mayor que 0 años, mostrar los años
+      if (ageInYears === 1) {
+        setCowAge(`${ageInYears} año`);
+      } else {
+        setCowAge(`${ageInYears} años`);
+      }
+    } else if (ageInMonths > 0) {
+      // Si la edad es 0 años pero los meses son mayores que 0, mostrar los meses
+      if (ageInMonths === 1) {
+        setCowAge(`${ageInMonths} mes`);
+      } else {
+        setCowAge(`${ageInMonths} meses`);
+      }
     } else {
-      setCowAge(age);
+      // Si la edad es 0 años y 0 meses, mostrar los días
+      if (ageInDays === 1) {
+        setCowAge(`${ageInDays} día`);
+      } else {
+        setCowAge(`${ageInDays} días`);
+      }
     }
   };
 
@@ -59,7 +74,7 @@ export const CowCard = ({ cow, razes }) => {
               <tr>
                 <td>{razes[cow.raza_vaca]}</td>
                 <td>{cow.id_genero === 1 ? "Macho" : "Hembra"}</td>
-                <td>{cowAge} años</td>
+                <td>{cowAge}</td>
               </tr>
             </tbody>
           </MDBTable>
