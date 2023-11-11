@@ -277,11 +277,12 @@ export const getAllCows = async () => {
   }
 };
 
-export const getHV = async () => {
+export const getHV = async (id_cow) => {
   try {
     const { data: hvData, error } = await supabase
       .from("Hojas de vida")
-      .select("*");
+      .select("*")
+      .eq("id_hoja_vida", id_cow);
 
     return hvData;
   } catch (error) {

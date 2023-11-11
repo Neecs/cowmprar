@@ -11,9 +11,21 @@ import {
 import { useEffect, useState } from "react";
 import "./cowCard.css";
 import ModalCV from "../HVCow/ModalCV";
+import { useContext } from "react";
+import { CowContext } from "../../../context/CowContext";
+import { getCowHV } from "../../../supabase/usecases/cows/get_cow";
 
 export const CowCard = ({ cow, razes }) => {
+  const [cowsHV, setCowsHV] = useState([]);
+
   useEffect(() => {
+    const cowsHVData = async () => {
+      const hvData = await getCowHV(cow.id_vaca);
+      console.log(hvData);
+      setCowsHV(hvData);
+    };
+    cowsHVData();
+    console.log(cowsHV);
     calculateCowAge();
   }, []);
 
