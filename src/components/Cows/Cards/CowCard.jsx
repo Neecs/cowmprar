@@ -16,8 +16,6 @@ import { CowContext } from "../../../context/CowContext";
 import { getCowHV } from "../../../supabase/usecases/cows/get_cow";
 
 export const CowCard = ({ cow, razes, cowshv }) => {
-  const [cowsHV, setCowsHV] = useState([]);
-
   useEffect(() => {
     calculateCowAge();
   }, []);

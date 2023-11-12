@@ -11,18 +11,24 @@ import { supabase } from "../../../supabase/data/constants/api_credentials.js";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { CowContext } from "../../../context/CowContext.jsx";
+import ModalHerd from "./ModalHerd.jsx";
 
 export const FormCvCow = () => {
   const [validated] = useState(false);
   const navigate = useNavigate();
   const { cowId } = useParams();
-  const { cowStatus } = useContext(CowContext);
+  const { cowStatus, cowHerds, departmentsLocation } = useContext(CowContext);
   const [selectedStatus, setSelectedStatus] = useState(0);
   const [statusDictionary, setStatusDictionary] = useState([]);
-
+  const [herdsDictionary, setHerdsDictionary] = useState([]);
+  const [selectedHerd, setSelectedHerd] = useState(0);
+  const [modalShow, setModalShow] = useState(false);
+  const [departmentDictionary, setDepartmentDictionary] = useState([]);
   useEffect(() => {
     setStatusDictionary(cowStatus);
-  }, []);
+    setHerdsDictionary(cowHerds);
+    setDepartmentDictionary(departmentsLocation);
+  }, [cowHerds]);
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -73,7 +79,7 @@ export const FormCvCow = () => {
               </Form.Control.Feedback>
             </Form.Group>
             <Col md="3">
-              <h2 className="subtitle">Ubicación</h2>
+              <h2 className="subtitle">Información del hato</h2>
             </Col>
             <Row></Row>
             <Row className="mb-3">
@@ -84,7 +90,21 @@ export const FormCvCow = () => {
                 </Form.Floating>
               </Form.Group>
             </Row>
-
+            <Form.Group as={Col} md="3" controlId="herd">
+              <Form.Select
+                aria-label="Default select example"
+                required
+                value={selectedHerd}
+                onChange={(e) => setSelectedHerd(e.target.value)}
+              >
+                <option value="">Hatos registrados</option>
+                {herdsDictionary.map((herd) => (
+                  <option key={herd.id_hato} value={herd.id_hato}>
+                    {herd.nombre_hato}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
             <div className="buttons-cow">
               <Form.Group className="mb-3"></Form.Group>
               <Button type="submit" className="button-common button-aceptar">
@@ -96,7 +116,20 @@ export const FormCvCow = () => {
                   Regresar
                 </Button>
               </Link>
+              <Button
+                type="button"
+                className="button-common button-regresar"
+                onClick={() => setModalShow(true)}
+              >
+                Agregar nuevo hato
+              </Button>
             </div>
+            <ModalHerd
+              herds={herdsDictionary}
+              departments={departmentDictionary}
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+            />
           </Form>
         </div>
       </div>

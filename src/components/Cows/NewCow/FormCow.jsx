@@ -100,7 +100,7 @@ export const FormCow = () => {
                   ))}
                 </Form.Select>
                 <Form.Control.Feedback type="invalid">
-                  Selecciona el sexo del Bovino.
+                  Selecciona el género del Bovino.
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group as={Col} md="5" controlId="bornDate">

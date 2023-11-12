@@ -357,3 +357,34 @@ export const getCowStatus = async () => {
     console.log(error);
   }
 };
+
+export const getHerdsPlaces = async () => {
+  try {
+    let { data: herds, error } = await supabase.from("Hato").select("*");
+    return herds;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getDepartmentsLocation = async () => {
+  try {
+    let { data: departments, error } = await supabase
+      .from("Departamentos")
+      .select("*");
+    return departments;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addHerdLocation = async (nombre_hato, id_departamento) => {
+  try {
+    const { data, error } = await supabase
+      .from("Hato")
+      .insert([{ nombre_hato, id_departamento }])
+      .select();
+  } catch (error) {
+    console.log(error);
+  }
+};
