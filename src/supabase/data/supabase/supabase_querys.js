@@ -288,19 +288,18 @@ export const getHV = async () => {
   }
 };
 
-export const updateHV = async (color, nombre, id_hato, id_persona) => {
+export const updateCowHV = async (color, id_hato, id_hv) => {
   try {
     await supabase
       .from("Hojas de vida")
       .update({
         color,
         id_hato,
-        id_persona,
       })
-      .eq("id_hoja_vida");
-    return true;
+      .eq("id_hoja_vida", id_hv)
+      .select();
   } catch (error) {
-    return false;
+    console.log(error);
   }
 };
 
@@ -383,6 +382,18 @@ export const addHerdLocation = async (nombre_hato, id_departamento) => {
     const { data, error } = await supabase
       .from("Hato")
       .insert([{ nombre_hato, id_departamento }])
+      .select();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateCowStatus = async (id_vaca, health_status) => {
+  try {
+    const { data, error } = await supabase
+      .from("Vacas")
+      .update([{ health_status }])
+      .eq("id_vaca", id_vaca)
       .select();
   } catch (error) {
     console.log(error);

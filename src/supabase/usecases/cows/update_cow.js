@@ -1,11 +1,16 @@
 import {
-  updateHV,
+  updateCowHV,
   addIncident,
   addHerdLocation,
+  updateCowStatus,
 } from "../../data/supabase/supabase_querys.js";
 
-export const updateHistory = async (color, name, id_hato, person_id) => {
-  return await updateHV(color, name, id_hato, person_id);
+export const updateHV = async (color, id_hato, id_hv) => {
+  return await updateCowHV(color, id_hato, id_hv);
+};
+
+export const updateStatus = async (id_vaca, health_status) => {
+  return await updateCowStatus(id_vaca, health_status);
 };
 
 export const addCowIncident = async (name, dateIn, description, cowId) => {

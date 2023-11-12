@@ -6,12 +6,11 @@ import Row from "react-bootstrap/Row";
 import "./formCvCow.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { createCow } from "../../../supabase/usecases/cows/create_cow.js";
-import { supabase } from "../../../supabase/data/constants/api_credentials.js";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { CowContext } from "../../../context/CowContext.jsx";
 import ModalHerd from "./ModalHerd.jsx";
+import { updateStatus, updateHV } from "../../../supabase/usecases/cows/update_cow";
 
 export const FormCvCow = () => {
   const [validated] = useState(false);
@@ -24,6 +23,13 @@ export const FormCvCow = () => {
   const [selectedHerd, setSelectedHerd] = useState(0);
   const [modalShow, setModalShow] = useState(false);
   const [departmentDictionary, setDepartmentDictionary] = useState([]);
+  const updateHealthStatus = async (id_vaca, health_status) => {
+    await updateStatus(id_vaca, health_status);
+  };
+  const updateHVData = async (color, id_hato, id_hv) => {
+    await updateHV(color, id_hato, id_hv);
+  };
+
   useEffect(() => {
     setStatusDictionary(cowStatus);
     setHerdsDictionary(cowHerds);
@@ -34,7 +40,10 @@ export const FormCvCow = () => {
     const form = event.currentTarget;
     event.preventDefault();
     const color = form.color.value;
-    const location = form.location.value;
+    const status = form.status.value;
+    const herd = form.herd.value;
+    updateHealthStatus(cowId, status);
+    updateHVData(color, herd, cowId);
   };
 
   return (
@@ -54,13 +63,10 @@ export const FormCvCow = () => {
                 <Form.Floating className="mb-3">
                   <Form.Control type="text" placeholder=" " required />
                   <Form.Label>Color</Form.Label>
-                  <Form.Control.Feedback type="invalid">
-                    Cambia el Color.
-                  </Form.Control.Feedback>
                 </Form.Floating>
               </Form.Group>
             </Row>
-            <Form.Group as={Col} md="3" controlId="state">
+            <Form.Group as={Col} md="3" controlId="status">
               <Form.Select
                 aria-label="Default select example"
                 required
@@ -74,22 +80,12 @@ export const FormCvCow = () => {
                   </option>
                 ))}
               </Form.Select>
-              <Form.Control.Feedback type="invalid">
-                Selecciona el sexo del Bovino.
-              </Form.Control.Feedback>
             </Form.Group>
             <Col md="3">
-              <h2 className="subtitle">Información del hato</h2>
+              <h2 className="subtitle">Hato</h2>
             </Col>
             <Row></Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} md="3" controlId="location">
-                <Form.Floating className="mb-3 long-text-field">
-                  <Form.Control type="text" placeholder=" " required />
-                  <Form.Label>Hato</Form.Label>
-                </Form.Floating>
-              </Form.Group>
-            </Row>
+            <Row className="mb-3"></Row>
             <Form.Group as={Col} md="3" controlId="herd">
               <Form.Select
                 aria-label="Default select example"
@@ -108,7 +104,7 @@ export const FormCvCow = () => {
             <div className="buttons-cow">
               <Form.Group className="mb-3"></Form.Group>
               <Button type="submit" className="button-common button-aceptar">
-                Modificar
+                Confirmar cambios
               </Button>
               <span style={{ marginRight: "10px" }}></span>
               <Link to="/">
