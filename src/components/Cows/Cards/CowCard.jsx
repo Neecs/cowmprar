@@ -1,6 +1,4 @@
-import Card from "react-bootstrap/Card";
-import Table from "react-bootstrap/Table";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   MDBCard,
   MDBCardBody,
@@ -11,9 +9,6 @@ import {
 import { useEffect, useState } from "react";
 import "./cowCard.css";
 import ModalCV from "../HVCow/ModalCV";
-import { useContext } from "react";
-import { CowContext } from "../../../context/CowContext";
-import { getCowHV } from "../../../supabase/usecases/cows/get_cow";
 
 export const CowCard = ({ cow, razes, cowshv }) => {
   useEffect(() => {
