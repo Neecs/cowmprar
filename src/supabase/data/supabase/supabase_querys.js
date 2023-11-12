@@ -281,8 +281,7 @@ export const getHV = async () => {
   try {
     const { data: hvData, error } = await supabase
       .from("Hojas de vida")
-      .select("id_hoja_vida");
-
+      .select("*");
     return hvData;
   } catch (error) {
     console.log(error);
@@ -295,7 +294,6 @@ export const updateHV = async (color, nombre, id_hato, id_persona) => {
       .from("Hojas de vida")
       .update({
         color,
-        nombre,
         id_hato,
         id_persona,
       })
@@ -326,7 +324,6 @@ export const getUserCows = async (userId) => {
       .from("Vacas")
       .select("*")
       .eq("userId", userId);
-    console.log(cowData);
     return cowData;
   } catch (error) {
     console.log(error);
@@ -345,6 +342,48 @@ export const addIncident = async (id_incidente, dateIn, description, cowId) => {
           id_hoja_vida: cowId,
         },
       ]);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCowStatus = async () => {
+  try {
+    let { data: cow_status, error } = await supabase
+      .from("cow_status")
+      .select("*");
+    return cow_status;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getHerdsPlaces = async () => {
+  try {
+    let { data: herds, error } = await supabase.from("Hato").select("*");
+    return herds;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getDepartmentsLocation = async () => {
+  try {
+    let { data: departments, error } = await supabase
+      .from("Departamentos")
+      .select("*");
+    return departments;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addHerdLocation = async (nombre_hato, id_departamento) => {
+  try {
+    const { data, error } = await supabase
+      .from("Hato")
+      .insert([{ nombre_hato, id_departamento }])
+      .select();
   } catch (error) {
     console.log(error);
   }
