@@ -37,7 +37,7 @@ export const MarketplaceCard = ({ cow, razes }) => {
 
   return (
       <div className="horizontal-cow-card">
-        <MDBCard className="cardcow rounded" style={{ width: "18rem" }}>
+        <MDBCard className="cardcow rounded h-100" style={{ width: "18rem" }}>
           <MDBCardBody>
             <MDBCardTitle>{cow.nombre_vaca}</MDBCardTitle>
             <MDBTable className="tableCow striped bordered hover">
@@ -50,7 +50,7 @@ export const MarketplaceCard = ({ cow, razes }) => {
               </MDBTableHead>
               <tbody>
               <tr>
-                <td>{razes[cow.raza_vaca]}</td>
+                <td id="cow-raze">{razes[cow.raza_vaca].replace(/\([^)]*\)/g, '')}</td>
                 <td>{cow.id_genero === 1 ? "Macho" : "Hembra"}</td>
                 <td>{cowAge} años</td>
               </tr>

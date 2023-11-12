@@ -8,12 +8,10 @@
 }
 
 .cardcow {
-    background-color: white;
     color: black;
 }
 
 .tableCow {
-    background-color: pink !important;
     color: aliceblue;
 }
 
@@ -27,4 +25,9 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+#cow-raze{
+    line-clamp: 1;
+    overflow: hidden;
 }

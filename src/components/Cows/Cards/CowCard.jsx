@@ -1,6 +1,4 @@
-import Card from "react-bootstrap/Card";
-import Table from "react-bootstrap/Table";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBTable, MDBTableHead } from "mdb-react-ui-kit";
 import {useEffect, useState} from "react";
 import './cowCard.css'
