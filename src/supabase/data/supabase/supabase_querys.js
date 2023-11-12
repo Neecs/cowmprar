@@ -346,3 +346,14 @@ export const addIncident = async (id_incidente, dateIn, description, cowId) => {
     console.log(error);
   }
 };
+
+export const getCowStatus = async () => {
+  try {
+    let { data: cow_status, error } = await supabase
+      .from("cow_status")
+      .select("*");
+    return cow_status;
+  } catch (error) {
+    console.log(error);
+  }
+};

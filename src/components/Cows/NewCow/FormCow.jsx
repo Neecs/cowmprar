@@ -12,6 +12,8 @@ import {
 } from "../../../supabase/usecases/cows/get_cow.js";
 import { createCow } from "../../../supabase/usecases/cows/create_cow.js";
 import { supabase } from "../../../supabase/data/constants/api_credentials.js";
+import { useContext } from "react";
+import { CowContext } from "../../../context/CowContext.jsx";
 
 export const FormCow = () => {
   const [validated] = useState(false);
@@ -20,7 +22,7 @@ export const FormCow = () => {
   const [selectedRaze, setSelectedRaze] = useState("");
   const [selectedGender, setSelectedGender] = useState("");
   const [actualDate, setActualDate] = useState(null);
-
+  const { cowsRazes, cowGenders } = useContext(CowContext);
   const navigate = useNavigate();
 
   const updateDate = () => {
@@ -33,14 +35,8 @@ export const FormCow = () => {
 
   useEffect(() => {
     updateDate();
-    async function fetchData() {
-      const razes = await getRazes();
-      setRazesDictionary(razes);
-
-      const gender = await getGenders();
-      setGenderDictionary(gender);
-    }
-    fetchData();
+    setRazesDictionary(cowsRazes);
+    setGenderDictionary(cowGenders);
   }, []);
 
   const handleSubmit = (event) => {

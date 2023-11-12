@@ -9,29 +9,26 @@ import { useNavigate } from "react-router-dom";
 import { createCow } from "../../../supabase/usecases/cows/create_cow.js";
 import { supabase } from "../../../supabase/data/constants/api_credentials.js";
 import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import { CowContext } from "../../../context/CowContext.jsx";
 
 export const FormCvCow = () => {
-  useEffect(() => {
-    console.log(cowId);
-  }, []);
-
   const [validated] = useState(false);
   const navigate = useNavigate();
   const { cowId } = useParams();
+  const { cowStatus } = useContext(CowContext);
+  const [selectedStatus, setSelectedStatus] = useState(0);
+  const [statusDictionary, setStatusDictionary] = useState([]);
+
+  useEffect(() => {
+    setStatusDictionary(cowStatus);
+  }, []);
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
-
     const color = form.color.value;
     const location = form.location.value;
-
-    const updateHV = async () => {
-      const user = await supabase.auth.getUser();
-      await createCow(razeId, genderId, bornDate, name, user.data.user.id);
-    };
-    createNewCow();
-    navigate("/");
   };
 
   return (
@@ -57,7 +54,24 @@ export const FormCvCow = () => {
                 </Form.Floating>
               </Form.Group>
             </Row>
-
+            <Form.Group as={Col} md="3" controlId="state">
+              <Form.Select
+                aria-label="Default select example"
+                required
+                value={selectedStatus}
+                onChange={(e) => setSelectedStatus(e.target.value)}
+              >
+                <option value="">Estado de la vaca</option>
+                {statusDictionary.map((state) => (
+                  <option key={state.id_estado} value={state.id_estado}>
+                    {state.nombre_estado}
+                  </option>
+                ))}
+              </Form.Select>
+              <Form.Control.Feedback type="invalid">
+                Selecciona el sexo del Bovino.
+              </Form.Control.Feedback>
+            </Form.Group>
             <Col md="3">
               <h2 className="subtitle">Ubicación</h2>
             </Col>
