@@ -1,11 +1,29 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ModalCV = (props) => {
+  const [cowHV, setCowHV] = useState([]);
+  const navigate = useNavigate();
+
+  const filterData = () => {
+    const cowsHV = props.cowshv;
+    const filteredHV = cowsHV.filter(
+      (cowhv) => cowhv.id_hoja_vida === props.cow.id_vaca
+    );
+    console.log("filtrado", filteredHV[0]);
+    setCowHV(filteredHV[0]);
+  };
   useEffect(() => {
-    console.log(props.cowhv);
+    filterData();
+    console.log(cowHV);
+    console.log(props.cowshv);
   }, []);
+
+  const handleEditHV = () => {
+    navigate(`/hv-cow/${props.cow.id_vaca}`);
+  };
 
   return (
     <Modal
@@ -20,11 +38,10 @@ const ModalCV = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h4>Centered Modal</h4>
+        <p>Color: {cowHV.color}</p>
         <p>asd</p>
-        <a href="/hv-cow" style={{ color: "blue" }}>
-          Editar hoja de vida
-        </a>
+
+        <Button onClick={handleEditHV}>Editar hoja de vida</Button>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>

@@ -277,13 +277,11 @@ export const getAllCows = async () => {
   }
 };
 
-export const getHV = async (id_cow) => {
+export const getHV = async () => {
   try {
     const { data: hvData, error } = await supabase
       .from("Hojas de vida")
-      .select("*")
-      .eq("id_hoja_vida", id_cow);
-
+      .select("*");
     return hvData;
   } catch (error) {
     console.log(error);
@@ -296,7 +294,6 @@ export const updateHV = async (color, nombre, id_hato, id_persona) => {
       .from("Hojas de vida")
       .update({
         color,
-        nombre,
         id_hato,
         id_persona,
       })
@@ -327,7 +324,6 @@ export const getUserCows = async (userId) => {
       .from("Vacas")
       .select("*")
       .eq("userId", userId);
-    console.log(cowData);
     return cowData;
   } catch (error) {
     console.log(error);

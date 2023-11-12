@@ -28,8 +28,8 @@ export const getAllDBCows = async () => {
     return await getAllCows()
 }
 
-export const getCowHV = async (id_cow) => {
-    return await getHV(id_cow)
+export const getCowHV = async () => {
+    return await getHV()
 }
 
 export const getCowsByUser = async (userId) => {

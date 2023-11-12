@@ -8,27 +8,25 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { createCow } from "../../../supabase/usecases/cows/create_cow.js";
 import { supabase } from "../../../supabase/data/constants/api_credentials.js";
+import { useParams } from "react-router-dom";
 
 export const FormCvCow = () => {
-  const [validated] = useState(false);
-
-  const navigate = useNavigate();
-
   useEffect(() => {
-    async function fetchData() {}
-    fetchData();
+    console.log(cowId);
   }, []);
+
+  const [validated] = useState(false);
+  const navigate = useNavigate();
+  const { cowId } = useParams();
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
 
-    const razeId = form.breed.value;
-    const bornDate = form.bornDate.value;
-    const genderId = form.genre.value;
-    const name = form.name.value;
+    const color = form.color.value;
+    const location = form.location.value;
 
-    const createNewCow = async () => {
+    const updateHV = async () => {
       const user = await supabase.auth.getUser();
       await createCow(razeId, genderId, bornDate, name, user.data.user.id);
     };
@@ -49,21 +47,12 @@ export const FormCvCow = () => {
               <h2 className="subtitle">Información</h2>
             </Col>
             <Row className="mb-3">
-              <Form.Group as={Col} md="3" controlId="genre">
+              <Form.Group as={Col} md="3" controlId="color">
                 <Form.Floating className="mb-3">
                   <Form.Control type="text" placeholder=" " required />
                   <Form.Label>Color</Form.Label>
                   <Form.Control.Feedback type="invalid">
                     Cambia el Color.
-                  </Form.Control.Feedback>
-                </Form.Floating>
-              </Form.Group>
-              <Form.Group as={Col} md="3" controlId="genre">
-                <Form.Floating className="mb-3">
-                  <Form.Control type="text" placeholder=" " required />
-                  <Form.Label>Nombre</Form.Label>
-                  <Form.Control.Feedback type="invalid">
-                    Cambia el nombre.
                   </Form.Control.Feedback>
                 </Form.Floating>
               </Form.Group>
@@ -74,7 +63,7 @@ export const FormCvCow = () => {
             </Col>
             <Row></Row>
             <Row className="mb-3">
-              <Form.Group as={Col} md="3" controlId="genre">
+              <Form.Group as={Col} md="3" controlId="location">
                 <Form.Floating className="mb-3 long-text-field">
                   <Form.Control type="text" placeholder=" " required />
                   <Form.Label>Hato</Form.Label>

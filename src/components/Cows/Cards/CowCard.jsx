@@ -15,17 +15,10 @@ import { useContext } from "react";
 import { CowContext } from "../../../context/CowContext";
 import { getCowHV } from "../../../supabase/usecases/cows/get_cow";
 
-export const CowCard = ({ cow, razes }) => {
+export const CowCard = ({ cow, razes, cowshv }) => {
   const [cowsHV, setCowsHV] = useState([]);
 
   useEffect(() => {
-    const cowsHVData = async () => {
-      const hvData = await getCowHV(cow.id_vaca);
-      console.log(hvData);
-      setCowsHV(hvData);
-    };
-    cowsHVData();
-    console.log(cowsHV);
     calculateCowAge();
   }, []);
 
@@ -101,6 +94,7 @@ export const CowCard = ({ cow, razes }) => {
           </a>
           <ModalCV
             cow={cow}
+            cowshv={cowshv}
             show={modalShow}
             onHide={() => setModalShow(false)}
           />
