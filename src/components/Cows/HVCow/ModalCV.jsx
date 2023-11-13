@@ -15,7 +15,6 @@ const ModalCV = (props) => {
     console.log("filtrado", filteredHV[0]);
     setCowHV(filteredHV[0]);
   };
-
   useEffect(() => {
     filterData();
     console.log(cowHV);

@@ -1,9 +1,15 @@
-import { MDBCard, MDBCardBody, MDBCardTitle, MDBTable, MDBTableHead } from "mdb-react-ui-kit";
-import {useEffect, useState} from "react";
-import './marketplaceCard.css'
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBTable,
+  MDBTableHead,
+} from "mdb-react-ui-kit";
+import { useEffect, useState } from "react";
+import "./marketplaceCard.css";
 import ModalMarketplace from "../Modal/ModalMarketplace.jsx";
 
-export const MarketplaceCard = ({razes, cow, cowshv}) => {
+export const MarketplaceCard = ({ razes, cow, cowshv }) => {
   useEffect(() => {
     calculateCowAge();
   }, []);
@@ -41,45 +47,43 @@ export const MarketplaceCard = ({razes, cow, cowshv}) => {
         setCowAge(`${ageInDays} días`);
       }
     }
-  }
+  };
 
   return (
-      <div className="horizontal-cow-card">
-        <MDBCard className="cardcow rounded h-100" style={{ width: "18rem" }}>
-          <MDBCardBody>
-            <MDBCardTitle>{cow.nombre_vaca}</MDBCardTitle>
-            <MDBTable className="tableCow striped bordered hover">
-              <MDBTableHead>
-                <tr>
-                  <th>Raza</th>
-                  <th>Genero</th>
-                  <th>Edad</th>
-                </tr>
-              </MDBTableHead>
-              <tbody>
+    <div className="horizontal-cow-card">
+      <MDBCard className="cardcow rounded h-100" style={{ width: "18rem" }}>
+        <MDBCardBody>
+          <MDBCardTitle>{cow.nombre_vaca}</MDBCardTitle>
+          <MDBTable className="tableCow striped bordered hover">
+            <MDBTableHead>
+              <tr>
+                <th>Raza</th>
+                <th>Genero</th>
+                <th>Edad</th>
+              </tr>
+            </MDBTableHead>
+            <tbody>
               <tr>
                 <td id="cow-raze">{razes[cow.raza_vaca]}</td>
                 <td>{cow.id_genero === 1 ? "Macho" : "Hembra"}</td>
                 <td>{cowAge} años</td>
               </tr>
-              </tbody>
-            </MDBTable>
-            <a
-            className="incident-button btn btn-primary"
-            >
-              Contactar al vendedor
-            </a>
-            <a className="btn btn-secondary" onClick={() => setModalShow(true)}>
-              Mas informacion
-            </a>
-            <ModalMarketplace
-              cow={cow}
-              cowshv={cowshv}
-              show={modalShow}
-              onHide={() => setModalShow(false)}
-            />
-          </MDBCardBody>
-        </MDBCard>
-      </div>
+            </tbody>
+          </MDBTable>
+          <a className="incident-button btn btn-primary">
+            Contactar al vendedor
+          </a>
+          <a className="btn btn-secondary" onClick={() => setModalShow(true)}>
+            Mas informacion
+          </a>
+          <ModalMarketplace
+            cow={cow}
+            cowshv={cowshv}
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+          />
+        </MDBCardBody>
+      </MDBCard>
+    </div>
   );
 };

@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { getAllUserCows } from "../supabase/usecases/cows/get_cow.js";
-import {fetchCows} from "../supabase/data/supabase/data_source.js";
+import { fetchCows } from "../supabase/data/supabase/data_source.js";
 
 export const MainPage = () => {
   const navigate = useNavigate();
@@ -22,24 +22,25 @@ export const MainPage = () => {
         navigate("/login");
       }
     });
-
-    console.log(fetchCows())
-    async function fetchData() {
-      const data = await getAllUserCows();
-      setCowsData(data);
-    }
-    fetchData();
   }, []);
 
   return (
     <div className="main-page">
       <div className="navbar-main">
         <Navbar>
-          <Navbar.Brand className="navbarText" href="#home">Cowmprar</Navbar.Brand>
+          <Navbar.Brand className="navbarText" href="#home">
+            Cowmprar
+          </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link className="navbarText" href="#home">Home</Nav.Link>
-            <Nav.Link className="navbarText" href="#features">Features</Nav.Link>
-            <Nav.Link className="navbarText" href="#pricing">Pricing</Nav.Link>
+            <Nav.Link className="navbarText" href="#home">
+              Home
+            </Nav.Link>
+            <Nav.Link className="navbarText" href="#features">
+              Features
+            </Nav.Link>
+            <Nav.Link className="navbarText" href="#pricing">
+              Pricing
+            </Nav.Link>
           </Nav>
           <Button
             variant="dark"
