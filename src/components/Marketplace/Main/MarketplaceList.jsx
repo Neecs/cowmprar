@@ -3,7 +3,7 @@ import { MarketplaceCard } from "../Cards/MarketplaceCard.jsx";
 import { CowContext } from "../../../context/CowContext.jsx";
 
 export const MarketplaceList = () => {
-  const { cowsRazes, dbCows, cowsHV } = useContext(CowContext);
+  const { cowsRazes, dbCows, cowsHV, sellers} = useContext(CowContext);
 
 
   return (
@@ -14,6 +14,7 @@ export const MarketplaceList = () => {
           cow={cow}
           razes={cowsRazes}
           cowshv={cowsHV}
+          seller={sellers}
         />
       ))}
     </div>

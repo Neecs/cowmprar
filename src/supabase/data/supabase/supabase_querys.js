@@ -71,6 +71,17 @@ export const fetchPersonDataByEmail = async (email) => {
   return data.length > 0;
 };
 
+export const getSellers = async () => {
+  try {
+    const {data: sellersData, error} = await supabase
+        .from('Person')
+        .select("*")
+    return sellersData
+  } catch (e) {
+    console.log(error)
+  }
+}
+
 // TODO no es registrar usuario sino actualizar usuario
 export const updateUser = async (
   doc_id,
@@ -270,7 +281,9 @@ export const recoverPasswordViaEmail = async (email) => {
 
 export const getAllCows = async () => {
   try {
-    const { data: cowData, error } = await supabase.from("Vacas").select("*");
+    const { data: cowData, error } = await supabase
+        .from("Vacas")
+        .select("*");
     return cowData;
   } catch (error) {
     console.log(error);

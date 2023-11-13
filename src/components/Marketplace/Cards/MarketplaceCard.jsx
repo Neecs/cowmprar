@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import "./marketplaceCard.css";
 import ModalMarketplace from "../Modal/ModalMarketplace.jsx";
 
-export const MarketplaceCard = ({ razes, cow, cowshv }) => {
+export const MarketplaceCard = ({ razes, cow, cowshv, seller}) => {
   useEffect(() => {
     calculateCowAge();
   }, []);
@@ -79,6 +79,7 @@ export const MarketplaceCard = ({ razes, cow, cowshv }) => {
           <ModalMarketplace
             cow={cow}
             cowshv={cowshv}
+            seller={seller}
             show={modalShow}
             onHide={() => setModalShow(false)}
           />
