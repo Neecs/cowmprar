@@ -7,7 +7,7 @@ import { RestorePassword } from "./components/Users/Restore/RestorePassword.jsx"
 import { FormCow } from "./components/Cows/NewCow/FormCow.jsx";
 import { RestoreForm } from "./components/Users/Restore/RestoreForm.jsx";
 import { FormCvCow } from "./components/Cows/HVCow/FormCvCow.jsx";
-import Marketplace from "./components/Marketplace/Marketplace.jsx";
+import Marketplace from "./components/Marketplace/Main/Marketplace.jsx";
 
 function App() {
   return (

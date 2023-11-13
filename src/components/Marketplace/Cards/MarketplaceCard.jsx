@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import {
   MDBCard,
   MDBCardBody,
@@ -7,16 +6,15 @@ import {
   MDBTableHead,
 } from "mdb-react-ui-kit";
 import { useEffect, useState } from "react";
-import "./cowCard.css";
-import ModalCV from "../HVCow/ModalCV";
+import "./marketplaceCard.css";
+import ModalMarketplace from "../Modal/ModalMarketplace.jsx";
 
-export const CowCard = ({ cow, razes, cowshv }) => {
+export const MarketplaceCard = ({ razes, cow, cowshv }) => {
   useEffect(() => {
     calculateCowAge();
   }, []);
 
   const [modalShow, setModalShow] = useState(false);
-  const navigate = useNavigate();
   const [cowAge, setCowAge] = useState(0);
 
   const calculateCowAge = () => {
@@ -51,13 +49,9 @@ export const CowCard = ({ cow, razes, cowshv }) => {
     }
   };
 
-  const handleAddIncident = () => {
-    navigate(`/inc-reg/${cow.id_vaca}`);
-  };
-
   return (
     <div className="horizontal-cow-card">
-      <MDBCard className="cardcow rounded" style={{ width: "18rem" }}>
+      <MDBCard className="cardcow rounded h-100" style={{ width: "18rem" }}>
         <MDBCardBody>
           <MDBCardTitle>{cow.nombre_vaca}</MDBCardTitle>
           <MDBTable className="tableCow striped bordered hover">
@@ -70,22 +64,19 @@ export const CowCard = ({ cow, razes, cowshv }) => {
             </MDBTableHead>
             <tbody>
               <tr>
-                <td>{razes[cow.raza_vaca]}</td>
+                <td id="cow-raze">{razes[cow.raza_vaca]}</td>
                 <td>{cow.id_genero === 1 ? "Macho" : "Hembra"}</td>
-                <td>{cowAge}</td>
+                <td>{cowAge} años</td>
               </tr>
             </tbody>
           </MDBTable>
-          <a
-            className="incident-button btn btn-primary"
-            onClick={handleAddIncident}
-          >
-            Agregar incidente
+          <a className="incident-button btn btn-primary">
+            Contactar al vendedor
           </a>
           <a className="btn btn-secondary" onClick={() => setModalShow(true)}>
-            Hoja de vida
+            Mas informacion
           </a>
-          <ModalCV
+          <ModalMarketplace
             cow={cow}
             cowshv={cowshv}
             show={modalShow}
