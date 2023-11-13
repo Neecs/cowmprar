@@ -7,7 +7,7 @@ import {
   getGenders,
   getHerds,
   getDepartments,
-  getAllDBCows
+  getAllDBCows,
 } from "../supabase/usecases/cows/get_cow";
 import { supabase } from "../supabase/data/constants/api_credentials";
 import { useState, useEffect } from "react";
@@ -22,11 +22,11 @@ export const CowContextProvider = (props) => {
   const [cowGenders, setCowGenders] = useState([]);
   const [cowHerds, setcowHerds] = useState([]);
   const [departmentsLocation, setDepartmentsLocation] = useState([]);
-  const [dbCows, setDbCows] = useState([])
+  const [dbCows, setDbCows] = useState([]);
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
-      if (session !== null) {
+      if (session !== null && cowsData.length === 0) {
         fetchDataCows();
       }
     });
@@ -63,7 +63,7 @@ export const CowContextProvider = (props) => {
         cowGenders,
         cowHerds,
         departmentsLocation,
-        dbCows
+        dbCows,
       }}
     >
       {props.children}
