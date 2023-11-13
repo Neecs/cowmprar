@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 
 const WhatsappButton = ({sellerPhoneNumber}) => {
     const sendWhatsappMessage = () => {
-        const whatsAppURL = `https://wa.me/${sellerPhoneNumber}`;
+        const whatsAppURL = `https://wa.me/+57${sellerPhoneNumber}`;
 
         window.open(whatsAppURL, '_blank');
     }

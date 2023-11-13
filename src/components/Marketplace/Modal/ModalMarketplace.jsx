@@ -6,29 +6,35 @@ import WhatsappButton from "../Cards/Contact/WhatsappButton.jsx";
 
 export const ModalMarketplace = (props) => {
   const [cowHV, setCowHV] = useState([]);
-  const [seller, setSeller] = useState([])
+  const [seller, setSeller] = useState([]);
+  const [phoneNumber, setPhoneNumber] = useState([]);
+  const [sellerEmail, setSellerEmail] = useState([])
 
   const filterData = () => {
     const cowsHV = props.cowshv;
-    const sellers = props.seller;
+    const cowIdPersona = cowHV.id_persona;
+    const allSellers = props.seller;
 
-// Filtering out null values and extracting telefono_persona values
-    const telefonoNumbers = sellers
-        .filter(seller => seller.telefono_persona !== null)
-        .map(seller => seller.telefono_persona);
-
-// Logging the result
-    console.log(telefonoNumbers);
     const filteredHV = cowsHV.filter(
       (cowhv) => cowhv.id_hoja_vida === props.cow.id_vaca
     );
-    const filteredSeller = sellers.filter(
-        (sell) => sell.id_rol === 2
-    )
     const selectedCow = filteredHV[0];
-    const selectedSeller = filteredSeller[0]
     setCowHV(selectedCow);
-    setSeller(selectedSeller)
+
+    allSellers.map((sel) => {
+      console.log("Cow: " + cowHV.id_persona)
+      console.log("Telefono: " + sel.telefono_persona)
+      console.log("Email: " + sel.email_persona)
+      if(cowHV.id_persona != null && sel.telefono_persona != null) {
+        if(sel.user_id === cowIdPersona) {
+          setSeller(sel.user_id)
+          setPhoneNumber(sel.telefono_persona)
+          setSellerEmail(sel.email_persona)
+          console.log("HTAPS")
+        }
+      }
+    })
+
   };
 
   useEffect(() => {
@@ -56,9 +62,13 @@ export const ModalMarketplace = (props) => {
         <Button>Editar hoja de vida</Button>
       </Modal.Body>
       <Modal.Footer>
-        <EmailButton/>
-        <WhatsappButton/>
-        Or write me directly on {props.seller}
+        <EmailButton
+          sellerEmail={sellerEmail}
+        />
+        <WhatsappButton
+          sellerPhoneNumber={phoneNumber}
+        />
+        Or write me directly on {phoneNumber}
       </Modal.Footer>
     </Modal>
   );
