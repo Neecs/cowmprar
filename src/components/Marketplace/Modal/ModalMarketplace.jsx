@@ -8,11 +8,11 @@ export const ModalMarketplace = (props) => {
   const [cowHV, setCowHV] = useState([]);
   const [seller, setSeller] = useState([]);
   const [phoneNumber, setPhoneNumber] = useState([]);
-  const [sellerEmail, setSellerEmail] = useState([])
+  const [sellerEmail, setSellerEmail] = useState([]);
 
   const filterData = () => {
     const cowsHV = props.cowshv;
-    const cowIdPersona = cowHV.id_persona;
+    console.log(props.cowshv);
     const allSellers = props.seller;
 
     const filteredHV = cowsHV.filter(
@@ -22,19 +22,18 @@ export const ModalMarketplace = (props) => {
     setCowHV(selectedCow);
 
     allSellers.map((sel) => {
-      console.log("Cow: " + cowHV.id_persona)
-      console.log("Telefono: " + sel.telefono_persona)
-      console.log("Email: " + sel.email_persona)
-      if(cowHV.id_persona != null && sel.telefono_persona != null) {
-        if(sel.user_id === cowIdPersona) {
-          setSeller(sel.user_id)
-          setPhoneNumber(sel.telefono_persona)
-          setSellerEmail(sel.email_persona)
-          console.log("HTAPS")
+      console.log("Cow: " + selectedCow);
+      console.log("Telefono: " + sel.telefono_persona);
+      console.log("Email: " + sel.email_persona);
+      if (selectedCow.id_persona != null && sel.telefono_persona != null) {
+        if (sel.user_id === selectedCow.id_persona) {
+          setSeller(sel.user_id);
+          setPhoneNumber(sel.telefono_persona);
+          setSellerEmail(sel.email_persona);
+          console.log("HPTAS");
         }
       }
-    })
-
+    });
   };
 
   useEffect(() => {
@@ -62,12 +61,8 @@ export const ModalMarketplace = (props) => {
         <Button>Editar hoja de vida</Button>
       </Modal.Body>
       <Modal.Footer>
-        <EmailButton
-          sellerEmail={sellerEmail}
-        />
-        <WhatsappButton
-          sellerPhoneNumber={phoneNumber}
-        />
+        <EmailButton sellerEmail={sellerEmail} />
+        <WhatsappButton sellerPhoneNumber={phoneNumber} />
         Or write me directly on {phoneNumber}
       </Modal.Footer>
     </Modal>
