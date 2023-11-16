@@ -13,8 +13,8 @@ export const updateStatus = async (id_vaca, health_status) => {
   return await updateCowStatus(id_vaca, health_status);
 };
 
-export const addCowIncident = async (name, dateIn, description, cowId) => {
-  return await addIncident(name, dateIn, description, cowId);
+export const addCowIncident = async (nameIn, dateIn, description, cowId) => {
+  return await addIncident(nameIn, dateIn, description, cowId);
 };
 
 export const addHerd = async (nombre_hato, id_departamento) => {

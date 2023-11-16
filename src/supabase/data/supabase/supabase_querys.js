@@ -73,14 +73,14 @@ export const fetchPersonDataByEmail = async (email) => {
 
 export const getSellers = async () => {
   try {
-    const {data: sellersData, error} = await supabase
-        .from('Person')
-        .select("*")
-    return sellersData
+    const { data: sellersData, error } = await supabase
+      .from("Person")
+      .select("*");
+    return sellersData;
   } catch (e) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 // TODO no es registrar usuario sino actualizar usuario
 export const updateUser = async (
@@ -281,9 +281,7 @@ export const recoverPasswordViaEmail = async (email) => {
 
 export const getAllCows = async () => {
   try {
-    const { data: cowData, error } = await supabase
-        .from("Vacas")
-        .select("*");
+    const { data: cowData, error } = await supabase.from("Vacas").select("*");
     return cowData;
   } catch (error) {
     console.log(error);
@@ -342,13 +340,13 @@ export const getUserCows = async (userId) => {
   }
 };
 
-export const addIncident = async (id_incidente, dateIn, description, cowId) => {
+export const addIncident = async (nameIn, dateIn, description, cowId) => {
   try {
     const { data: cowIncident, error } = await supabase
       .from("Historiales")
       .insert([
         {
-          id_incidente,
+          id_incidente: nameIn,
           fecha_incidente: dateIn,
           descripcion: description,
           id_hoja_vida: cowId,
@@ -390,6 +388,18 @@ export const getDepartmentsLocation = async () => {
   }
 };
 
+export const getDepartmentsById = async (id_departamento) => {
+  try {
+    let { data: department, error } = await supabase
+      .from("Departamentos")
+      .select("nombre_departamento")
+      .eq("id_departamento", id_departamento);
+    return department;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const addHerdLocation = async (nombre_hato, id_departamento) => {
   try {
     const { data, error } = await supabase
@@ -408,6 +418,32 @@ export const updateCowStatus = async (id_vaca, health_status) => {
       .update([{ health_status }])
       .eq("id_vaca", id_vaca)
       .select();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getIncidentTypeById = async (id_incidente) => {
+  try {
+    let { data: incident, error } = await supabase
+      .from("Tipos incidentes")
+      .select("nombre_incidente")
+      .eq("id_incidente", id_incidente);
+    console.log(incident);
+    return incident;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getHistorialsById = async (id_hv) => {
+  try {
+    let { data: historials, error } = await supabase
+      .from("Historiales")
+      .select("*")
+      .eq("id_hoja_vida", id_hv);
+    console.log(historials);
+    return historials;
   } catch (error) {
     console.log(error);
   }

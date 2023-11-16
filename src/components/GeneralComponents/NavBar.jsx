@@ -8,12 +8,12 @@ function NavBar() {
     return (
         <div className="navbar-main">
             <Navbar id="navbar-menu">
-                <Navbar.Brand className="navbarText" href="">
+                <Navbar.Brand className="navbarText" href="/">
                     Cowmprar
                 </Navbar.Brand>
                 <Nav className="me-auto">
-                    <Nav.Link className="navbarText" href="home">
-                        Home
+                    <Nav.Link className="navbarText" href="/">
+                        Tus vacas
                     </Nav.Link>
                     <Nav.Link className="navbarText" href="marketplace">
                         Marketplace

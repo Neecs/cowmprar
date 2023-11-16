@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import "./cowCard.css";
 import ModalCV from "../HVCow/ModalCV";
 
-export const CowCard = ({ cow, razes, cowshv }) => {
+export const CowCard = ({ cow, razes, cowshv, herds }) => {
   useEffect(() => {
     calculateCowAge();
   }, []);
@@ -89,6 +89,7 @@ export const CowCard = ({ cow, razes, cowshv }) => {
             cow={cow}
             cowshv={cowshv}
             show={modalShow}
+            cowherds={herds}
             onHide={() => setModalShow(false)}
           />
         </MDBCardBody>

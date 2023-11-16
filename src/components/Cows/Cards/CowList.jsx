@@ -3,15 +3,18 @@ import { CowContext } from "../../../context/CowContext.jsx";
 import { useContext } from "react";
 
 export const CowList = () => {
-  const{cowsData, cowsRazes, cowsHV} = useContext(CowContext);
+  const { cowsData, cowsRazes, cowsHV, cowHerds } = useContext(CowContext);
 
   return (
     <div>
       {cowsData.map((cow) => (
-        <CowCard key={cow.id_vaca}
-                 cow={cow}
-                 razes={cowsRazes}
-                 cowshv={cowsHV} />
+        <CowCard
+          key={cow.id_vaca}
+          cow={cow}
+          razes={cowsRazes}
+          cowshv={cowsHV}
+          herds={cowHerds}
+        />
       ))}
     </div>
   );

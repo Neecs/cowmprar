@@ -18,6 +18,7 @@ export const IncidentForm = () => {
   const [incidentTypes, setIncidentTypes] = useState("");
   const [incidentDictionary, setIncidentDictionary] = useState({});
   const { cowId } = useParams();
+  const [actualDate, setActualDate] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -25,15 +26,25 @@ export const IncidentForm = () => {
       setIncidentDictionary(incidents);
     }
     fetchData();
+    updateDate();
   }, []);
+
+  const updateDate = () => {
+    const date = new Date();
+    const actualYear = date.getFullYear();
+    const actualMonth = date.getMonth() + 1;
+    const actualDay = date.getDate();
+    setActualDate(`${actualYear}-${actualMonth}-${actualDay}`);
+  };
 
   const handleSumbit = (e) => {
     const form = e.currentTarget;
     e.preventDefault();
     const dateIn = form.dateIn.value;
     const description = form.description.value;
-    addCowIncident(dateIn, description, cowId);
-    navigate('/')
+    const incidentName = form.incidentName.value;
+    addCowIncident(incidentName, dateIn, description, cowId);
+    navigate("/");
   };
 
   return (
@@ -46,7 +57,7 @@ export const IncidentForm = () => {
           <div className="date-in">
             <Form.Group className="mb-3" controlId="dateIn">
               <Form.Label>Fecha</Form.Label>
-              <Form.Control type="date" placeholder="name@example.com" />
+              <Form.Control type="date" max={actualDate} />
             </Form.Group>
           </div>
           <div className="text-area-des">
