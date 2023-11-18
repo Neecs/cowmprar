@@ -65,3 +65,7 @@ export const getHistorials = async (id_hv) => {
 export const getOneIncident = async (id_inc) => {
   return await getIncidentTypeById(id_inc);
 };
+
+export const getCowsInMarketplace = async() => {
+  return await getAllCowsInMarketplace()
+}
