@@ -15,7 +15,7 @@ function NavBar() {
                     <Nav.Link className="navbarText" href="/">
                         Tus vacas
                     </Nav.Link>
-                    <Nav.Link className="navbarText" href="marketplace">
+                    <Nav.Link className="navbarText" href="/marketplace">
                         Marketplace
                     </Nav.Link>
                     <Nav.Link className="navbarText" href="#pricing">

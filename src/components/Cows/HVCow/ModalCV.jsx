@@ -18,7 +18,6 @@ const ModalCV = (props) => {
     setCowDepartment(department[0].nombre_departamento);
   };
 
-
   const getCowHistorial = async (id_hv) => {
     const historials = await getHistorials(id_hv);
     setCowHistorials(historials);
@@ -36,6 +35,15 @@ const ModalCV = (props) => {
     const filteredHerd = cowsHerds.filter(
       (herd) => herd.id_hato === filteredHV[0].id_hato
     );
+    if (
+      filteredHerd[0].id_departamento === null ||
+      filteredHerd[0].id_departamento === undefined
+    ) {
+      setHerd("No tiene hato");
+    } else {
+      setHerd(filteredHerd[0].nombre_hato);
+      getDepartment(filteredHerd[0].id_departamento);
+    }
     getDepartment(filteredHerd[0].id_departamento);
     console.log(filteredHerd[0].nombre_hato);
     console.log("filtrado", filteredHV[0]);
@@ -67,7 +75,8 @@ const ModalCV = (props) => {
       <Modal.Body>
         <p>Color: {cowHV.color}</p>
         <p>
-          Hato: {herd}, {cowDepartment}
+          Hato: {herd},{" "}
+          {cowDepartment === null ? "No se ha registrado hato" : cowDepartment}
         </p>
         <h3>Incidentes</h3>
         <IncidentTable historials={cowHistorials} />

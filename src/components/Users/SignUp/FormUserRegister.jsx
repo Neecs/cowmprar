@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -6,14 +6,8 @@ import Row from "react-bootstrap/Row";
 import "./formNewUser.css";
 import { Link } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
-import { getGenders, getRazes } from "../../../supabase/usecases/cows/get_cow.js";
-import { getDocumentTypes } from "../../../supabase/data/supabase/supabase_querys.js";
-import {
-  getPossibleDocuments,
-  getRoles,
-} from "../../../supabase/usecases/user/fetch_user.js";
-import { registerUser } from "../../../supabase/usecases/user/create_user.js";
-import { supabase } from "../../../supabase/data/constants/api_credentials.js";
+import { UserContext } from "../../../context/UserContext";
+import { registerUser } from "../../../supabase/usecases/user/create_user";
 
 export const FormUserRegister = () => {
   const [validated, setValidated] = useState(false);
@@ -24,18 +18,11 @@ export const FormUserRegister = () => {
   const [roleType, setRoleType] = useState({});
   const [selectedIDType, setSelectedIDType] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
-
+  const { documentTypes } = useContext(UserContext);
 
   useEffect(() => {
-    // Fetch the raze dictionary when the component mounts
-    async function fetchData() {
-      const types = await getPossibleDocuments();
-      setIDTypes(types);
-
-      const role = await getRoles();
-      setRoleType(role);
-    }
-    fetchData();
+    setIDTypes(documentTypes);
+    console.log(documentTypes);
   }, []);
 
   const handleSubmit = async (event) => {
@@ -79,7 +66,7 @@ export const FormUserRegister = () => {
         <br />
         <div className="data">
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            {/*<Row className="mb-3">
+            <Row className="mb-3">
               <Form.Group as={Col} md="4" controlId="name">
                 <Form.Floating className="mb-3">
                   <Form.Control type="text" placeholder=" " required />
@@ -138,25 +125,6 @@ export const FormUserRegister = () => {
             </Row>
 
             <Row className="mb-3">
-              <Form.Group as={Col} md="4" controlId="userType">
-                <Form.Select
-                  aria-label="Default select example"
-                  required
-                  value={selectedRole}
-                  onChange={(e) => setSelectedRole(e.target.value)}
-                >
-                  <option value="">Rol</option>
-                  {Object.keys(roleType).map((key) => (
-                    <option key={key} value={key}>
-                      {roleType[key]}
-                    </option>
-                  ))}
-                </Form.Select>
-                <Form.Control.Feedback type="invalid">
-                  Seleccione tipo de identificación válido
-                </Form.Control.Feedback>
-              </Form.Group>
-
               <Form.Group as={Col} md="4" controlId="phoneNumber">
                 <Form.Floating className="mb-3">
                   <Form.Control
@@ -172,7 +140,7 @@ export const FormUserRegister = () => {
                 </Form.Floating>
               </Form.Group>
             </Row>
-*/}
+
             <Row className="mb-3">
               <Form.Group as={Col} md="4" controlId="email">
                 <Form.Floating className="mb-3">

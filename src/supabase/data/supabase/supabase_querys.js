@@ -35,7 +35,6 @@ export const createNewUser = async (
   documento_persona,
   nombre_persona,
   apellido_persona,
-  id_rol,
   telefono_persona,
   id_tipo_documento
 ) => {
@@ -45,7 +44,6 @@ export const createNewUser = async (
       documento_persona,
       nombre_persona,
       apellido_persona,
-      id_rol,
       telefono_persona,
       id_tipo_documento,
     });
@@ -222,20 +220,6 @@ export const getDocumentTypes = async () => {
       dictionaryDocTypes[element.id_tipo_documento] = element.tipo_documento;
     });
     return dictionaryDocTypes;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const getAppRoles = async () => {
-  try {
-    const { data: appRoles, error } = await supabase.from("roles").select("*");
-    console.log(appRoles);
-    const rolesDictionary = {};
-    appRoles.forEach((element) => {
-      rolesDictionary[element.id_rol] = element.descripcion_rol;
-    });
-    return rolesDictionary;
   } catch (error) {
     console.error(error);
   }
