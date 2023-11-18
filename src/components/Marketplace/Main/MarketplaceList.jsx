@@ -3,20 +3,19 @@ import { MarketplaceCard } from "../Cards/MarketplaceCard.jsx";
 import { CowContext } from "../../../context/CowContext.jsx";
 
 export const MarketplaceList = () => {
-  const { cowsRazes, dbCows, cowsHV, sellers} = useContext(CowContext);
-
+  const { cowsRazes, filteredCows, cowsHV, sellers} = useContext(CowContext);
 
   return (
-    <div>
-      {dbCows.map((cow) => (
-        <MarketplaceCard
-          key={cow.id_vaca}
-          cow={cow}
-          razes={cowsRazes}
-          cowshv={cowsHV}
-          seller={sellers}
-        />
-      ))}
-    </div>
+      <div>
+        {filteredCows.map((cow) => (
+            <MarketplaceCard
+                key={cow.id_vaca}
+                cow={cow}
+                razes={cowsRazes}
+                cowshv={cowsHV}
+                seller={sellers}
+            />
+        ))}
+      </div>
   );
 };

@@ -24,6 +24,7 @@ export const CowContextProvider = (props) => {
   const [cowHerds, setcowHerds] = useState([]);
   const [departmentsLocation, setDepartmentsLocation] = useState([]);
   const [dbCows, setDbCows] = useState([]);
+  const [filteredCows, setFilteredCows] = useState([]);
   const [sellers, setSellers] = useState([]);
 
   useEffect(() => {
@@ -55,6 +56,7 @@ export const CowContextProvider = (props) => {
     setDepartmentsLocation(departments);
     setDbCows(allCows);
     setSellers(allSellers);
+    setFilteredCows(dbCows);
   };
 
   return (
@@ -69,6 +71,8 @@ export const CowContextProvider = (props) => {
         departmentsLocation,
         dbCows,
         sellers,
+        filteredCows,
+        setFilteredCows
       }}
     >
       {props.children}
