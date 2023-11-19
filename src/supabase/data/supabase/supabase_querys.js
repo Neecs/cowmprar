@@ -81,28 +81,29 @@ export const getSellers = async () => {
   }
 };
 
-// TODO no es registrar usuario sino actualizar usuario
-export const updateUser = async (
-  doc_id,
-  first_name,
-  last_name,
-  role_id,
-  phone,
-  doc_type
-) => {
+export const updateUserPhone = async (telefono_persona, user_id) => {
   try {
-    if (!(await fetchPersonDataByEmail(user.email))) {
-      await supabase.from("Person").insert({
-        doc_id,
-        first_name,
-        last_name,
-        role_id,
-        phone,
-        doc_type,
-      });
-      return true;
-    }
-    return false;
+    await supabase
+      .from("Person")
+      .update({ telefono_persona })
+      .eq("user_id", user_id)
+      .select();
+
+    return true;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateUserEmail = async (email_persona, user_id) => {
+  try {
+    await supabase
+      .from("Person")
+      .update({ email_persona })
+      .eq("user_id", user_id)
+      .select();
+
+    return true;
   } catch (error) {
     return error;
   }
@@ -266,9 +267,7 @@ export const recoverPasswordViaEmail = async (email) => {
 
 export const getAllCows = async () => {
   try {
-    const { data: cowData, error } = await supabase
-        .from("Vacas")
-        .select("*");
+    const { data: cowData, error } = await supabase.from("Vacas").select("*");
     return cowData;
   } catch (error) {
     console.log(error);
@@ -434,39 +433,39 @@ export const getHistorialsById = async (id_hv) => {
   }
 };
 
- export const addMarketplaceCow = async (id_vaca) => {
-   try {
-      let {data:vacaActualizada, error} = await supabase
-          .from("Vacas")
-          .update({marketplace: true})
-          .eq("id_vaca", id_vaca)
-     return true;
-   } catch (error ) {
-     console.log(error)
-     return false;
-   }
- }
+export const addMarketplaceCow = async (id_vaca) => {
+  try {
+    let { data: vacaActualizada, error } = await supabase
+      .from("Vacas")
+      .update({ marketplace: true })
+      .eq("id_vaca", id_vaca);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
 
- export const removeCowFromMarketplace = async (id_vaca) => {
-   try {
-     let {data: removedCow, error } = await  supabase
-         .from("Vacas")
-         .update({marketplace:false})
-         .eq("id_vaca", id_vaca)
-     return true;
-   } catch (error) {
-     console.log(error)
-   }
- }
+export const removeCowFromMarketplace = async (id_vaca) => {
+  try {
+    let { data: removedCow, error } = await supabase
+      .from("Vacas")
+      .update({ marketplace: false })
+      .eq("id_vaca", id_vaca);
+    return true;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
- export const getAllCowsInMarketplace = async () => {
-   try {
-     let {data:cowsFromSupabase, error} = await supabase
-         .from("Vacas")
-         .select("*")
-         .eq("marketplace", true)
-     return cowsFromSupabase;
-   } catch (error) {
-     console.log(error)
-   }
- }
+export const getAllCowsInMarketplace = async () => {
+  try {
+    let { data: cowsFromSupabase, error } = await supabase
+      .from("Vacas")
+      .select("*")
+      .eq("marketplace", true);
+    return cowsFromSupabase;
+  } catch (error) {
+    console.log(error);
+  }
+};
