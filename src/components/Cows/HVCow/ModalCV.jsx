@@ -7,15 +7,20 @@ import { getHistorials } from "../../../supabase/usecases/cows/get_cow";
 import IncidentTable from "../Incidents/IncidentTable";
 import AddToMarketplaceModal from "./HandleOnMarketplace/AddCowToMarketplace.jsx";
 import RemoveFromMarketplaceModal from "./HandleOnMarketplace/RemoveCowFromMarketplace.jsx";
-import { addCowToMarketplace, removeCowInMarketplace } from "../../../supabase/usecases/cows/update_cow.js";
+import {
+  addCowToMarketplace,
+  removeCowInMarketplace,
+} from "../../../supabase/usecases/cows/update_cow.js";
 
 const ModalCV = (props) => {
   const [cowHV, setCowHV] = useState({});
   const [herd, setHerd] = useState("No tiene hato");
   const [cowDepartment, setCowDepartment] = useState(null);
   const [cowHistorials, setCowHistorials] = useState([]);
-  const [showAddToMarketplaceModal, setShowAddToMarketplaceModal] = useState(false);
-  const [showRemoveFromMarketplaceModal, setShowRemoveFromMarketplaceModal] = useState(false);
+  const [showAddToMarketplaceModal, setShowAddToMarketplaceModal] =
+    useState(false);
+  const [showRemoveFromMarketplaceModal, setShowRemoveFromMarketplaceModal] =
+    useState(false);
 
   const navigate = useNavigate();
 
@@ -33,10 +38,14 @@ const ModalCV = (props) => {
     const filterData = () => {
       const cowsHV = props.cowshv;
       const cowsHerds = props.cowherds;
-      const filteredHV = cowsHV.find((cowhv) => cowhv.id_hoja_vida === props.cow.id_vaca);
+      const filteredHV = cowsHV.find(
+        (cowhv) => cowhv.id_hoja_vida === props.cow.id_vaca
+      );
 
       if (filteredHV) {
-        const filteredHerd = cowsHerds.find((herd) => herd.id_hato === filteredHV.id_hato);
+        const filteredHerd = cowsHerds.find(
+          (herd) => herd.id_hato === filteredHV.id_hato
+        );
 
         if (filteredHerd) {
           setHerd(filteredHerd.nombre_hato);
@@ -52,10 +61,13 @@ const ModalCV = (props) => {
   }, [props.cow, props.cowshv, props.cowherds]);
 
   const getCowInMarketplaceStatus = () => {
-    return props.cow.marketplace ? "Eliminar la vaca de marketplace" : "Añadir la vaca a marketplace";
+    return props.cow.marketplace
+      ? "Eliminar la vaca de marketplace"
+      : "Añadir la vaca a marketplace";
   };
 
-  const getCowMarketplace = () => (props.cow.marketplace ? "danger" : "success");
+  const getCowMarketplace = () =>
+    props.cow.marketplace ? "danger" : "success";
 
   const handleEditHV = () => {
     navigate(`/hv-cow/${props.cow.id_vaca}`);
@@ -86,58 +98,63 @@ const ModalCV = (props) => {
   };
 
   return (
-      <>
-        <Modal
-            {...props}
-            size="lg"
-            aria-labelledby="example-modal-sizes-title-sm"
-            centered
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id="example-modal-sizes-title-sm">
-              {props.cow.nombre_vaca}
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>Color: {cowHV.color}</p>
-            <p>
-              Hato: {herd},{" "}
-              {cowDepartment === null ? "No se ha registrado hato" : cowDepartment}
-            </p>
-            <p>Fecha de nacimiento: {props.cow.fecha_nacimiento}</p>
-            <h3>Incidentes</h3>
-            <IncidentTable historials={cowHistorials} />
-            <Button onClick={handleEditHV}>Editar hoja de vida</Button>
-          </Modal.Body>
-          {/* Main Modal Content */}
-          <Modal.Footer>
+    <>
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="example-modal-sizes-title-sm"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-sm">
+            {props.cow.nombre_vaca}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Color: {cowHV.color}</p>
+          <p>
+            Hato: {herd},{" "}
+            {cowDepartment === null
+              ? "No se ha registrado hato"
+              : cowDepartment}
+          </p>
+          <p>Fecha de nacimiento: {props.cow.fecha_nacimiento}</p>
+          <h3>Incidentes</h3>
+          <IncidentTable historials={cowHistorials} />
+          <Button onClick={handleEditHV}>Editar hoja de vida</Button>
+        </Modal.Body>
+        {/* Main Modal Content */}
+        <Modal.Footer>
+          <div style={{ display: "flex", gap: "500px" }}>
+            <Button variant="danger">Eliminar</Button>
             <Button
-                onClick={() => chooseWhatToShow()}
-                variant={getCowMarketplace()}
-                id="marketplace-button"
+              onClick={() => chooseWhatToShow()}
+              variant={getCowMarketplace()}
+              id="marketplace-button"
             >
               {getCowInMarketplaceStatus()}
             </Button>
-          </Modal.Footer>
-        </Modal>
+          </div>
+        </Modal.Footer>
+      </Modal>
 
-        {/* Add to Marketplace Modal */}
-        <AddToMarketplaceModal
-            show={showAddToMarketplaceModal}
-            onHide={() => setShowAddToMarketplaceModal(false)}
-            onConfirm={handleAddToMarketplace}
+      {/* Add to Marketplace Modal */}
+      <AddToMarketplaceModal
+        show={showAddToMarketplaceModal}
+        onHide={() => setShowAddToMarketplaceModal(false)}
+        onConfirm={handleAddToMarketplace}
+      />
+
+      {/* Remove from Marketplace Modal */}
+      {showRemoveFromMarketplaceModal && (
+        <RemoveFromMarketplaceModal
+          show={showRemoveFromMarketplaceModal}
+          onHide={() => setShowRemoveFromMarketplaceModal(false)}
+          onConfirm={handleRemoveFromMarketplace}
+          cow={props.cow}
         />
-
-        {/* Remove from Marketplace Modal */}
-        {showRemoveFromMarketplaceModal && (
-            <RemoveFromMarketplaceModal
-                show={showRemoveFromMarketplaceModal}
-                onHide={() => setShowRemoveFromMarketplaceModal(false)}
-                onConfirm={handleRemoveFromMarketplace}
-                cow={props.cow}
-            />
-        )}
-      </>
+      )}
+    </>
   );
 };
 
