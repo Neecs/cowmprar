@@ -13,6 +13,7 @@ import {
   deleteCow,
 } from "../../../supabase/usecases/cows/update_cow.js";
 import { markInactiveCow } from "../../../supabase/data/supabase/supabase_querys.js";
+import DeleteCowModal from "./DeleteCowModal.jsx";
 
 const ModalCV = (props) => {
   const [cowHV, setCowHV] = useState({});
@@ -23,8 +24,11 @@ const ModalCV = (props) => {
     useState(false);
   const [showRemoveFromMarketplaceModal, setShowRemoveFromMarketplaceModal] =
     useState(false);
-
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const navigate = useNavigate();
+  const handleShowDeleteModal = () => {
+    setShowDeleteModal(true);
+  };
 
   const getDepartment = async (id_departamento) => {
     const department = await getOneDepartment(id_departamento);
@@ -36,13 +40,6 @@ const ModalCV = (props) => {
     setCowHistorials(historials);
   };
 
-  const deleteOneCow = async (id_vaca) => {
-    await markInactiveCow(id_vaca);
-  };
-
-  const onDeleteButton = () => {
-    deleteOneCow(props.cow.id_vaca);
-  };
 
   useEffect(() => {
     const filterData = () => {
@@ -136,7 +133,7 @@ const ModalCV = (props) => {
         {/* Main Modal Content */}
         <Modal.Footer>
           <div style={{ display: "flex", gap: "500px" }}>
-            <Button variant="danger" onClick={onDeleteButton}>
+            <Button variant="danger" onClick={() => setShowDeleteModal(true)}>
               Eliminar
             </Button>
             <Button
@@ -166,6 +163,11 @@ const ModalCV = (props) => {
           cow={props.cow}
         />
       )}
+      <DeleteCowModal
+        show={showDeleteModal}
+        onHide={() => setShowDeleteModal(false)}
+        cow={props.cow}
+      />
     </>
   );
 };

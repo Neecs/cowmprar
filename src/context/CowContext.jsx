@@ -28,12 +28,8 @@ export const CowContextProvider = (props) => {
   const [sellers, setSellers] = useState([]);
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((event, session) => {
-      if (session !== null && cowsData.length === 0) {
-        fetchDataCows();
-      }
-    });
-  }, [cowsData, dbCows]);
+    fetchDataCows();
+  }, []);
 
   const fetchDataCows = async () => {
     const user = await supabase.auth.getUser();
