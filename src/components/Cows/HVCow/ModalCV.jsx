@@ -104,6 +104,7 @@ const ModalCV = (props) => {
               Hato: {herd},{" "}
               {cowDepartment === null ? "No se ha registrado hato" : cowDepartment}
             </p>
+            <p>Fecha de nacimiento: {props.cow.fecha_nacimiento}</p>
             <h3>Incidentes</h3>
             <IncidentTable historials={cowHistorials} />
             <Button onClick={handleEditHV}>Editar hoja de vida</Button>
