@@ -1,6 +1,6 @@
 import { CowCard } from "./CowCard.jsx";
 import { CowContext } from "../../../context/CowContext.jsx";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export const CowList = () => {
   const { cowsData, cowsRazes, cowsHV, cowHerds } = useContext(CowContext);

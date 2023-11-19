@@ -11,7 +11,7 @@ import {
 import { supabase } from "../supabase/data/constants/api_credentials";
 import { useState, useEffect } from "react";
 import { getAllSellers } from "../supabase/usecases/fetch_data.js";
-import {getAllCowsInMarketplace} from "../supabase/data/supabase/supabase_querys.js";
+import { getAllCowsInMarketplace } from "../supabase/data/supabase/supabase_querys.js";
 
 export const CowContext = createContext();
 
@@ -28,12 +28,8 @@ export const CowContextProvider = (props) => {
   const [sellers, setSellers] = useState([]);
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((event, session) => {
-      if (session !== null && cowsData.length === 0) {
-        fetchDataCows();
-      }
-    });
-  }, [cowsData, dbCows]);
+    fetchDataCows();
+  }, []);
 
   const fetchDataCows = async () => {
     const user = await supabase.auth.getUser();
@@ -72,7 +68,7 @@ export const CowContextProvider = (props) => {
         dbCows,
         sellers,
         filteredCows,
-        setFilteredCows
+        setFilteredCows,
       }}
     >
       {props.children}

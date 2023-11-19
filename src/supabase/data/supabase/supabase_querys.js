@@ -471,3 +471,15 @@ export const getAllCowsInMarketplace = async () => {
     console.log(error);
   }
 };
+
+export const markInactiveCow = async (id_vaca) => {
+  try {
+    await supabase
+      .from("Vacas")
+      .update({ active: false })
+      .eq("id_vaca", id_vaca)
+      .select();
+  } catch (error) {
+    console.log(error);
+  }
+};
