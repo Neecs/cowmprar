@@ -11,7 +11,7 @@ import {
 import { supabase } from "../supabase/data/constants/api_credentials";
 import { useState, useEffect } from "react";
 import { getAllSellers } from "../supabase/usecases/fetch_data.js";
-import {getAllCowsInMarketplace} from "../supabase/data/supabase/supabase_querys.js";
+import { getAllCowsInMarketplace } from "../supabase/data/supabase/supabase_querys.js";
 
 export const CowContext = createContext();
 
@@ -72,7 +72,7 @@ export const CowContextProvider = (props) => {
         dbCows,
         sellers,
         filteredCows,
-        setFilteredCows
+        setFilteredCows,
       }}
     >
       {props.children}

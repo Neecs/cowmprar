@@ -10,7 +10,9 @@ import RemoveFromMarketplaceModal from "./HandleOnMarketplace/RemoveCowFromMarke
 import {
   addCowToMarketplace,
   removeCowInMarketplace,
+  deleteCow,
 } from "../../../supabase/usecases/cows/update_cow.js";
+import { markInactiveCow } from "../../../supabase/data/supabase/supabase_querys.js";
 
 const ModalCV = (props) => {
   const [cowHV, setCowHV] = useState({});
@@ -32,6 +34,14 @@ const ModalCV = (props) => {
   const getCowHistorial = async (id_hv) => {
     const historials = await getHistorials(id_hv);
     setCowHistorials(historials);
+  };
+
+  const deleteOneCow = async (id_vaca) => {
+    await markInactiveCow(id_vaca);
+  };
+
+  const onDeleteButton = () => {
+    deleteOneCow(props.cow.id_vaca);
   };
 
   useEffect(() => {
@@ -126,7 +136,9 @@ const ModalCV = (props) => {
         {/* Main Modal Content */}
         <Modal.Footer>
           <div style={{ display: "flex", gap: "500px" }}>
-            <Button variant="danger">Eliminar</Button>
+            <Button variant="danger" onClick={onDeleteButton}>
+              Eliminar
+            </Button>
             <Button
               onClick={() => chooseWhatToShow()}
               variant={getCowMarketplace()}
