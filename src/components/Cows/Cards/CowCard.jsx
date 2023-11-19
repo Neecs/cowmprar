@@ -22,7 +22,7 @@ export const CowCard = ({ cow, razes, cowshv, herds }) => {
   const calculateCowAge = () => {
     const actualDate = new Date();
     const bornDate = new Date(Date.parse(cow.fecha_nacimiento));
-    console.log(cow)
+    console.log(cow);
 
     const ageInYears = actualDate.getFullYear() - bornDate.getFullYear();
     const ageInMonths = actualDate.getMonth() - bornDate.getMonth();
@@ -60,7 +60,7 @@ export const CowCard = ({ cow, razes, cowshv, herds }) => {
     <div className="horizontal-cow-card-group">
       <MDBCard className="card-cow rounded">
         <MDBCardBody>
-          <MDBCardTitle>{cow.nombre_vaca}</MDBCardTitle>
+          <MDBCardTitle>{cow.nombre_vaca} </MDBCardTitle>
           <MDBTable className="tableCow striped bordered hover">
             <MDBTableHead>
               <tr>
@@ -79,12 +79,15 @@ export const CowCard = ({ cow, razes, cowshv, herds }) => {
           </MDBTable>
           <div className="card-button-container">
             <a
-                className="incident-button btn btn-primary"
-                onClick={handleAddIncident}
+              className="incident-button btn btn-primary"
+              onClick={handleAddIncident}
             >
               Agregar incidente
             </a>
-            <a className="hv-button btn btn-secondary" onClick={() => setModalShow(true)}>
+            <a
+              className="hv-button btn btn-secondary"
+              onClick={() => setModalShow(true)}
+            >
               Hoja de vida
             </a>
           </div>
@@ -93,6 +96,7 @@ export const CowCard = ({ cow, razes, cowshv, herds }) => {
             cow={cow}
             cowshv={cowshv}
             show={modalShow}
+            cowstatus={cow.healt_status}
             cowherds={herds}
             onHide={() => setModalShow(false)}
           />

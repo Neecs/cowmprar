@@ -2,7 +2,10 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getOneDepartment } from "../../../supabase/usecases/cows/get_cow";
+import {
+  getOneDepartment,
+  getCowStatusName,
+} from "../../../supabase/usecases/cows/get_cow";
 import { getHistorials } from "../../../supabase/usecases/cows/get_cow";
 import IncidentTable from "../Incidents/IncidentTable";
 import AddToMarketplaceModal from "./HandleOnMarketplace/AddCowToMarketplace.jsx";
@@ -10,7 +13,6 @@ import RemoveFromMarketplaceModal from "./HandleOnMarketplace/RemoveCowFromMarke
 import {
   addCowToMarketplace,
   removeCowInMarketplace,
-  deleteCow,
 } from "../../../supabase/usecases/cows/update_cow.js";
 import { markInactiveCow } from "../../../supabase/data/supabase/supabase_querys.js";
 import DeleteCowModal from "./DeleteCowModal.jsx";
@@ -26,8 +28,19 @@ const ModalCV = (props) => {
     useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const navigate = useNavigate();
-  const handleShowDeleteModal = () => {
-    setShowDeleteModal(true);
+  const [cowHealthStatus, setCowHealthStatus] = useState("");
+  const [statusColor, setStatusColor] = useState("");
+
+  const setStatusColorText = () => {
+    if (props.cowstatus === 1) {
+      setStatusColor("yellow");
+    } else if (props.cowstatus === 2) {
+      setStatusColor("orange");
+    } else if (props.cowstatus === 3) {
+      setStatusColor("red");
+    } else if (props.cowstatus === 4) {
+      setStatusColor("green");
+    }
   };
 
   const getDepartment = async (id_departamento) => {
@@ -40,8 +53,14 @@ const ModalCV = (props) => {
     setCowHistorials(historials);
   };
 
+  const getCowHealthStatus = async (id_vaca) => {
+    const healthStatus = await getCowStatusName(id_vaca);
+    console.log(healthStatus[0].nombre_estado);
+    setCowHealthStatus(healthStatus[0].nombre_estado);
+  };
 
   useEffect(() => {
+    console.log(props.cowstatus);
     const filterData = () => {
       const cowsHV = props.cowshv;
       const cowsHerds = props.cowherds;
@@ -65,6 +84,8 @@ const ModalCV = (props) => {
     };
 
     filterData();
+    getCowHealthStatus(props.cowstatus);
+    setStatusColorText();
   }, [props.cow, props.cowshv, props.cowherds]);
 
   const getCowInMarketplaceStatus = () => {
@@ -126,6 +147,17 @@ const ModalCV = (props) => {
               : cowDepartment}
           </p>
           <p>Fecha de nacimiento: {props.cow.fecha_nacimiento}</p>
+          <div
+            style={{
+              backgroundColor: statusColor,
+              padding: "5px",
+              borderRadius: "6px",
+              boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+              margin: "10px",
+            }}
+          >
+            <p>Estado de salud: {cowHealthStatus}</p>
+          </div>
           <h3>Incidentes</h3>
           <IncidentTable historials={cowHistorials} />
           <Button onClick={handleEditHV}>Editar hoja de vida</Button>

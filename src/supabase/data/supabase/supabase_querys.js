@@ -403,7 +403,7 @@ export const updateCowStatus = async (id_vaca, health_status) => {
   try {
     const { data, error } = await supabase
       .from("Vacas")
-      .update([{ health_status }])
+      .update([{ healt_status: health_status }])
       .eq("id_vaca", id_vaca)
       .select();
   } catch (error) {
@@ -479,6 +479,19 @@ export const markInactiveCow = async (id_vaca) => {
       .update({ active: false })
       .eq("id_vaca", id_vaca)
       .select();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getStatusName = async (id_status) => {
+  try {
+    let { data: cow_status, error } = await supabase
+      .from("cow_status")
+      .select("nombre_estado")
+      .eq("id_estado", id_status);
+    console.log(cow_status);
+    return cow_status;
   } catch (error) {
     console.log(error);
   }
