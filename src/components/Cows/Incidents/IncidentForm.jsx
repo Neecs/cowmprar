@@ -48,11 +48,9 @@ export const IncidentForm = () => {
   };
 
   return (
-    <div className="inc-form-page">
-      <h1>Registrar Incidente</h1>
-      <br />
-      <br />
+    <div className="incident-form-page">
       <div className="inc-form">
+        <h1>Registrar Incidente</h1>
         <Form onSubmit={handleSumbit}>
           <div className="date-in">
             <Form.Group className="mb-3" controlId="dateIn">
@@ -63,7 +61,7 @@ export const IncidentForm = () => {
           <div className="text-area-des">
             <Form.Group className="mb-3" controlId="description">
               <Form.Label>Descripción</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Control as="textarea" className="incident-description" rows={3} />
             </Form.Group>
           </div>
           <Row className="mb-3">

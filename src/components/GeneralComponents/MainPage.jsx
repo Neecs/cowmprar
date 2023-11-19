@@ -31,17 +31,12 @@ export const MainPage = () => {
   return (
     <div className="main-page">
       <NavBar />
-      <br />
       <div className="main-page-body">
         <CowList />
         <br />
-        <Link to="form-cow" id="add-new-cow">
-          <Button variant="dark" id="add-cow-button">
+          <Button variant="dark" id="add-cow-button" href="form-cow">
             Agregar vaca
           </Button>
-        </Link>
-        <br />
-        <br />
       </div>
     </div>
   );

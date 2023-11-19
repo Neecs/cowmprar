@@ -50,8 +50,8 @@ export const MarketplaceCard = ({ razes, cow, cowshv, seller}) => {
   };
 
   return (
-    <div className="horizontal-cow-card">
-      <MDBCard className="cardcow rounded h-100" style={{ width: "18rem" }}>
+    <div className="horizontal-cow-card-marketplace">
+      <MDBCard className="marketplace-card-cow rounded h-100" style={{ width: "18rem" }}>
         <MDBCardBody>
           <MDBCardTitle>{cow.nombre_vaca}</MDBCardTitle>
           <MDBTable className="tableCow striped bordered hover">
@@ -70,12 +70,14 @@ export const MarketplaceCard = ({ razes, cow, cowshv, seller}) => {
               </tr>
             </tbody>
           </MDBTable>
-          <a className="incident-button btn btn-primary">
-            Contactar al vendedor
-          </a>
-          <a className="btn btn-secondary" onClick={() => setModalShow(true)}>
-            Mas informacion
-          </a>
+          <div className="markteplace-card-button-container">
+            <a className="marketplace-seller-button btn btn-primary">
+              Contactar al vendedor
+            </a>
+            <a className="marketplace-more-info-button btn btn-secondary" onClick={() => setModalShow(true)}>
+              Mas informacion
+            </a>
+          </div>
           <ModalMarketplace
             cow={cow}
             cowshv={cowshv}

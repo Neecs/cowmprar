@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import { supabase } from "../../supabase/data/constants/api_credentials.js";
 import { useNavigate } from "react-router-dom";
+import './NavBar.css'
 
 function NavBar() {
   const navigate = useNavigate();
@@ -27,17 +28,17 @@ function NavBar() {
   return (
     <div className="navbar-main">
       <Navbar id="navbar-menu">
-        <Navbar.Brand className="navbarText" href="/">
+        <Navbar.Brand className="navbar-text" href="/">
           Cowmprar
         </Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link className="navbarText" href="/">
+          <Nav.Link className="navbar-text" href="/">
             Tus vacas
           </Nav.Link>
-          <Nav.Link className="navbarText" href="/marketplace">
+          <Nav.Link className="navbar-text" href="/marketplace">
             Marketplace
           </Nav.Link>
-          <Nav.Link className="navbarText" onClick={goToSettings}>
+          <Nav.Link className="navbar-text" onClick={goToSettings}>
             Editar usuario
           </Nav.Link>
         </Nav>
