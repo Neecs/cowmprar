@@ -112,7 +112,7 @@ export const Login = () => {
             <Row>
               {/* Links for password recovery and user registration */}
               <Col className="secondary-options col-3">
-                <a href="/restore">¿Olvidaste tu contraseña?</a>
+                <a href="/restore" id="forgot-password-text">¿Olvidaste tu contraseña?</a>
                 <br />
                 <br />
                 <a href="/register" id="signup-text">

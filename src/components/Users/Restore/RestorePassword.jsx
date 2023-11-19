@@ -55,30 +55,29 @@ export const RestorePassword = () => {
   return (
     <div className="form-pass-recovery">
       <div className="form-pass-recovery-space">
-        <div className="header-title">
+        <div className="form-password-header-title">
           <h4 className="title">Enter your registered email on cowmprar</h4>
-          <p className="category">
+          <p className="restore-category">
             If your email is registered, you will receive a link to reset your password.
           </p>
         </div>
         <br />
         <br />
-        <div className="infoSpace">
-          {/* Form to input the email for password reset */}
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Form.Group as={Col} md="4" controlId="email">
-              <Form.Floating className="mb-3">
-                <Form.Control
-                  type="email"
-                  placeholder="example@mail.com"
-                  required
-                />
-                <Form.Label>Email</Form.Label>
-                <Form.Control.Feedback type="invalid">
-                  Please enter a valid email.
-                </Form.Control.Feedback>
-              </Form.Floating>
-            </Form.Group>
+        <div className="restore-password-info-space">
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <Form.Group as={Col} md="4" controlId="email">
+            <Form.Floating className="mb-3 restore-password-field">
+              <Form.Control
+                type="email"
+                placeholder="example@mail.com"
+                required
+              />
+              <Form.Label>Correo electronico</Form.Label>
+              <Form.Control.Feedback type="invalid">
+                Ingrese un correo válido
+              </Form.Control.Feedback>
+            </Form.Floating>
+          </Form.Group>
 
             {/* Confirmation and return buttons */}
             <div className="buttons">

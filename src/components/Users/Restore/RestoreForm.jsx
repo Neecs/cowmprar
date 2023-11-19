@@ -64,20 +64,20 @@ export const RestoreForm = () => {
   };
 
   return (
-    <div className="form-pass">
-      <div className="form-pass-space">
-        <div className="header-title">
-          <h4>Enter your new password</h4>
-          <p>Enter your new password to regain access to your account.</p>
+    <div className="restore-form-pass">
+      <div className="restore-form-pass-space">
+        <div className="restore-form-header-title">
+          <h4>Ingresa tu nueva contraseña</h4>
+          <p id="new-password-text">Ingresa tu nueva contraseña para poder acceder a tu cuenta.</p>
         </div>
-        <div className="infoSpace">
+        <div className="info-space">
           {/* Form to input the new password */}
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <p>Enter your new password</p>
 
             {/* Input field for the new password */}
             <Form.Group as={Col} md="4" controlId="password">
-              <Form.Floating className="mb-3">
+              <Form.Floating className="mb-3 restore-pass-field">
                 <Form.Control type="password" placeholder=" " required />
                 <Form.Label>Password</Form.Label>
                 <Form.Control.Feedback type="invalid">
@@ -90,7 +90,7 @@ export const RestoreForm = () => {
 
             {/* Input field to confirm the new password */}
             <Form.Group as={Col} md="4" controlId="passwordConfirmation">
-              <Form.Floating className="mb-3">
+              <Form.Floating className="mb-3 restore-pass-field">
                 <Form.Control type="password" placeholder=" " required />
                 <Form.Label>Confirm Password</Form.Label>
                 <Form.Control.Feedback type="invalid">
