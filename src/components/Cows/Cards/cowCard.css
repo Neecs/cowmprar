@@ -1,23 +1,33 @@
-/* CowCard.css */
-.horizontal-cow-card {
-    display: inline-block; /* Display horizontally */
-    margin: 10px; /* Add some margin for spacing */
-    background-color: white !important;
+.horizontal-cow-card-group {
+    display: inline-block;
+    margin: 10px;
     color: black;
 }
 
-.cardcow{
-    background-color: white;
-    padding: 10px;
+.card-cow {
+    width: 20vw;
+    height: 45vh;
+    padding: 15px;
     color: black;
-}
-
-.tableCow{
-    background-color: pink !important;
-    color: aliceblue;
 }
 
 .btn {
     padding: 4px;
     margin: 5px;
+}
+
+.card-button-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Take full width of the card */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.incident-button,
+.hv-button {
+    font-size: 17px;
 }

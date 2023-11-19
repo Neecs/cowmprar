@@ -72,8 +72,8 @@ export const CowCard = ({ cow, razes, cowshv, herds }) => {
   };
 
   return (
-    <div className="horizontal-cow-card">
-      <MDBCard className="cardcow rounded" style={{ width: "18rem" }}>
+    <div className="horizontal-cow-card-group">
+      <MDBCard className="card-cow rounded">
         <MDBCardBody>
           <MDBCardTitle>{cow.nombre_vaca}</MDBCardTitle>
           <MDBTable className="tableCow striped bordered hover">
@@ -92,15 +92,18 @@ export const CowCard = ({ cow, razes, cowshv, herds }) => {
               </tr>
             </tbody>
           </MDBTable>
-          <a
-            className="incident-button btn btn-primary"
-            onClick={handleAddIncident}
-          >
-            Add Incident
-          </a>
-          <a className="btn btn-secondary" onClick={() => setModalShow(true)}>
-            Profile
-          </a>
+          <div className="card-button-container">
+            <a
+                className="incident-button btn btn-primary"
+                onClick={handleAddIncident}
+            >
+              Agregar incidente
+            </a>
+            <a className="hv-button btn btn-secondary" onClick={() => setModalShow(true)}>
+              Hoja de vida
+            </a>
+          </div>
+
           <ModalCV
             cow={cow}
             cowshv={cowshv}

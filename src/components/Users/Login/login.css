@@ -6,8 +6,11 @@
   width: 100vw;
   background-image: url("../../../assets/BGCow.jpg");
   background-color: rgba(0, 0, 0, 0.68);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
   filter: brightness(90%);
-  background-size: contain;
+  position: fixed;
   font-size: 20px;
 }
 

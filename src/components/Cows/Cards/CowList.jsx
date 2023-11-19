@@ -4,7 +4,7 @@
  */
 import { CowCard } from "./CowCard.jsx";
 import { CowContext } from "../../../context/CowContext.jsx";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 /**
  * @component

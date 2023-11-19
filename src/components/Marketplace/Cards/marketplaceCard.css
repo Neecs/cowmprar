@@ -1,18 +1,15 @@
 /* MarketplaceCard.css */
-.horizontal-cow-card {
-    display: inline-block; /* Display horizontally */
-    margin: 2rem; /* Add some margin for spacing */
-    color: black;
-    height: 18rem;
-    width: 18rem;
-}
-
-.cardcow {
+.horizontal-cow-card-marketplace {
+    display: inline-block;
+    margin: 10px;
     color: black;
 }
 
-.tableCow {
-    color: aliceblue;
+.card-cow {
+    width: 20vw;
+    height: 45vh;
+    padding: 15px;
+    color: black;
 }
 
 .btn {
@@ -20,14 +17,18 @@
     margin: 5px;
 }
 
-.th {
-    max-width: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.marketplace-card-button-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Take full width of the card */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
 }
 
-#cow-raze{
-    line-clamp: 1;
-    overflow: hidden;
+.marketplace-seller-button,
+.marketplace-more-info-button {
+    font-size: 12px;
 }

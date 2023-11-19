@@ -1,21 +1,34 @@
+/**
+ * React component for the list of cows in the Marketplace.
+ *
+ * @component
+ * @returns {JSX.Element} JSX representation of the MarketplaceList component.
+ */
 import { useContext } from "react";
 import { MarketplaceCard } from "../Cards/MarketplaceCard.jsx";
 import { CowContext } from "../../../context/CowContext.jsx";
 
+/**
+ * @function
+ * @description Functional component for the list of cows in the Marketplace.
+ * @returns {JSX.Element} JSX representation of the MarketplaceList component.
+ */
 export const MarketplaceList = () => {
-  const { cowsRazes, filteredCows, cowsHV, sellers} = useContext(CowContext);
+  // Destructuring context values
+  const { cowsRazes, filteredCows, cowsHV, sellers } = useContext(CowContext);
 
+  // JSX representation of the MarketplaceList component
   return (
-      <div>
-        {filteredCows.map((cow) => (
-            <MarketplaceCard
-                key={cow.id_vaca}
-                cow={cow}
-                razes={cowsRazes}
-                cowshv={cowsHV}
-                seller={sellers}
-            />
-        ))}
-      </div>
+    <div>
+      {filteredCows.map((cow) => (
+        <MarketplaceCard
+          key={cow.id_vaca}
+          cow={cow}
+          razes={cowsRazes}
+          cowshv={cowsHV}
+          seller={sellers}
+        />
+      ))}
+    </div>
   );
 };

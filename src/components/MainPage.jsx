@@ -14,13 +14,12 @@ import { fetchCows } from "../supabase/data/supabase/data_source.js";
 
 export const MainPage = () => {
   const navigate = useNavigate();
-  const [cowsData, setCowsData] = useState({});
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((event, session) => {
       if (!session) {
         navigate("/login");
-      }
+      } 
     });
   }, []);
 

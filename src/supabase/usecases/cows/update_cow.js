@@ -3,7 +3,9 @@ import {
   addIncident,
   addHerdLocation,
   updateCowStatus,
-  addMarketplaceCow, removeCowFromMarketplace
+  addMarketplaceCow,
+  removeCowFromMarketplace,
+  markInactiveCow,
 } from "../../data/supabase/supabase_querys.js";
 
 export const updateHV = async (color, id_hato, id_hv) => {
@@ -24,8 +26,12 @@ export const addHerd = async (nombre_hato, id_departamento) => {
 
 export const addCowToMarketplace = async (id_vaca) => {
   return await addMarketplaceCow(id_vaca);
-}
+};
 
 export const removeCowInMarketplace = async (id_vaca) => {
   return await removeCowFromMarketplace(id_vaca);
-}
+};
+
+export const deleteCow = async (id_vaca) => {
+  return await markInactiveCow(id_vaca);
+};

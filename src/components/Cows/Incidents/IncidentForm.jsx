@@ -74,12 +74,9 @@ export const IncidentForm = () => {
 
   // JSX representation of the incident registration form
   return (
-    <div className="inc-form-page">
-      <h1>Register Incident</h1>
-      <br />
-      <br />
+    <div className="incident-form-page">
       <div className="inc-form">
-        {/* Incident Form */}
+        <h1>Registrar Incidente</h1>
         <Form onSubmit={handleSumbit}>
           {/* Date Input */}
           <div className="date-in">
@@ -92,8 +89,8 @@ export const IncidentForm = () => {
           {/* Description Textarea */}
           <div className="text-area-des">
             <Form.Group className="mb-3" controlId="description">
-              <Form.Label>Description</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Label>Descripción</Form.Label>
+              <Form.Control as="textarea" className="incident-description" rows={3} />
             </Form.Group>
           </div>
 
