@@ -34,19 +34,19 @@ export const RestorePassword = () => {
   return (
     <div className="form-pass-recovery">
       <div className="form-pass-recovery-space">
-        <div className="header-title">
+        <div className="form-password-header-title">
           <h4 className="title">Ingresa tu correo registrado en cowmprar</h4>
-          <p className="category">
+          <p className="restore-category">
             Si tu correo está registrado te llegará un enlace para restaurar tu
             contraseña.
           </p>
         </div>
         <br />
         <br />
-        <div className="infoSpace">
+        <div className="restore-password-info-space">
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <Form.Group as={Col} md="4" controlId="email">
-            <Form.Floating className="mb-3">
+            <Form.Floating className="mb-3 restore-password-field">
               <Form.Control
                 type="email"
                 placeholder="example@mail.com"

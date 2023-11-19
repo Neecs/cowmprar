@@ -67,11 +67,10 @@ export const FormUserRegister = () => {
   };
 
   return (
-    <div className="form-user">
-      <div className="form-space">
-        <div className="header-title">
-          <h4 className="title">Formulario de registro</h4>
-          <p className="category">Ingrese sus Datos</p>
+    <div className="register-form-user">
+      <div className="register-form-space">
+        <div className="register-header-title">
+          <h4 className="register-title">Formulario de registro</h4>
         </div>
         <br />
         <div className="data">
@@ -122,6 +121,7 @@ export const FormUserRegister = () => {
                 <Form.Floating className="mb-3">
                   <Form.Control
                     type="text"
+                    className="doc-id-number"
                     placeholder=" "
                     pattern="[0-9]*"
                     required
