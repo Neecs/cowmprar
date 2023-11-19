@@ -2,15 +2,23 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getOneDepartment } from "../../../supabase/usecases/cows/get_cow";
+import {getOneDepartment} from "../../../supabase/usecases/cows/get_cow";
 import { getHistorials } from "../../../supabase/usecases/cows/get_cow";
 import IncidentTable from "../Incidents/IncidentTable";
+import AddToMarketplaceModal from "./HandleOnMarketplace/AddCowToMarketplace.jsx";
+import RemoveFromMarketplaceModal from "./HandleOnMarketplace/RemoveCowFromMarketplace.jsx";
+import {addCowToMarketplace, removeCowInMarketplace} from "../../../supabase/usecases/cows/update_cow.js";
 
 const ModalCV = (props) => {
   const [cowHV, setCowHV] = useState([]);
   const [herd, setHerd] = useState("");
   const [cowDepartment, setCowDepartment] = useState("");
   const [cowHistorials, setCowHistorials] = useState([]);
+  const [showAddToMarketplaceModal, setShowAddToMarketplaceModal] = useState(false);
+  const [showRemoveFromMarketplaceModal, setShowRemoveFromMarketplaceModal] = useState(false);
+  const [showSuccessAddCow, setShowSuccessAddCow] = useState();
+  const [showUnsuccessfulAddCow, setShowUnsuccessfulAddCow] = useState();
+
   const navigate = useNavigate();
 
   const getDepartment = async (id_departamento) => {
@@ -24,6 +32,7 @@ const ModalCV = (props) => {
   };
 
   const filterData = () => {
+    console.log(props.cow.marketplace!=null?"Si":"No")
     const cowsHV = props.cowshv;
     const cowsHerds = props.cowherds;
     console.log(cowsHerds);
@@ -46,15 +55,70 @@ const ModalCV = (props) => {
     setCowHV(filteredHV[0]);
     getCowHistorial(filteredHV[0].id_hoja_vida);
 
-    setCowDepartment();
   };
   useEffect(() => {
     filterData();
   }, []);
 
+  const getCowInMarketplacestatus = () => {
+    let buttonCowStatus;
+    switch (props.cow.marketplace) {
+      case true:
+        buttonCowStatus = "Eliminar la vaca de marketplace"
+        break;
+      case false:
+        buttonCowStatus = "Añadir la vaca a marketplace"
+        break;
+      default:
+        buttonCowStatus = "Añadir la vaca a marketplace"
+        break;
+    }
+    return buttonCowStatus;
+ }
+
+  const getCowMarketplace = () => {
+    let status
+    switch (props.cow.marketplace){
+      case null:
+        status="success"
+        break;
+      case true:
+        status="danger"
+        break;
+      default:
+        status="success"
+        break;
+    }
+    return status;
+  }
+
   const handleEditHV = () => {
     navigate(`/hv-cow/${props.cow.id_vaca}`);
   };
+
+  const handleAddToMarketplace = () => {
+    addCowToMarketplace(props.cow.id_vaca)
+      setShowSuccessAddCow(true)
+      setShowAddToMarketplaceModal(false)
+  };
+
+  const handleRemoveFromMarketplace = () => {
+    removeCowInMarketplace(props.cow.id_vaca)
+  };
+
+  const chooseWhatToShow = () => {
+    switch (props.cow.marketplace) {
+      case true:
+        setShowRemoveFromMarketplaceModal(true)
+        break;
+      case false:
+        setShowAddToMarketplaceModal(true)
+        break;
+      default:
+        setShowAddToMarketplaceModal(true)
+        break;
+    }
+  }
 
   return (
     <Modal
@@ -79,9 +143,31 @@ const ModalCV = (props) => {
         <IncidentTable historials={cowHistorials} />
         <Button onClick={handleEditHV}>Editar hoja de vida</Button>
       </Modal.Body>
+      {/* Main Modal Content */}
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button
+            onClick={() => chooseWhatToShow()}
+            variant={getCowMarketplace()}
+            id="marketplace-button"
+        >
+          {getCowInMarketplacestatus()}
+        </Button>
       </Modal.Footer>
+
+      {/* Add to Marketplace Modal */}
+      <AddToMarketplaceModal
+          show={showAddToMarketplaceModal}
+          onHide={() => setShowAddToMarketplaceModal(false)}
+          onConfirm={handleAddToMarketplace}
+      />
+
+      {/* Remove from Marketplace Modal */}
+      <RemoveFromMarketplaceModal
+          show={showRemoveFromMarketplaceModal}
+          onHide={() => setShowRemoveFromMarketplaceModal(false)}
+          onConfirm={handleRemoveFromMarketplace}
+          cow={props.cow}
+      />
     </Modal>
   );
 };

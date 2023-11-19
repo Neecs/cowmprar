@@ -266,7 +266,9 @@ export const recoverPasswordViaEmail = async (email) => {
 
 export const getAllCows = async () => {
   try {
-    const { data: cowData, error } = await supabase.from("Vacas").select("*");
+    const { data: cowData, error } = await supabase
+        .from("Vacas")
+        .select("*");
     return cowData;
   } catch (error) {
     console.log(error);
@@ -414,7 +416,6 @@ export const getIncidentTypeById = async (id_incidente) => {
       .from("Tipos incidentes")
       .select("nombre_incidente")
       .eq("id_incidente", id_incidente);
-    console.log(incident);
     return incident;
   } catch (error) {
     console.log(error);
@@ -427,9 +428,45 @@ export const getHistorialsById = async (id_hv) => {
       .from("Historiales")
       .select("*")
       .eq("id_hoja_vida", id_hv);
-    console.log(historials);
     return historials;
   } catch (error) {
     console.log(error);
   }
 };
+
+ export const addMarketplaceCow = async (id_vaca) => {
+   try {
+      let {data:vacaActualizada, error} = await supabase
+          .from("Vacas")
+          .update({marketplace: true})
+          .eq("id_vaca", id_vaca)
+     return true;
+   } catch (error ) {
+     console.log(error)
+     return false;
+   }
+ }
+
+ export const removeCowFromMarketplace = async (id_vaca) => {
+   try {
+     let {data: removedCow, error } = await  supabase
+         .from("Vacas")
+         .update({marketplace:false})
+         .eq("id_vaca", id_vaca)
+     return true;
+   } catch (error) {
+     console.log(error)
+   }
+ }
+
+ export const getAllCowsInMarketplace = async () => {
+   try {
+     let {data:cowsFromSupabase, error} = await supabase
+         .from("Vacas")
+         .select("*")
+         .eq("marketplace", true)
+     return cowsFromSupabase;
+   } catch (error) {
+     console.log(error)
+   }
+ }

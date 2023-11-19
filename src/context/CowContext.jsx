@@ -7,11 +7,11 @@ import {
   getGenders,
   getHerds,
   getDepartments,
-  getAllDBCows,
 } from "../supabase/usecases/cows/get_cow";
 import { supabase } from "../supabase/data/constants/api_credentials";
 import { useState, useEffect } from "react";
 import { getAllSellers } from "../supabase/usecases/fetch_data.js";
+import {getAllCowsInMarketplace} from "../supabase/data/supabase/supabase_querys.js";
 
 export const CowContext = createContext();
 
@@ -43,7 +43,7 @@ export const CowContextProvider = (props) => {
     const genders = await getGenders();
     const herds = await getHerds();
     const departments = await getDepartments();
-    const allCows = await getAllDBCows();
+    const allCows = await getAllCowsInMarketplace();
     const allSellers = await getAllSellers();
 
     setCowsRazes(razes);
