@@ -19,6 +19,7 @@ import {
 } from "../../../supabase/usecases/user/update_user";
 
 /**
+ * 
  * @function
  * @description Functional component for user settings.
  * @returns {JSX.Element} JSX representation of the UserSettings component.
