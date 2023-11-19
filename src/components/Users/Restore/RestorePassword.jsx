@@ -1,4 +1,8 @@
-import { useState } from "react";
+/**
+ * React component for the password restoration form.
+ * Allows users to request a password reset link via email.
+ */
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -7,10 +11,21 @@ import Alert from "react-bootstrap/Alert";
 import "./restorePass.css";
 import { supabase } from "../../../supabase/data/constants/api_credentials.js";
 
+/**
+ * @component
+ * @description Functional component for the password restoration form.
+ * @returns {JSX.Element} JSX representation of the password restoration form.
+ */
 export const RestorePassword = () => {
+  // States to manage form validation and success message
   const [validated, setValidated] = useState(false);
   const [message, setMessage] = useState(false);
 
+  /**
+   * Handles the submission of the password restoration form.
+   * Sends a password reset email to the provided email address.
+   * @param {Event} event - The form submission event.
+   */
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
@@ -21,11 +36,17 @@ export const RestorePassword = () => {
       event.stopPropagation();
     }
 
+    /**
+     * Sends a password reset email to the provided email address.
+     * Redirects the user to the specified URL after a successful reset.
+     */
     const sendEmail = async () => {
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: "http://localhost:5173/profile/update",
       });
     };
+    
+    // Execute the sendEmail function, display success message, and set form as validated
     sendEmail();
     setMessage(true);
     setValidated(true);
@@ -35,51 +56,53 @@ export const RestorePassword = () => {
     <div className="form-pass-recovery">
       <div className="form-pass-recovery-space">
         <div className="header-title">
-          <h4 className="title">Ingresa tu correo registrado en cowmprar</h4>
+          <h4 className="title">Enter your registered email on cowmprar</h4>
           <p className="category">
-            Si tu correo está registrado te llegará un enlace para restaurar tu
-            contraseña.
+            If your email is registered, you will receive a link to reset your password.
           </p>
         </div>
         <br />
         <br />
         <div className="infoSpace">
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
-          <Form.Group as={Col} md="4" controlId="email">
-            <Form.Floating className="mb-3">
-              <Form.Control
-                type="email"
-                placeholder="example@mail.com"
-                required
-              />
-              <Form.Label>Correo electronico</Form.Label>
-              <Form.Control.Feedback type="invalid">
-                Ingrese un correo válido
-              </Form.Control.Feedback>
-            </Form.Floating>
-          </Form.Group>
+          {/* Form to input the email for password reset */}
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form.Group as={Col} md="4" controlId="email">
+              <Form.Floating className="mb-3">
+                <Form.Control
+                  type="email"
+                  placeholder="example@mail.com"
+                  required
+                />
+                <Form.Label>Email</Form.Label>
+                <Form.Control.Feedback type="invalid">
+                  Please enter a valid email.
+                </Form.Control.Feedback>
+              </Form.Floating>
+            </Form.Group>
 
-          <div className="buttons">
-            <Form.Group className="mb-3"></Form.Group>
-            <Button type="submit" className="btn btn-dark btn-md">
-              Enviar correo
-            </Button>
-            <span style={{ marginRight: "10px" }}></span>
-            <Link to="/">
-              <Button type="button" className="btn btn-dark btn-md">
-                Regresar
+            {/* Confirmation and return buttons */}
+            <div className="buttons">
+              <Form.Group className="mb-3"></Form.Group>
+              <Button type="submit" className="btn btn-dark btn-md">
+                Send Email
               </Button>
-            </Link>
-          </div>
+              <span style={{ marginRight: "10px" }}></span>
+              <Link to="/">
+                <Button type="button" className="btn btn-dark btn-md">
+                  Return
+                </Button>
+              </Link>
+            </div>
 
-          <br />
-          <br />
-        </Form>
+            <br />
+            <br />
+          </Form>
         </div>
-        
+
+        {/* Display a success message after sending the password reset email */}
         {message && (
           <Alert key="info" variant="info">
-            Revisa en tu correo el enlace de recuperación.
+            Check your email for the recovery link.
           </Alert>
         )}
       </div>
