@@ -1,3 +1,15 @@
+/**
+ * React component for displaying the detailed information about a cow in a modal.
+ * Allows users to view and edit the color, herd, and incidents associated with a cow.
+ * Provides options to add or remove the cow from the marketplace.
+ *
+ * @component
+ * @param {Object} props - Component properties.
+ * @param {Object} props.cow - The cow object containing information like name, birthdate, and marketplace status.
+ * @param {Array} props.cowshv - An array of cow health and vital information.
+ * @param {Array} props.cowherds - An array of cow herds.
+ * @returns {JSX.Element} JSX representation of the cow's modal.
+ */
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useEffect, useState } from "react";
@@ -12,28 +24,47 @@ import {
   removeCowInMarketplace,
 } from "../../../supabase/usecases/cows/update_cow.js";
 
+/**
+ * @function
+ * @description Functional component representing the modal for displaying detailed cow information.
+ * @param {Object} props - Component properties.
+ * @returns {JSX.Element} JSX representation of the cow's modal.
+ */
 const ModalCV = (props) => {
+  // State for storing health and vital information of the cow
   const [cowHV, setCowHV] = useState({});
+
+  // State for storing the name of the herd associated with the cow
   const [herd, setHerd] = useState("No tiene hato");
+
+  // State for storing the department information of the cow's herd
   const [cowDepartment, setCowDepartment] = useState(null);
+
+  // State for storing the historical incident data of the cow
   const [cowHistorials, setCowHistorials] = useState([]);
+
+  // States for controlling the visibility of the add and remove from marketplace modals
   const [showAddToMarketplaceModal, setShowAddToMarketplaceModal] =
     useState(false);
   const [showRemoveFromMarketplaceModal, setShowRemoveFromMarketplaceModal] =
     useState(false);
 
+  // Hook for programmatic navigation
   const navigate = useNavigate();
 
+  // Function to fetch department information based on department ID
   const getDepartment = async (id_departamento) => {
     const department = await getOneDepartment(id_departamento);
     setCowDepartment(department[0]?.nombre_departamento || null);
   };
 
+  // Function to fetch historical incident data based on cow's health and vital ID
   const getCowHistorial = async (id_hv) => {
     const historials = await getHistorials(id_hv);
     setCowHistorials(historials);
   };
 
+  // Effect hook to filter and update relevant cow information when props change
   useEffect(() => {
     const filterData = () => {
       const cowsHV = props.cowshv;
@@ -60,29 +91,7 @@ const ModalCV = (props) => {
     filterData();
   }, [props.cow, props.cowshv, props.cowherds]);
 
-  const getCowInMarketplaceStatus = () => {
-    return props.cow.marketplace
-      ? "Eliminar la vaca de marketplace"
-      : "Añadir la vaca a marketplace";
-  };
-
-  const getCowMarketplace = () =>
-    props.cow.marketplace ? "danger" : "success";
-
-  const handleEditHV = () => {
-    navigate(`/hv-cow/${props.cow.id_vaca}`);
-  };
-
-  const handleAddToMarketplace = () => {
-    addCowToMarketplace(props.cow.id_vaca);
-    setShowAddToMarketplaceModal(false);
-  };
-
-  const handleRemoveFromMarketplace = () => {
-    removeCowInMarketplace(props.cow.id_vaca);
-    setShowRemoveFromMarketplaceModal(false);
-  };
-
+  // Function to determine the action to be performed based on the marketplace status of the cow
   const chooseWhatToShow = () => {
     switch (props.cow.marketplace) {
       case true:
@@ -97,8 +106,35 @@ const ModalCV = (props) => {
     }
   };
 
+  // Function to get the appropriate text for the marketplace button
+  const getCowInMarketplaceStatus = () =>
+    props.cow.marketplace
+      ? "Remove cow from marketplace"
+      : "Add cow to marketplace";
+
+  // Function to get the appropriate variant for the marketplace button
+  const getCowMarketplace = () => (props.cow.marketplace ? "danger" : "success");
+
+  // Function to handle the edit health and vital information action
+  const handleEditHV = () => {
+    navigate(`/hv-cow/${props.cow.id_vaca}`);
+  };
+
+  // Function to handle adding the cow to the marketplace
+  const handleAddToMarketplace = () => {
+    addCowToMarketplace(props.cow.id_vaca);
+    setShowAddToMarketplaceModal(false);
+  };
+
+  // Function to handle removing the cow from the marketplace
+  const handleRemoveFromMarketplace = () => {
+    removeCowInMarketplace(props.cow.id_vaca);
+    setShowRemoveFromMarketplaceModal(false);
+  };
+
   return (
     <>
+      {/* Main Cow Modal */}
       <Modal
         {...props}
         size="lg"
@@ -121,12 +157,11 @@ const ModalCV = (props) => {
           <p>Fecha de nacimiento: {props.cow.fecha_nacimiento}</p>
           <h3>Incidentes</h3>
           <IncidentTable historials={cowHistorials} />
-          <Button onClick={handleEditHV}>Editar hoja de vida</Button>
+          <Button onClick={handleEditHV}>Edit Health and Vital Information</Button>
         </Modal.Body>
-        {/* Main Modal Content */}
         <Modal.Footer>
           <div style={{ display: "flex", gap: "500px" }}>
-            <Button variant="danger">Eliminar</Button>
+            <Button variant="danger">Delete</Button>
             <Button
               onClick={() => chooseWhatToShow()}
               variant={getCowMarketplace()}

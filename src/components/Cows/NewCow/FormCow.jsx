@@ -1,3 +1,9 @@
+/**
+ * React component representing a form for registering a new cow.
+ *
+ * @component
+ * @returns {JSX.Element} JSX representation of the FormCow component.
+ */
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
@@ -6,15 +12,17 @@ import Row from "react-bootstrap/Row";
 import "./formNewCow.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import {
-  getGenders,
-  getRazes,
-} from "../../../supabase/usecases/cows/get_cow.js";
+import { getGenders, getRazes } from "../../../supabase/usecases/cows/get_cow.js";
 import { createCow } from "../../../supabase/usecases/cows/create_cow.js";
 import { supabase } from "../../../supabase/data/constants/api_credentials.js";
 import { useContext } from "react";
 import { CowContext } from "../../../context/CowContext.jsx";
 
+/**
+ * @function
+ * @description Functional component representing a form for registering a new cow.
+ * @returns {JSX.Element} JSX representation of the FormCow component.
+ */
 export const FormCow = () => {
   const [validated] = useState(false);
   const [razesDictionary, setRazesDictionary] = useState({});
@@ -25,6 +33,10 @@ export const FormCow = () => {
   const { cowsRazes, cowGenders } = useContext(CowContext);
   const navigate = useNavigate();
 
+  /**
+   * @function
+   * @description Update the date for the form based on the current date.
+   */
   const updateDate = () => {
     const date = new Date();
     const actualYear = date.getFullYear();
@@ -39,6 +51,11 @@ export const FormCow = () => {
     setGenderDictionary(cowGenders);
   }, []);
 
+  /**
+   * @function
+   * @description Handle form submission and create a new cow.
+   * @param {Event} event - The form submission event.
+   */
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     event.preventDefault();
@@ -57,6 +74,7 @@ export const FormCow = () => {
     });
   };
 
+  // JSX representation of the FormCow component
   return (
     <div className="form-cow">
       <div className="form-space-cow">
@@ -92,7 +110,7 @@ export const FormCow = () => {
                   value={selectedGender}
                   onChange={(e) => setSelectedGender(e.target.value)}
                 >
-                  <option value="">Genero</option>
+                  <option value="">Género</option>
                   {Object.keys(genderDictionary).map((key) => (
                     <option key={key} value={key}>
                       {genderDictionary[key]}

@@ -1,3 +1,11 @@
+/**
+ * React component for displaying a form to register incidents for a cow.
+ * Allows users to input incident details such as date, description, and incident type.
+ * Handles the submission of incident data to update the cow's record.
+ *
+ * @component
+ * @returns {JSX.Element} JSX representation of the incident registration form.
+ */
 import Form from "react-bootstrap/Form";
 import "./incidentForm.css";
 import Col from "react-bootstrap/Col";
@@ -13,13 +21,28 @@ import {
   getRazes,
 } from "../../../supabase/usecases/cows/get_cow.js";
 
+/**
+ * @function
+ * @description Functional component representing the incident registration form.
+ * @returns {JSX.Element} JSX representation of the incident registration form.
+ */
 export const IncidentForm = () => {
+  // React Router hook for navigation
   const navigate = useNavigate();
+
+  // State for storing incident types
   const [incidentTypes, setIncidentTypes] = useState("");
+
+  // State for storing incident dictionary
   const [incidentDictionary, setIncidentDictionary] = useState({});
+
+  // React Router hook for accessing URL parameters
   const { cowId } = useParams();
+
+  // State for storing the current date
   const [actualDate, setActualDate] = useState(null);
 
+  // useEffect to fetch incident types and update date on component mount
   useEffect(() => {
     async function fetchData() {
       const incidents = await getIncidents();
@@ -29,6 +52,7 @@ export const IncidentForm = () => {
     updateDate();
   }, []);
 
+  // Function to update the current date
   const updateDate = () => {
     const date = new Date();
     const actualYear = date.getFullYear();
@@ -37,6 +61,7 @@ export const IncidentForm = () => {
     setActualDate(`${actualYear}-${actualMonth}-${actualDay}`);
   };
 
+  // Function to handle form submission
   const handleSumbit = (e) => {
     const form = e.currentTarget;
     e.preventDefault();
@@ -47,25 +72,32 @@ export const IncidentForm = () => {
     navigate("/");
   };
 
+  // JSX representation of the incident registration form
   return (
     <div className="inc-form-page">
-      <h1>Registrar Incidente</h1>
+      <h1>Register Incident</h1>
       <br />
       <br />
       <div className="inc-form">
+        {/* Incident Form */}
         <Form onSubmit={handleSumbit}>
+          {/* Date Input */}
           <div className="date-in">
             <Form.Group className="mb-3" controlId="dateIn">
-              <Form.Label>Fecha</Form.Label>
+              <Form.Label>Date</Form.Label>
               <Form.Control type="date" max={actualDate} />
             </Form.Group>
           </div>
+
+          {/* Description Textarea */}
           <div className="text-area-des">
             <Form.Group className="mb-3" controlId="description">
-              <Form.Label>Descripción</Form.Label>
+              <Form.Label>Description</Form.Label>
               <Form.Control as="textarea" rows={3} />
             </Form.Group>
           </div>
+
+          {/* Incident Type Dropdown */}
           <Row className="mb-3">
             <Form.Group as={Col} md="4" controlId="incidentName">
               <Form.Select
@@ -74,7 +106,7 @@ export const IncidentForm = () => {
                 value={incidentTypes}
                 onChange={(e) => setIncidentTypes(e.target.value)}
               >
-                <option value="">Tipo incidente</option>
+                <option value="">Incident Type</option>
                 {Object.keys(incidentDictionary).map((key) => (
                   <option key={key} value={key}>
                     {incidentDictionary[key]}
@@ -82,18 +114,20 @@ export const IncidentForm = () => {
                 ))}
               </Form.Select>
               <Form.Control.Feedback type="invalid">
-                Selecciona el sexo del Bovino.
+                Select the incident type.
               </Form.Control.Feedback>
             </Form.Group>
           </Row>
+
+          {/* Form Buttons */}
           <div className="buttons">
             <Button type="submit" className="btn btn-dark btn-lg">
-              Guardar
+              Save
             </Button>
             <span style={{ marginRight: "10px" }}></span>
             <Link to="/">
               <Button type="button" className="btn btn-dark btn-lg">
-                Regresar
+                Back
               </Button>
             </Link>
           </div>
