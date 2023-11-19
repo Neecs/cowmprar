@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import { UserContext } from "../../../context/UserContext";
 import { registerUser } from "../../../supabase/usecases/user/create_user";
+import { supabase } from "../../../supabase/data/constants/api_credentials";
 
 export const FormUserRegister = () => {
   const [validated, setValidated] = useState(false);
@@ -15,22 +16,23 @@ export const FormUserRegister = () => {
   const [errorPassword, setErrorPassword] = useState(false);
   const [succesfullRegister, setSuccesfullRegister] = useState(false);
   const [idTypes, setIDTypes] = useState({});
-  const [roleType, setRoleType] = useState({});
   const [selectedIDType, setSelectedIDType] = useState("");
-  const [selectedRole, setSelectedRole] = useState("");
   const { documentTypes } = useContext(UserContext);
 
   useEffect(() => {
     setIDTypes(documentTypes);
-    console.log(documentTypes);
   }, []);
 
   const handleSubmit = async (event) => {
     const form = event.currentTarget;
     event.preventDefault();
-    console.log(form);
     const email = form.email.value;
     const password = form.password.value;
+    const idType = form.idType.value;
+    const idNumber = form.idNumber.value;
+    const phoneNumber = form.phoneNumber.value;
+    const name = form.name.value;
+    const lastName = form.lastName.value;
 
     if (password !== form.passwordConfirmation.value) {
       event.preventDefault();
@@ -41,8 +43,16 @@ export const FormUserRegister = () => {
         event.preventDefault();
         event.stopPropagation();
       } else {
-        let data = registerUser(email, password);
-        console.log(data);
+        let data = registerUser(
+          email,
+          password,
+          idNumber,
+          name,
+          lastName,
+          phoneNumber,
+          idType
+        );
+
         if (data === false) {
           setErrorSignUp(true);
           setSuccesfullRegister(false);
@@ -97,9 +107,9 @@ export const FormUserRegister = () => {
                   onChange={(e) => setSelectedIDType(e.target.value)}
                 >
                   <option value="">Tipo de identificacion</option>
-                  {Object.keys(idTypes).map((key) => (
+                  {Object.keys(documentTypes).map((key) => (
                     <option key={key} value={key}>
-                      {idTypes[key]}
+                      {documentTypes[key]}
                     </option>
                   ))}
                 </Form.Select>

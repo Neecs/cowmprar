@@ -32,24 +32,20 @@ const ModalCV = (props) => {
     );
 
     console.log(filteredHV);
-    const filteredHerd = cowsHerds.filter(
-      (herd) => herd.id_hato === filteredHV[0].id_hato
-    );
-    if (
-      filteredHerd[0].id_departamento === null ||
-      filteredHerd[0].id_departamento === undefined
-    ) {
-      setHerd("No tiene hato");
-    } else {
-      setHerd(filteredHerd[0].nombre_hato);
+
+    if (filteredHV[0].id_hato !== null) {
+      const filteredHerd = cowsHerds.filter(
+        (herd) => herd.id_hato === filteredHV[0].id_hato
+      );
       getDepartment(filteredHerd[0].id_departamento);
+      console.log(filteredHerd[0].nombre_hato);
+      setHerd(filteredHerd[0].nombre_hato);
     }
-    getDepartment(filteredHerd[0].id_departamento);
-    console.log(filteredHerd[0].nombre_hato);
+
     console.log("filtrado", filteredHV[0]);
     setCowHV(filteredHV[0]);
     getCowHistorial(filteredHV[0].id_hoja_vida);
-    setHerd(filteredHerd[0].nombre_hato);
+
     setCowDepartment();
   };
   useEffect(() => {
@@ -78,6 +74,7 @@ const ModalCV = (props) => {
           Hato: {herd},{" "}
           {cowDepartment === null ? "No se ha registrado hato" : cowDepartment}
         </p>
+        <p>Fecha de nacimiento: {props.cow.fecha_nacimiento}</p>
         <h3>Incidentes</h3>
         <IncidentTable historials={cowHistorials} />
         <Button onClick={handleEditHV}>Editar hoja de vida</Button>

@@ -32,7 +32,7 @@ export const CowContextProvider = (props) => {
         fetchDataCows();
       }
     });
-  }, [cowsData]);
+  }, [cowsData, dbCows]);
 
   const fetchDataCows = async () => {
     const user = await supabase.auth.getUser();

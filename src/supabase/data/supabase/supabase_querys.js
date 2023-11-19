@@ -53,6 +53,7 @@ export const createNewUser = async (
       email: email_persona,
       password: password,
     });
+
     console.log(createAuthUser, errorAuth);
     return true;
   } catch (error) {
