@@ -13,11 +13,13 @@ import ModalCV from "../HVCow/ModalCV";
 export const CowCard = ({ cow, razes, cowshv, herds }) => {
   useEffect(() => {
     calculateCowAge();
+    setStatusColorText();
   }, []);
 
   const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
   const [cowAge, setCowAge] = useState(0);
+  const [statusColor, setStatusColor] = useState("");
 
   const calculateCowAge = () => {
     const actualDate = new Date();
@@ -51,6 +53,17 @@ export const CowCard = ({ cow, razes, cowshv, herds }) => {
       }
     }
   };
+  const setStatusColorText = () => {
+    if (cow.healt_status === 1) {
+      setStatusColor("yellow");
+    } else if (cow.healt_status === 2) {
+      setStatusColor("orange");
+    } else if (cow.healt_status === 3) {
+      setStatusColor("red");
+    } else if (cow.healt_status === 4) {
+      setStatusColor("green");
+    }
+  };
 
   const handleAddIncident = () => {
     navigate(`/inc-reg/${cow.id_vaca}`);
@@ -60,7 +73,19 @@ export const CowCard = ({ cow, razes, cowshv, herds }) => {
     <div className="horizontal-cow-card-group">
       <MDBCard className="card-cow rounded">
         <MDBCardBody>
-          <MDBCardTitle>{cow.nombre_vaca} </MDBCardTitle>
+          <MDBCardTitle>
+            {cow.nombre_vaca}
+            <br />
+            <br />
+            <div
+              style={{
+                width: "30px",
+                height: "30px",
+                backgroundColor: statusColor,
+                borderRadius: "50%",
+              }}
+            ></div>
+          </MDBCardTitle>
           <MDBTable className="tableCow striped bordered hover">
             <MDBTableHead>
               <tr>
