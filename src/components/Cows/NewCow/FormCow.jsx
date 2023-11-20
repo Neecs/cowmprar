@@ -33,7 +33,7 @@ export const FormCow = () => {
     updateDate();
     setRazesDictionary(cowsRazes);
     setGenderDictionary(cowGenders);
-  }, [cowsRazes]);
+  }, [cowGenders]);
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
