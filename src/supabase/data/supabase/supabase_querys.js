@@ -321,7 +321,6 @@ export const getUserCows = async (userId) => {
       .select("*")
       .eq("userId", userId)
       .eq("active", true);
-    console.log(cowData);
     return cowData;
   } catch (error) {
     console.log(error);
