@@ -57,12 +57,10 @@ const ModalCV = (props) => {
 
   const getCowHealthStatus = async (id_vaca) => {
     const healthStatus = await getCowStatusName(id_vaca);
-    console.log(healthStatus[0].nombre_estado);
     setCowHealthStatus(healthStatus[0].nombre_estado);
   };
 
   useEffect(() => {
-    console.log(props.cowstatus);
     const filterData = () => {
       const cowsHV = props.cowshv;
       const cowsHerds = props.cowherds;

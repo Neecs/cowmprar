@@ -34,7 +34,6 @@ export const FormCvCow = () => {
   };
 
   useEffect(() => {
-    console.log(cowStatus);
     setStatusDictionary(cowStatus);
     setHerdsDictionary(cowHerds);
     setDepartmentDictionary(departmentsLocation);

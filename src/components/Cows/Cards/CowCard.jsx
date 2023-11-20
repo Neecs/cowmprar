@@ -24,7 +24,6 @@ export const CowCard = ({ cow, razes, cowshv, herds }) => {
   const calculateCowAge = () => {
     const actualDate = new Date();
     const bornDate = new Date(Date.parse(cow.fecha_nacimiento));
-    console.log(cow);
 
     const ageInYears = actualDate.getFullYear() - bornDate.getFullYear();
     const ageInMonths = actualDate.getMonth() - bornDate.getMonth();

@@ -1,23 +1,8 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import {
-  getOneDepartment,
-  getCowStatusName,
-} from "../../../supabase/usecases/cows/get_cow";
-import { getHistorials } from "../../../supabase/usecases/cows/get_cow";
-import IncidentTable from "../Incidents/IncidentTable";
-import AddToMarketplaceModal from "./HandleOnMarketplace/AddCowToMarketplace.jsx";
-import RemoveFromMarketplaceModal from "./HandleOnMarketplace/RemoveCowFromMarketplace.jsx";
-import {
-  addCowToMarketplace,
-  removeCowInMarketplace,
-  transferCow,
-} from "../../../supabase/usecases/cows/update_cow.js";
-import DeleteCowModal from "./DeleteCowModal.jsx";
+import { transferCow } from "../../../supabase/usecases/cows/update_cow.js";
 
 const ModalTransferCow = (props) => {
   const [description, setDescription] = useState("");
@@ -25,10 +10,6 @@ const ModalTransferCow = (props) => {
   const setNewUser = async (id_user, id_vaca) => {
     await transferCow(id_user, id_vaca);
   };
-
-  useEffect(() => {
-    console.log(props.cow.id_vaca);
-  }, []);
 
   const handleConfirm = (event) => {
     const form = event.currentTarget;
