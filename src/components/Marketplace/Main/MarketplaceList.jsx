@@ -15,12 +15,12 @@ import { CowContext } from "../../../context/CowContext.jsx";
  */
 export const MarketplaceList = () => {
   // Destructuring context values
-  const { cowsRazes, filteredCows, cowsHV, sellers } = useContext(CowContext);
+  const { cowsRazes, dbCows, cowsHV, sellers  } = useContext(CowContext);
 
   // JSX representation of the MarketplaceList component
   return (
     <div>
-      {filteredCows.map((cow) => (
+      {dbCows.map((cow) => (
         <MarketplaceCard
           key={cow.id_vaca}
           cow={cow}

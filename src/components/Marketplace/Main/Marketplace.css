@@ -1,0 +1,11 @@
+.marketplace-space {
+    background-color: #BABFA8;
+    background-size: cover;
+    background-blend-mode: darken;
+    background-color: rgba(0,0,0,0.5);
+    background-image: url("../../../assets/BGCow.jpg");
+}
+
+.marketplace-body {
+    padding: 2vh;
+}

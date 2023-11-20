@@ -37,10 +37,11 @@ function Marketplace(props) {
 
   // JSX representation of the Marketplace component
   return (
-    <div>
+    <div className="marketplace-space">
       <NavBar />
-      <CowSearch />
-      <MarketplaceList />
+      <div className="marketplace-body">
+        <MarketplaceList />
+      </div>
     </div>
   );
 }

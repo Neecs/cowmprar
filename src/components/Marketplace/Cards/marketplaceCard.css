@@ -1,13 +1,12 @@
-/* MarketplaceCard.css */
 .horizontal-cow-card-marketplace {
     display: inline-block;
     margin: 10px;
     color: black;
 }
 
-.card-cow {
-    width: 20vw;
-    height: 45vh;
+.mktplace-card-cow {
+    width: 22vw;
+    height: 35vh;
     padding: 15px;
     color: black;
 }
@@ -28,7 +27,13 @@
     padding: 10px;
 }
 
-.marketplace-seller-button,
+.markteplace-card-button-container {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
 .marketplace-more-info-button {
-    font-size: 12px;
+    font-size: 17px;
 }

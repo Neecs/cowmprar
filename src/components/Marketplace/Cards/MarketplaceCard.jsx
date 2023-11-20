@@ -64,7 +64,7 @@ export const MarketplaceCard = ({ razes, cow, cowshv, seller }) => {
   // JSX representation of the MarketplaceCard component
   return (
     <div className="horizontal-cow-card-marketplace">
-      <MDBCard className="marketplace-card-cow rounded h-100" style={{ width: "18rem" }}>
+      <MDBCard className="mktplace-card-cow rounded" style={{ width: "18rem" }}>
         <MDBCardBody>
           <MDBCardTitle>{cow.nombre_vaca}</MDBCardTitle>
           <MDBTable className="tableCow striped bordered hover">
@@ -84,9 +84,6 @@ export const MarketplaceCard = ({ razes, cow, cowshv, seller }) => {
             </tbody>
           </MDBTable>
           <div className="markteplace-card-button-container">
-            <a className="marketplace-seller-button btn btn-primary">
-              Contactar al vendedor
-            </a>
             <a
               className="marketplace-more-info-button btn btn-secondary"
               onClick={() => setModalShow(true)}

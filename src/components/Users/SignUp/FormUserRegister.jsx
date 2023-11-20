@@ -62,7 +62,6 @@ export const FormUserRegister = () => {
       }
     }
 
-    console.log(form.checkValidity());
     setValidated(true);
   };
 

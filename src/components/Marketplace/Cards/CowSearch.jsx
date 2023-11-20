@@ -13,11 +13,8 @@ import { CowContext } from "../../../context/CowContext.jsx";
  * @returns {JSX.Element} JSX representation of the CowSearch component.
  */
 export const CowSearch = () => {
-  // State to store the search term
-  const [searchTerm, setSearchTerm] = useState("");
-
-  // Accessing the CowContext to get the cow data and set filtered cows
-  const { dbCows, setFilteredCows } = useContext(CowContext);
+    const [searchTerm, setSearchTerm] = useState("");
+    const { dbCows, setFilteredCows } = useContext(CowContext);
 
   /**
    * @function
@@ -46,7 +43,7 @@ export const CowSearch = () => {
       />
 
       {/* Button to trigger the search operation */}
-      <button onClick={handleSearch}>Search</button>
+      <button >Search</button>
     </div>
   );
 };

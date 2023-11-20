@@ -6,6 +6,7 @@ import {
   addMarketplaceCow,
   removeCowFromMarketplace,
   markInactiveCow,
+  updateUser,
 } from "../../data/supabase/supabase_querys.js";
 
 export const updateHV = async (color, id_hato, id_hv) => {
@@ -34,4 +35,8 @@ export const removeCowInMarketplace = async (id_vaca) => {
 
 export const deleteCow = async (id_vaca) => {
   return await markInactiveCow(id_vaca);
+};
+
+export const transferCow = async (id_user, id_vaca) => {
+  return await updateUser(id_user, id_vaca);
 };

@@ -489,8 +489,43 @@ export const getStatusName = async (id_status) => {
       .from("cow_status")
       .select("nombre_estado")
       .eq("id_estado", id_status);
-    console.log(cow_status);
     return cow_status;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateUser = async (user_id, cow_id) => {
+  try {
+    await supabase
+      .from("Vacas")
+      .update({ userId: user_id })
+      .eq("id_vaca", cow_id)
+      .select();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getPhoneNumber = async (user_id) => {
+  try {
+    let { data: phone, error } = await supabase
+      .from("Person")
+      .select("telefono_persona")
+      .eq("user_id", user_id);
+    return phone;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getEmail = async (user_id) => {
+  try {
+    let { data: email, error } = await supabase
+      .from("Person")
+      .select("email_persona")
+      .eq("user_id", user_id);
+    return email;
   } catch (error) {
     console.log(error);
   }
