@@ -11,7 +11,7 @@ const EmailButton = ({sellerEmail}) => {
     }
     return (
         <Button onClick={sendEmail}>
-            Write me via Email
+            Contacto via Email
         </Button>
     );
 }

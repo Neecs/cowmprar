@@ -8,7 +8,7 @@ const WhatsappButton = ({sellerPhoneNumber}) => {
     }
     return (
         <Button onClick={sendWhatsappMessage}>
-            Write me in WhatsApp
+            Contacto via WhatsApp
         </Button>
     );
 }

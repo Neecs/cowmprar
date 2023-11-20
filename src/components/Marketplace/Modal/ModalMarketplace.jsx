@@ -56,12 +56,11 @@ export const ModalMarketplace = (props) => {
         <p>Ultimo incidente: </p>
         <p>Fecha de nacimiento: {props.cow.fecha_nacimiento}</p>
         <p>{props.cow.health_status}</p>
-        <Button>Editar hoja de vida</Button>
       </Modal.Body>
       <Modal.Footer>
         <EmailButton sellerEmail={sellerEmail} />
         <WhatsappButton sellerPhoneNumber={phoneNumber} />
-        Or write me directly on {phoneNumber}
+        Llamadas directas a: {phoneNumber}
       </Modal.Footer>
     </Modal>
   );
