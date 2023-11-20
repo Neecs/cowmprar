@@ -495,3 +495,15 @@ export const getStatusName = async (id_status) => {
     console.log(error);
   }
 };
+
+export const updateUser = async (user_id, cow_id) => {
+  try {
+    await supabase
+      .from("Vacas")
+      .update({ userId: user_id })
+      .eq("id_vaca", cow_id)
+      .select();
+  } catch (error) {
+    console.log(error);
+  }
+};

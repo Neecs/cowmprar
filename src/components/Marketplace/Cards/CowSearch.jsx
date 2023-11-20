@@ -19,7 +19,7 @@ export const CowSearch = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search by cow name..."
             />
-            <button onClick={handleSearch}>Search</button>
+            <button >Search</button>
         </div>
     );
 };

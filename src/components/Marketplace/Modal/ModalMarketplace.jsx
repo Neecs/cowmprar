@@ -30,7 +30,6 @@ export const ModalMarketplace = (props) => {
           setSeller(sel.user_id);
           setPhoneNumber(sel.telefono_persona);
           setSellerEmail(sel.email_persona);
-          console.log("HPTAS");
         }
       }
     });
@@ -54,7 +53,6 @@ export const ModalMarketplace = (props) => {
       </Modal.Header>
       <Modal.Body>
         <p>Color: {cowHV.color}</p>
-        {seller}
         <p>Ultimo incidente: </p>
         <p>Fecha de nacimiento: {props.cow.fecha_nacimiento}</p>
         <p>{props.cow.health_status}</p>

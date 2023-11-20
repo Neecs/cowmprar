@@ -13,9 +13,10 @@ import RemoveFromMarketplaceModal from "./HandleOnMarketplace/RemoveCowFromMarke
 import {
   addCowToMarketplace,
   removeCowInMarketplace,
+  transferCow,
 } from "../../../supabase/usecases/cows/update_cow.js";
-import { markInactiveCow } from "../../../supabase/data/supabase/supabase_querys.js";
 import DeleteCowModal from "./DeleteCowModal.jsx";
+import ModalTransferCow from "../HVCow/ModalTransferCow.jsx";
 
 const ModalCV = (props) => {
   const [cowHV, setCowHV] = useState({});
@@ -30,6 +31,7 @@ const ModalCV = (props) => {
   const navigate = useNavigate();
   const [cowHealthStatus, setCowHealthStatus] = useState("");
   const [statusColor, setStatusColor] = useState("");
+  const [showTransferModal, setShowTransferModal] = useState(false);
 
   const setStatusColorText = () => {
     if (props.cowstatus === 1) {
@@ -162,7 +164,13 @@ const ModalCV = (props) => {
           <IncidentTable historials={cowHistorials} />
           <Button onClick={handleEditHV}>Editar hoja de vida</Button>
         </Modal.Body>
-        {/* Main Modal Content */}
+        <Button
+          onClick={() => setShowTransferModal(true)}
+          variant={getCowMarketplace()}
+          id="marketplace-button"
+        >
+          Transferir vaca
+        </Button>
         <Modal.Footer>
           <div style={{ display: "flex", gap: "500px" }}>
             <Button variant="danger" onClick={() => setShowDeleteModal(true)}>
@@ -195,6 +203,11 @@ const ModalCV = (props) => {
           cow={props.cow}
         />
       )}
+      <ModalTransferCow
+        show={showTransferModal}
+        onHide={() => setShowTransferModal(false)}
+        cow={props.cow}
+      />
       <DeleteCowModal
         show={showDeleteModal}
         onHide={() => setShowDeleteModal(false)}
