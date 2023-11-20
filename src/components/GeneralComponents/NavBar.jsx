@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import { supabase } from "../../supabase/data/constants/api_credentials.js";
 import { useNavigate } from "react-router-dom";
-import './NavBar.css'
+import "./NavBar.css";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -16,8 +16,10 @@ function NavBar() {
 
   const getUserId = () => {
     supabase.auth.onAuthStateChange((event, session) => {
-      const id = session.user.id;
-      setUserId(id);
+      if (!session) {
+        const id = session.user.id;
+        setUserId(id);
+      }
     });
   };
 
