@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
 import EmailButton from "../Cards/Contact/EmailButton.jsx";
 import WhatsappButton from "../Cards/Contact/WhatsappButton.jsx";
 
