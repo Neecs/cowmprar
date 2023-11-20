@@ -16,7 +16,7 @@ function NavBar() {
 
   const getUserId = () => {
     supabase.auth.onAuthStateChange((event, session) => {
-      if (!session) {
+      if (session!==null) {
         const id = session.user.id;
         setUserId(id);
       }
