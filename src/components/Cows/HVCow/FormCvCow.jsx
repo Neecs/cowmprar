@@ -62,6 +62,7 @@ export const FormCvCow = () => {
 
   // Effect hook to update dictionaries when cowHerds change
   useEffect(() => {
+    console.log(cowStatus);
     setStatusDictionary(cowStatus);
     setHerdsDictionary(cowHerds);
     setDepartmentDictionary(departmentsLocation);

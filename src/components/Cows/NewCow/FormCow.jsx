@@ -12,7 +12,6 @@ import Row from "react-bootstrap/Row";
 import "./formNewCow.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getGenders, getRazes } from "../../../supabase/usecases/cows/get_cow.js";
 import { createCow } from "../../../supabase/usecases/cows/create_cow.js";
 import { supabase } from "../../../supabase/data/constants/api_credentials.js";
 import { useContext } from "react";
@@ -49,7 +48,7 @@ export const FormCow = () => {
     updateDate();
     setRazesDictionary(cowsRazes);
     setGenderDictionary(cowGenders);
-  }, []);
+  }, [cowGenders]);
 
   /**
    * @function
