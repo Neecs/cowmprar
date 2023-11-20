@@ -16,19 +16,16 @@ export const ModalMarketplace = (props) => {
 
   const setOwnerPhone = async (id_user) => {
     const phone = await getUserPhone(id_user);
-    console.log(phone[0].telefono_persona);
     setPhoneNumber(phone[0].telefono_persona);
   };
 
   const setOwnerEmail = async (id_user) => {
     const email = await getEmail(id_user);
-    console.log(email[0].email_persona);
     setSellerEmail(email[0].email_persona);
   };
 
   const filterData = () => {
     const cowsHV = props.cowshv;
-    console.log(props.cowshv);
 
     const filteredHV = cowsHV.filter(
       (cowhv) => cowhv.id_hoja_vida === props.cow.id_vaca
