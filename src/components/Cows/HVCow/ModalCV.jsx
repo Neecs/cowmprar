@@ -14,7 +14,10 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getOneDepartment } from "../../../supabase/usecases/cows/get_cow";
+import {
+  getOneDepartment,
+  getCowStatusName,
+} from "../../../supabase/usecases/cows/get_cow";
 import { getHistorials } from "../../../supabase/usecases/cows/get_cow";
 import IncidentTable from "../Incidents/IncidentTable";
 import AddToMarketplaceModal from "./HandleOnMarketplace/AddCowToMarketplace.jsx";
@@ -51,6 +54,20 @@ const ModalCV = (props) => {
 
   // Hook for programmatic navigation
   const navigate = useNavigate();
+  const [cowHealthStatus, setCowHealthStatus] = useState("");
+  const [statusColor, setStatusColor] = useState("");
+
+  const setStatusColorText = () => {
+    if (props.cowstatus === 1) {
+      setStatusColor("yellow");
+    } else if (props.cowstatus === 2) {
+      setStatusColor("orange");
+    } else if (props.cowstatus === 3) {
+      setStatusColor("red");
+    } else if (props.cowstatus === 4) {
+      setStatusColor("green");
+    }
+  };
 
   // Function to fetch department information based on department ID
   const getDepartment = async (id_departamento) => {
@@ -64,8 +81,14 @@ const ModalCV = (props) => {
     setCowHistorials(historials);
   };
 
-  // Effect hook to filter and update relevant cow information when props change
+  const getCowHealthStatus = async (id_vaca) => {
+    const healthStatus = await getCowStatusName(id_vaca);
+    console.log(healthStatus[0].nombre_estado);
+    setCowHealthStatus(healthStatus[0].nombre_estado);
+  };
+
   useEffect(() => {
+    console.log(props.cowstatus);
     const filterData = () => {
       const cowsHV = props.cowshv;
       const cowsHerds = props.cowherds;
@@ -89,6 +112,8 @@ const ModalCV = (props) => {
     };
 
     filterData();
+    getCowHealthStatus(props.cowstatus);
+    setStatusColorText();
   }, [props.cow, props.cowshv, props.cowherds]);
 
   // Function to determine the action to be performed based on the marketplace status of the cow
@@ -155,6 +180,17 @@ const ModalCV = (props) => {
               : cowDepartment}
           </p>
           <p>Fecha de nacimiento: {props.cow.fecha_nacimiento}</p>
+          <div
+            style={{
+              backgroundColor: statusColor,
+              padding: "5px",
+              borderRadius: "6px",
+              boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+              margin: "10px",
+            }}
+          >
+            <p>Estado de salud: {cowHealthStatus}</p>
+          </div>
           <h3>Incidentes</h3>
           <IncidentTable historials={cowHistorials} />
           <Button onClick={handleEditHV}>Edit Health and Vital Information</Button>

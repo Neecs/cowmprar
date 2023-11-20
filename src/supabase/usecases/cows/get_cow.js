@@ -12,6 +12,8 @@ import {
   getDepartmentsById,
   getHistorialsById,
   getIncidentTypeById,
+  getAllCowsInMarketplace,
+  getStatusName,
 } from "../../data/supabase/supabase_querys.js";
 
 export const getCow = async (id_cow) => {
@@ -66,6 +68,10 @@ export const getOneIncident = async (id_inc) => {
   return await getIncidentTypeById(id_inc);
 };
 
-export const getCowsInMarketplace = async() => {
-  return await getAllCowsInMarketplace()
-}
+export const getCowsInMarketplace = async () => {
+  return await getAllCowsInMarketplace();
+};
+
+export const getCowStatusName = async (id_status) => {
+  return await getStatusName(id_status);
+};

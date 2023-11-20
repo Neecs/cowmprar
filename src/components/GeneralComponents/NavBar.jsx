@@ -63,7 +63,7 @@ function NavBar() {
             Marketplace
           </Nav.Link>
           <Nav.Link className="navbar-text" onClick={goToSettings}>
-            Editar usuario
+            Editar perfil
           </Nav.Link>
         </Nav>
         {/* Sign Out Button */}

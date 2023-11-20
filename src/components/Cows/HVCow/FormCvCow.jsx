@@ -15,7 +15,10 @@ import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { CowContext } from "../../../context/CowContext.jsx";
 import ModalHerd from "./ModalHerd.jsx";
-import { updateStatus, updateHV } from "../../../supabase/usecases/cows/update_cow";
+import {
+  updateStatus,
+  updateHV,
+} from "../../../supabase/usecases/cows/update_cow";
 
 /**
  * @component
@@ -75,6 +78,7 @@ export const FormCvCow = () => {
     // Update health status and herd information
     updateHealthStatus(cowId, status);
     updateHVData(color, herd, cowId);
+    navigate("/");
   };
 
   return (
