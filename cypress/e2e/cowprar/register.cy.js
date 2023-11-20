@@ -2,7 +2,7 @@
 
 describe('Cowprar', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173/login')
+    
   });
 
   it('should register a new user', () => {
