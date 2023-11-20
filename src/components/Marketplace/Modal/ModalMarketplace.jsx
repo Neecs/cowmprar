@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import EmailButton from "../Cards/Contact/EmailButton.jsx";
 import WhatsappButton from "../Cards/Contact/WhatsappButton.jsx";
+import {
+  getUserPhone,
+  getUserEmail,
+} from "../../../supabase/usecases/cows/get_cow.js";
+import { getEmail } from "../../../supabase/data/supabase/supabase_querys.js";
 
 export const ModalMarketplace = (props) => {
   const [cowHV, setCowHV] = useState([]);
@@ -9,10 +14,21 @@ export const ModalMarketplace = (props) => {
   const [phoneNumber, setPhoneNumber] = useState([]);
   const [sellerEmail, setSellerEmail] = useState([]);
 
+  const setOwnerPhone = async (id_user) => {
+    const phone = await getUserPhone(id_user);
+    console.log(phone[0].telefono_persona);
+    setPhoneNumber(phone[0].telefono_persona);
+  };
+
+  const setOwnerEmail = async (id_user) => {
+    const email = await getEmail(id_user);
+    console.log(email[0].email_persona);
+    setSellerEmail(email[0].email_persona);
+  };
+
   const filterData = () => {
     const cowsHV = props.cowshv;
     console.log(props.cowshv);
-    const allSellers = props.seller;
 
     const filteredHV = cowsHV.filter(
       (cowhv) => cowhv.id_hoja_vida === props.cow.id_vaca
@@ -20,18 +36,8 @@ export const ModalMarketplace = (props) => {
     const selectedCow = filteredHV[0];
     setCowHV(selectedCow);
 
-    allSellers.map((sel) => {
-      console.log("Cow: " + selectedCow);
-      console.log("Telefono: " + sel.telefono_persona);
-      console.log("Email: " + sel.email_persona);
-      if (selectedCow.id_persona != null && sel.telefono_persona != null) {
-        if (sel.user_id === selectedCow.id_persona) {
-          setSeller(sel.user_id);
-          setPhoneNumber(sel.telefono_persona);
-          setSellerEmail(sel.email_persona);
-        }
-      }
-    });
+    setOwnerPhone(props.cow.userId);
+    setOwnerEmail(props.cow.userId);
   };
 
   useEffect(() => {
@@ -52,7 +58,6 @@ export const ModalMarketplace = (props) => {
       </Modal.Header>
       <Modal.Body>
         <p>Color: {cowHV.color}</p>
-        <p>Ultimo incidente: </p>
         <p>Fecha de nacimiento: {props.cow.fecha_nacimiento}</p>
         <p>{props.cow.health_status}</p>
       </Modal.Body>
