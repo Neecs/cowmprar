@@ -35,7 +35,6 @@ export const createNewUser = async (
   documento_persona,
   nombre_persona,
   apellido_persona,
-  id_rol,
   telefono_persona,
   id_tipo_documento
 ) => {
@@ -45,7 +44,6 @@ export const createNewUser = async (
       documento_persona,
       nombre_persona,
       apellido_persona,
-      id_rol,
       telefono_persona,
       id_tipo_documento,
     });
@@ -55,6 +53,7 @@ export const createNewUser = async (
       email: email_persona,
       password: password,
     });
+
     console.log(createAuthUser, errorAuth);
     return true;
   } catch (error) {
@@ -71,28 +70,40 @@ export const fetchPersonDataByEmail = async (email) => {
   return data.length > 0;
 };
 
-// TODO no es registrar usuario sino actualizar usuario
-export const updateUser = async (
-  doc_id,
-  first_name,
-  last_name,
-  role_id,
-  phone,
-  doc_type
-) => {
+export const getSellers = async () => {
   try {
-    if (!(await fetchPersonDataByEmail(user.email))) {
-      await supabase.from("Person").insert({
-        doc_id,
-        first_name,
-        last_name,
-        role_id,
-        phone,
-        doc_type,
-      });
-      return true;
-    }
-    return false;
+    const { data: sellersData, error } = await supabase
+      .from("Person")
+      .select("*");
+    return sellersData;
+  } catch (e) {
+    console.log(error);
+  }
+};
+
+export const updateUserPhone = async (telefono_persona, user_id) => {
+  try {
+    await supabase
+      .from("Person")
+      .update({ telefono_persona })
+      .eq("user_id", user_id)
+      .select();
+
+    return true;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateUserEmail = async (email_persona, user_id) => {
+  try {
+    await supabase
+      .from("Person")
+      .update({ email_persona })
+      .eq("user_id", user_id)
+      .select();
+
+    return true;
   } catch (error) {
     return error;
   }
@@ -216,20 +227,6 @@ export const getDocumentTypes = async () => {
   }
 };
 
-export const getAppRoles = async () => {
-  try {
-    const { data: appRoles, error } = await supabase.from("roles").select("*");
-    console.log(appRoles);
-    const rolesDictionary = {};
-    appRoles.forEach((element) => {
-      rolesDictionary[element.id_rol] = element.descripcion_rol;
-    });
-    return rolesDictionary;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
 export const getIncidentTypes = async () => {
   try {
     const { data: incidentes, error } = await supabase
@@ -281,28 +278,25 @@ export const getHV = async () => {
   try {
     const { data: hvData, error } = await supabase
       .from("Hojas de vida")
-      .select("id_hoja_vida");
-
+      .select("*");
     return hvData;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const updateHV = async (color, nombre, id_hato, id_persona) => {
+export const updateCowHV = async (color, id_hato, id_hv) => {
   try {
     await supabase
       .from("Hojas de vida")
       .update({
         color,
-        nombre,
         id_hato,
-        id_persona,
       })
-      .eq("id_hoja_vida");
-    return true;
+      .eq("id_hoja_vida", id_hv)
+      .select();
   } catch (error) {
-    return false;
+    console.log(error);
   }
 };
 
@@ -325,26 +319,190 @@ export const getUserCows = async (userId) => {
     const { data: cowData, error } = await supabase
       .from("Vacas")
       .select("*")
-      .eq("userId", userId);
-    console.log(cowData);
+      .eq("userId", userId)
+      .eq("active", true);
     return cowData;
   } catch (error) {
     console.log(error);
   }
 };
 
-export const addIncident = async (id_incidente, dateIn, description, cowId) => {
+export const addIncident = async (nameIn, dateIn, description, cowId) => {
   try {
     const { data: cowIncident, error } = await supabase
       .from("Historiales")
       .insert([
         {
-          id_incidente,
+          id_incidente: nameIn,
           fecha_incidente: dateIn,
           descripcion: description,
           id_hoja_vida: cowId,
         },
       ]);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCowStatus = async () => {
+  try {
+    let { data: cow_status, error } = await supabase
+      .from("cow_status")
+      .select("*");
+    return cow_status;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getHerdsPlaces = async () => {
+  try {
+    let { data: herds, error } = await supabase.from("Hato").select("*");
+    return herds;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getDepartmentsLocation = async () => {
+  try {
+    let { data: departments, error } = await supabase
+      .from("Departamentos")
+      .select("*");
+    return departments;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getDepartmentsById = async (id_departamento) => {
+  try {
+    let { data: department, error } = await supabase
+      .from("Departamentos")
+      .select("nombre_departamento")
+      .eq("id_departamento", id_departamento);
+    return department;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addHerdLocation = async (nombre_hato, id_departamento) => {
+  try {
+    const { data, error } = await supabase
+      .from("Hato")
+      .insert([{ nombre_hato, id_departamento }])
+      .select();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateCowStatus = async (id_vaca, health_status) => {
+  try {
+    const { data, error } = await supabase
+      .from("Vacas")
+      .update([{ healt_status: health_status }])
+      .eq("id_vaca", id_vaca)
+      .select();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getIncidentTypeById = async (id_incidente) => {
+  try {
+    let { data: incident, error } = await supabase
+      .from("Tipos incidentes")
+      .select("nombre_incidente")
+      .eq("id_incidente", id_incidente);
+    return incident;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getHistorialsById = async (id_hv) => {
+  try {
+    let { data: historials, error } = await supabase
+      .from("Historiales")
+      .select("*")
+      .eq("id_hoja_vida", id_hv);
+    return historials;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addMarketplaceCow = async (id_vaca) => {
+  try {
+    let { data: vacaActualizada, error } = await supabase
+      .from("Vacas")
+      .update({ marketplace: true })
+      .eq("id_vaca", id_vaca);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const removeCowFromMarketplace = async (id_vaca) => {
+  try {
+    let { data: removedCow, error } = await supabase
+      .from("Vacas")
+      .update({ marketplace: false })
+      .eq("id_vaca", id_vaca);
+    return true;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getAllCowsInMarketplace = async () => {
+  try {
+    let { data: cowsFromSupabase, error } = await supabase
+      .from("Vacas")
+      .select("*")
+      .eq("marketplace", true);
+    return cowsFromSupabase;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const markInactiveCow = async (id_vaca) => {
+  try {
+    await supabase
+      .from("Vacas")
+      .update({ active: false })
+      .eq("id_vaca", id_vaca)
+      .select();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getStatusName = async (id_status) => {
+  try {
+    let { data: cow_status, error } = await supabase
+      .from("cow_status")
+      .select("nombre_estado")
+      .eq("id_estado", id_status);
+    console.log(cow_status);
+    return cow_status;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateUser = async (user_id, cow_id) => {
+  try {
+    await supabase
+      .from("Vacas")
+      .update({ userId: user_id })
+      .eq("id_vaca", cow_id)
+      .select();
   } catch (error) {
     console.log(error);
   }

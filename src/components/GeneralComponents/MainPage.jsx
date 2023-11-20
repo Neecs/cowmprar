@@ -15,22 +15,28 @@ export const MainPage = () => {
     supabase.auth.onAuthStateChange((event, session) => {
       if (!session) {
         navigate("/login");
+      } else {
+        const updateUserId = async () => {
+          await supabase
+            .from("Person")
+            .update({ user_id: session.user.id })
+            .is("user_id", null)
+            .select();
+        };
+        updateUserId();
       }
     });
   }, []);
 
   return (
     <div className="main-page">
-      <NavBar/>
-      <br />
+      <NavBar />
       <div className="main-page-body">
         <CowList />
         <br />
-        <Link to="form-cow" id="add-new-cow">
-          <Button variant="dark" id="add-cow-button">Agregar vaca</Button>
-        </Link>
-        <br />
-        <br />
+          <Button variant="dark" id="add-cow-button" href="form-cow">
+            Agregar vaca
+          </Button>
       </div>
     </div>
   );

@@ -72,7 +72,7 @@ export const Login = () => {
           <Form.Group>
             <Row>
               <Col className="secondary-options col-3">
-                <a href="/restore">¿Olvidaste tu contraseña?</a>
+                <a href="/restore" id="forgot-password-text">¿Olvidaste tu contraseña?</a>
                 <br/>
                 <br/>
                 <a href="/register" id="signup-text">No tienes una cuenta? Registrate</a>

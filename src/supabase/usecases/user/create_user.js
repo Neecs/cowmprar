@@ -1,16 +1,21 @@
-import {createNewUser} from "../../data/supabase/supabase_querys.js";
+import { createNewUser } from "../../data/supabase/supabase_querys.js";
 
-
-export const registerUser = async (email, password, doc_id, first_name, last_name, role_id, phone, doc_type) => {
-    console.log(email,password,doc_id,first_name,last_name,role_id,phone,doc_type)
-    return await createNewUser(
-        email,
-        password,
-        doc_id,
-        first_name,
-        last_name,
-        role_id,
-        phone,
-        doc_type
-    )
+export const registerUser = async (
+  email_persona,
+  password,
+  documento_persona,
+  nombre_persona,
+  apellido_persona,
+  telefono_persona,
+  id_tipo_documento
+) => {
+  return await createNewUser(
+    email_persona,
+    password,
+    documento_persona,
+    nombre_persona,
+    apellido_persona,
+    telefono_persona,
+    id_tipo_documento
+  );
 };

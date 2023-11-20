@@ -4,15 +4,20 @@
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background-image: url("../../../assets/Login-Cows.jpg");
+  background-image: url("../../../assets/BGCow.jpg");
+  background-color: rgba(0, 0, 0, 0.68);
+  background-repeat: no-repeat;
   background-size: cover;
+  background-position: bottom;
+  filter: brightness(90%);
+  position: fixed;
   font-size: 20px;
 }
 
 .login-space {
   width: 50%;
   padding: 5vh 5vw;
-  color: #eceff1;
+  color: black;
   background: rgba( 255, 255, 255, 0.1 );
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   backdrop-filter: blur( 12.5px );
@@ -44,7 +49,7 @@
 }
 
 #text-muted {
-  color: white;
+  color: black;
 }
 
 #login-button {
@@ -60,21 +65,21 @@
   font-size: 12px;
 }
 
-a {
+#forgot-password-text {
   margin-bottom: 3vh;
   margin-top: 3vh;
-  color: #eceff1;
+  color: black;
 }
 
-p {
-  color: #ffffff;
-  font-size: 13px;
+#signup-text {
+  color:black;
 }
 
 #privacy {
-  color: white;
+  color: black;
+  font-size: 13px;
 }
 
 #login-text {
-  color: #1e1e1e;
+  color: black;
 }

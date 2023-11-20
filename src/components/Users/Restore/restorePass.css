@@ -1,35 +1,52 @@
 .form-pass-recovery {
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: #BABFA8 !important;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("../../../assets/BGCow.jpg");
+    background-color: rgba(0, 0, 0, 0.68);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    filter: brightness(90%);
+    font-size: 20px;
+    justify-content: center;
   
 }
 
 .form-pass-recovery-space {
-  border-radius: 30px;
-  border: 10px solid #50592F;
-  height: 60vh; 
-  width: 46vw;
-  margin-top: 5vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: #F1EFEF;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    background: rgba( 255, 255, 255, 0.1 );
+    backdrop-filter: blur( 12.5px );
+    -webkit-backdrop-filter: blur( 12.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    margin-bottom: 8vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 60vh;
+    align-items:center;
+    width: 46vw;
 }
 
-.header-title {
+.form-password-header-title {
   box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
    border-radius: 32px;
    padding: 21px;
    background-color: #50592F; 
    height: 13vh; 
-   width: 80vh;
    color: white;
    margin-left: 2vw;
 }
 
-.infoSpace {
-  margin-left: 2vw;
+.restore-category {
+    color:white;
+    font-weight: lighter;
+}
+.restore-password-info-space {
+}
+
+.restore-password-field {
+    width: 25vw;
 }
