@@ -12,7 +12,7 @@ import Row from "react-bootstrap/Row";
 import { useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import { Link } from "react-router-dom";
-import './UserSettings.css'
+import "./UserSettings.css";
 import {
   updateEmail,
   updatePhone,
@@ -63,10 +63,13 @@ const UserSettings = () => {
         <div className="user-settings-welcome">
           <h1>Cambiar datos de usuario</h1>
         </div>
-        {/* User settings form */}
-        <Form className="user-settings" noValidate validated={true} onSubmit={handleSubmit}>
+        <Form
+          className="user-settings"
+          noValidate
+          validated={true}
+          onSubmit={handleSubmit}
+        >
           <Row className="mb-3">
-            {/* Phone number input */}
             <Form.Group as={Col} md="4" controlId="phoneNumber">
               <Form.Floating className="mb-3">
                 <Form.Control
@@ -76,16 +79,15 @@ const UserSettings = () => {
                   pattern="[0-9]*"
                   required
                 />
-                <Form.Label>Número de teléfono</Form.Label>
+                <Form.Label>Número de telefono</Form.Label>
                 <Form.Control.Feedback type="invalid">
-                  Ingrese un número de teléfono válido
+                  Ingrese un numero de telefono valido
                 </Form.Control.Feedback>
               </Form.Floating>
             </Form.Group>
           </Row>
 
           <Row className="mb-3">
-            {/* Email input */}
             <Form.Group as={Col} md="4" controlId="email">
               <Form.Floating className="mb-3">
                 <Form.Control
@@ -94,7 +96,7 @@ const UserSettings = () => {
                   placeholder="example@mail.com"
                   required
                 />
-                <Form.Label>Correo electrónico</Form.Label>
+                <Form.Label>Correo electronico</Form.Label>
                 <Form.Control.Feedback type="invalid">
                   Ingrese un correo válido
                 </Form.Control.Feedback>
@@ -103,13 +105,11 @@ const UserSettings = () => {
           </Row>
 
           <div className="buttons">
-            {/* Submit button */}
             <Form.Group className="mb-3"></Form.Group>
             <Button type="submit" className="btn btn-dark btn-lg">
               Editar información
             </Button>
             <span style={{ marginRight: "10px" }}></span>
-            {/* Link to go back */}
             <Link to="/">
               <Button type="button" className="btn btn-dark btn-lg">
                 Regresar
@@ -117,7 +117,6 @@ const UserSettings = () => {
             </Link>
           </div>
           <br />
-          {/* Display error and success messages */}
           {errorSignUp && (
             <Alert key="danger" variant="danger">
               Ingresa datos correctos
@@ -135,8 +134,12 @@ const UserSettings = () => {
           )}
         </Form>
         <p id="update-hint">
-          Si quieres actualizar contraseña, cierra sesión y luego ve a recuperar
-          contraseña.
+          Si quieres actualizar contraseña cierra sesión y luego ve a recuperar
+          contraseña
+        </p>
+        <p id="update-hint">
+          Tu id de usuario es: {userId}, acuérdate de compartirlo cuando vayas a
+          comprar una vaca
         </p>
       </div>
     </div>
