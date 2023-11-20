@@ -1,6 +1,7 @@
 .main-page {
   background-color: #BABFA8;
   background-size: cover;
+  height: 100vh;
   background-blend-mode: darken;
   background-color: rgba(0,0,0,0.5);
   background-image: url("../../assets/BGCow.jpg");
