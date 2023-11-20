@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import "./marketplaceCard.css";
 import ModalMarketplace from "../Modal/ModalMarketplace.jsx";
 
-export const MarketplaceCard = ({ razes, cow, cowshv, seller}) => {
+export const MarketplaceCard = ({ razes, cow, cowshv, seller }) => {
   useEffect(() => {
     calculateCowAge();
   }, []);
@@ -51,7 +51,10 @@ export const MarketplaceCard = ({ razes, cow, cowshv, seller}) => {
 
   return (
     <div className="horizontal-cow-card-marketplace">
-      <MDBCard className="marketplace-card-cow rounded h-100" style={{ width: "18rem" }}>
+      <MDBCard
+        className="marketplace-card-cow rounded h-100"
+        style={{ width: "18rem" }}
+      >
         <MDBCardBody>
           <MDBCardTitle>{cow.nombre_vaca}</MDBCardTitle>
           <MDBTable className="tableCow striped bordered hover">
@@ -71,10 +74,10 @@ export const MarketplaceCard = ({ razes, cow, cowshv, seller}) => {
             </tbody>
           </MDBTable>
           <div className="markteplace-card-button-container">
-            <a className="marketplace-seller-button btn btn-primary">
-              Contactar al vendedor
-            </a>
-            <a className="marketplace-more-info-button btn btn-secondary" onClick={() => setModalShow(true)}>
+            <a
+              className="marketplace-more-info-button btn btn-secondary"
+              onClick={() => setModalShow(true)}
+            >
               Mas informacion
             </a>
           </div>

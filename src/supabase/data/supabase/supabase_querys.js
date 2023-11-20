@@ -507,3 +507,29 @@ export const updateUser = async (user_id, cow_id) => {
     console.log(error);
   }
 };
+
+export const getPhoneNumber = async (user_id) => {
+  try {
+    let { data: phone, error } = await supabase
+      .from("Person")
+      .select("telefono_persona")
+      .eq("user_id", user_id);
+    console.log(phone);
+    return phone;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getEmail = async (user_id) => {
+  try {
+    let { data: email, error } = await supabase
+      .from("Person")
+      .select("email_persona")
+      .eq("user_id", user_id);
+    console.log(email);
+    return email;
+  } catch (error) {
+    console.log(error);
+  }
+};
