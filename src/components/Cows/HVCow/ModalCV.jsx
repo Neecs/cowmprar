@@ -197,7 +197,7 @@ const ModalCV = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <div style={{ display: "flex", gap: "500px" }}>
-            <Button variant="danger">Delete</Button>
+            <Button variant="danger">Borrar vaca</Button>
             <Button
               onClick={() => chooseWhatToShow()}
               variant={getCowMarketplace()}
